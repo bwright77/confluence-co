@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-cc-dark antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  /* Focus styles — visible, on-brand */
+  :focus-visible {
+    outline: 3px solid #009dd6;
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Skip to content — accessibility */
+  .skip-link {
+    @apply absolute -top-12 left-4 bg-cc-navy text-white font-display font-bold uppercase tracking-display
+           px-4 py-2 z-[100] transition-all duration-200 focus:top-4;
+  }
+
+  /* Section headings in WPA poster style */
+  .heading-display {
+    @apply font-display font-bold uppercase tracking-poster text-cc-navy;
+  }
+
+  .heading-section {
+    @apply font-display font-bold uppercase tracking-display;
+  }
+
+  /* Consistent section padding */
+  .section-pad {
+    @apply py-16 md:py-24;
+  }
+
+  .container-site {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply inline-block bg-cc-orange text-white font-display font-bold uppercase tracking-display
+           px-6 py-3 rounded transition-all duration-200
+           hover:bg-cc-navy hover:scale-105 focus-visible:bg-cc-navy;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply inline-block bg-transparent text-cc-navy font-display font-bold uppercase tracking-display
+           border-2 border-cc-navy px-6 py-3 rounded transition-all duration-200
+           hover:bg-cc-navy hover:text-white focus-visible:bg-cc-navy focus-visible:text-white;
+  }
+
+  /* White button variant (for dark backgrounds) */
+  .btn-white {
+    @apply inline-block bg-white text-cc-navy font-display font-bold uppercase tracking-display
+           px-6 py-3 rounded transition-all duration-200
+           hover:bg-cc-sand focus-visible:bg-cc-sand;
+  }
+}
+
+/* Reduce motion — respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
