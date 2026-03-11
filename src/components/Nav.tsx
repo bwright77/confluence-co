@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { CCBug, CCHorizontal } from './Logo'
+import { CCBug } from './Logo'
 
 interface NavChild {
   label: string
@@ -65,13 +65,22 @@ export default function Nav() {
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
         <nav
-          className="container-site flex items-center justify-between h-16 lg:h-20"
+          className="container-site flex items-center justify-between h-20 lg:h-24"
           aria-label="Main navigation"
         >
-          {/* Logo */}
-          <Link to="/" className="flex items-center shrink-0" aria-label="Confluence Colorado — home">
-            <CCBug variant="dark" className="h-10 w-10 lg:hidden" />
-            <CCHorizontal variant="dark" className="hidden lg:block h-10 w-auto" />
+          {/* Logo — oversized bug mark + bold wordmark in HTML (readable at all sizes) */}
+          <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Confluence Colorado — home">
+            <CCBug variant="dark" className="h-12 w-12 md:h-14 md:w-14 shrink-0" />
+            <div className="leading-none">
+              <div className="font-display font-bold uppercase text-white tracking-wide"
+                style={{ fontSize: 'clamp(1.1rem, 2vw, 1.45rem)', letterSpacing: '0.06em' }}>
+                Confluence
+              </div>
+              <div className="font-display font-semibold uppercase text-cc-sky tracking-widest"
+                style={{ fontSize: 'clamp(0.7rem, 1.3vw, 0.9rem)', letterSpacing: '0.2em' }}>
+                Colorado
+              </div>
+            </div>
           </Link>
 
           {/* Desktop nav links */}
