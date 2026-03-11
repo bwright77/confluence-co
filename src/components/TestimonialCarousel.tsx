@@ -19,25 +19,25 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "Confluence Colorado has created something rare — a space where young people from our community see themselves as stewards of the land and the river. This isn't just programming; it's identity formation.",
+      "Mo' Betta Green Marketplace is founded on the principles of food literacy, environmental stewardship, and social responsibility. We love partnering with Confluence Colorado to use nature to connect people to HEAL (Health, eating, active living).",
     name: 'Beverly Grant',
-    title: 'Community Partner',
+    title: 'Mo\u2019 Betta Green Marketplace',
     initials: 'BG',
     accentColor: '#009dd6',
   },
   {
     quote:
-      "I never thought I'd be testing water quality in the South Platte. Now I'm the one teaching other kids how to do it. Confluence showed me that this river is mine to protect.",
+      "Confluence Colorado brings unique and diverse work to the community and exposes youth to projects that they would not otherwise get a chance to participate in.",
     name: 'Braylen Aldridge',
-    title: 'SPRAY Council Youth Member',
+    title: 'Community Member',
     initials: 'BA',
     accentColor: '#b44b00',
   },
   {
     quote:
-      "The Mo Betta market changed how my neighborhood thinks about food. When youth grow it, harvest it, and sell it — that's real power. That's what Confluence Colorado builds.",
-    name: 'Cam Juarez',
-    title: 'Program Participant',
+      "Partnering with Confluence Colorado helps make places accessible to people that traditionally do not have those opportunities and, in some cases, connects people to the land and their ancestral traditions that may have been taken from them.",
+    name: 'Camiliano Juarez',
+    title: 'Community Partner',
     initials: 'CJ',
     accentColor: '#4A6741',
   },

@@ -132,10 +132,11 @@ export default function ProgramCards() {
             <motion.div
               key={program.slug}
               variants={reduced ? undefined : cardVariants}
+              className="h-full"
             >
               <Link
                 to={program.href}
-                className="group block rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cc-sky focus-visible:ring-offset-2"
+                className="group flex flex-col h-full rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cc-sky focus-visible:ring-offset-2"
                 aria-label={`${program.title} — ${program.tagline}`}
               >
                 {/* Poster illustration area */}
@@ -168,11 +169,11 @@ export default function ProgramCards() {
                 </div>
 
                 {/* Card text */}
-                <div className="bg-white p-5">
+                <div className="bg-white p-5 flex flex-col flex-1">
                   <h3 className="font-display font-bold uppercase tracking-display text-cc-navy text-lg mb-1 group-hover:text-cc-sky transition-colors duration-200">
                     {program.title}
                   </h3>
-                  <p className="font-body text-cc-stone text-sm leading-relaxed mb-4">
+                  <p className="font-body text-cc-stone text-sm leading-relaxed mb-4 flex-1">
                     {program.tagline}
                   </p>
                   <span className="inline-flex items-center gap-1.5 font-display font-semibold text-xs uppercase tracking-display text-cc-orange group-hover:gap-3 transition-all duration-200">
