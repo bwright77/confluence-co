@@ -40,7 +40,7 @@ export default function About() {
           src={heroPhoto}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-left"
           style={{ filter: 'saturate(0.72) contrast(1.08)' }}
         />
         <div className="absolute inset-0" style={{ background: 'rgba(0, 44, 70, 0.32)' }} />
