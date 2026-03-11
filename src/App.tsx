@@ -10,6 +10,7 @@ import Lgcp from './pages/programs/Lgcp'
 import MoBetta from './pages/programs/MoBetta'
 import Recreation from './pages/programs/Recreation'
 import Cultural from './pages/programs/Cultural'
+import Civic from './pages/programs/Civic'
 import Impact from './pages/Impact'
 import GetInvolved from './pages/GetInvolved'
 import Donate from './pages/Donate'
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/programs/mo-betta" element={<MoBetta />} />
           <Route path="/programs/recreation" element={<Recreation />} />
           <Route path="/programs/cultural" element={<Cultural />} />
+          <Route path="/programs/civic" element={<Civic />} />
           <Route path="/impact" element={<Impact />} />
           <Route path="/get-involved" element={<GetInvolved />} />
           <Route path="/donate" element={<Donate />} />
