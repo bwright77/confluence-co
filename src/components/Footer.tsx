@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
-import { CCStacked } from './Logo'
+import ccStacked from '../../CC-Stacked.svg'
 
 const programLinks = [
-  { label: 'Youth Pathways', href: '/programs/pathways' },
+  { label: 'Pathways', href: '/programs/pathways' },
   { label: 'Watershed Restoration', href: '/programs/watershed' },
-  { label: 'Lorraine Granado Park', href: '/programs/lgcp' },
-  { label: 'Mo Betta Green', href: '/programs/mo-betta' },
+  { label: 'Natural Resource Conservation', href: '/programs/lgcp' },
+  { label: 'Civic & Community Engagement', href: '/programs/civic' },
   { label: 'Outdoor Recreation', href: '/programs/recreation' },
-  { label: 'Cultural Programs', href: '/programs/cultural' },
+  { label: 'Public Health', href: '/programs/mo-betta' },
 ]
 
 const orgLinks = [
@@ -21,7 +21,7 @@ const orgLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-cc-navy text-white" aria-label="Site footer">
+    <footer className="bg-cc-sand text-cc-navy" aria-label="Site footer">
       {/* Main footer content */}
       <div className="container-site py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -29,9 +29,13 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-1">
             <Link to="/" aria-label="Confluence Colorado — home">
-              <CCStacked variant="dark" className="h-28 w-auto mb-4" />
+              <img
+                src={ccStacked}
+                alt="Confluence Colorado"
+                className="h-44 w-auto mb-5"
+              />
             </Link>
-            <p className="font-body text-white/70 text-sm leading-relaxed mt-4">
+            <p className="font-body text-cc-navy/65 text-sm leading-relaxed">
               {/* TODO: Replace with verbatim mission statement from Shane */}
               Building the next generation of environmental stewards by connecting Denver's
               underserved youth to the land, water, and community they call home.
@@ -40,7 +44,7 @@ export default function Footer() {
 
           {/* Programs links */}
           <div>
-            <h3 className="font-display font-bold text-sm uppercase tracking-poster text-cc-sky mb-4">
+            <h3 className="font-display font-bold text-sm uppercase tracking-poster text-cc-navy mb-4">
               Programs
             </h3>
             <ul className="space-y-2">
@@ -48,7 +52,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="font-body text-sm text-white/70 hover:text-white transition-colors"
+                    className="font-body text-sm text-cc-navy/60 hover:text-cc-navy transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -59,7 +63,7 @@ export default function Footer() {
 
           {/* Org links */}
           <div>
-            <h3 className="font-display font-bold text-sm uppercase tracking-poster text-cc-sky mb-4">
+            <h3 className="font-display font-bold text-sm uppercase tracking-poster text-cc-navy mb-4">
               Organization
             </h3>
             <ul className="space-y-2">
@@ -67,7 +71,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="font-body text-sm text-white/70 hover:text-white transition-colors"
+                    className="font-body text-sm text-cc-navy/60 hover:text-cc-navy transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -78,25 +82,25 @@ export default function Footer() {
 
           {/* Contact + newsletter */}
           <div>
-            <h3 className="font-display font-bold text-sm uppercase tracking-poster text-cc-sky mb-4">
+            <h3 className="font-display font-bold text-sm uppercase tracking-poster text-cc-navy mb-4">
               Connect
             </h3>
-            <address className="not-italic font-body text-sm text-white/70 space-y-1 mb-4">
+            <address className="not-italic font-body text-sm text-cc-navy/60 space-y-1 mb-4">
               <p>3000 Lawrence Street</p>
               <p>Denver, CO 80205</p>
               <p>
-                <a href="tel:+13038157613" className="hover:text-white transition-colors">
+                <a href="tel:+13038157613" className="hover:text-cc-navy transition-colors">
                   (303) 815-7613
                 </a>
               </p>
               <p>
-                <a href="mailto:shane@confluenceco.org" className="hover:text-white transition-colors">
+                <a href="mailto:shane@confluenceco.org" className="hover:text-cc-navy transition-colors">
                   shane@confluenceco.org
                 </a>
               </p>
             </address>
 
-            {/* Social links — placeholders */}
+            {/* Social links */}
             <div className="flex gap-3 mb-6">
               {[
                 { label: 'Instagram', href: '#', icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z' },
@@ -107,7 +111,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-8 h-8 flex items-center justify-center text-white/50 hover:text-cc-sky transition-colors"
+                  className="w-8 h-8 flex items-center justify-center text-cc-navy/40 hover:text-cc-sky transition-colors"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d={social.icon} />
@@ -116,12 +120,12 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* Newsletter signup — Phase 4 will wire to Mailchimp */}
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              aria-label="Newsletter signup"
-            >
-              <label htmlFor="footer-email" className="block font-display font-semibold text-xs uppercase tracking-display text-white/70 mb-2">
+            {/* Newsletter signup */}
+            <form onSubmit={(e) => e.preventDefault()} aria-label="Newsletter signup">
+              <label
+                htmlFor="footer-email"
+                className="block font-display font-semibold text-xs uppercase tracking-display text-cc-navy/60 mb-2"
+              >
                 Stay in the loop
               </label>
               <div className="flex gap-2">
@@ -129,30 +133,30 @@ export default function Footer() {
                   id="footer-email"
                   type="email"
                   placeholder="your@email.com"
-                  className="flex-1 bg-white/10 border border-white/20 rounded px-3 py-2 font-body text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-cc-sky"
+                  className="flex-1 bg-white border border-cc-navy/20 rounded px-3 py-2 font-body text-sm text-cc-navy placeholder:text-cc-navy/35 focus:outline-none focus:border-cc-sky"
                   autoComplete="email"
                 />
                 <button
                   type="submit"
-                  className="bg-cc-sky text-white font-display font-bold text-xs uppercase tracking-display px-4 py-2 rounded hover:bg-cc-orange transition-colors"
+                  className="bg-cc-orange text-white font-display font-bold text-xs uppercase tracking-display px-4 py-2 rounded hover:bg-cc-navy transition-colors"
                 >
                   Join
                 </button>
               </div>
             </form>
           </div>
+
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-cc-navy/15">
         <div className="container-site py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="font-body text-xs text-white/40">
+          <p className="font-body text-xs text-cc-navy/45">
             © 2026 Confluence Colorado. All rights reserved.{' '}
-            {/* TODO: Add EIN once confirmed with Shane */}
-            501(c)(3) nonprofit. Your donation may be tax-deductible.
+            EIN 88-1757678 · 501(c)(3) nonprofit · Your donation may be tax-deductible.
           </p>
-          <p className="font-body text-xs text-white/30 italic">
+          <p className="font-body text-xs text-cc-navy/35 italic">
             the confluence of people and place
           </p>
         </div>
