@@ -7,21 +7,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Derived directly from the Confluence Colorado logo
-        'cc-navy':  '#004667', // primary — nav, footer, headings
-        'cc-sky':   '#009dd6', // secondary — CTAs, links, accents
-        'cc-orange':'#b44b00', // accent — highlights, donate button
-        // Supporting palette derived from the logo colors + Colorado landscape
-        'cc-sage':  '#4A6741', // foothills green
-        'cc-sand':  '#F5E6D3', // warm neutral — card backgrounds
-        'cc-mist':  '#E8F4F9', // very light sky — section backgrounds
-        'cc-dark':  '#0D2137', // near-black navy — deep backgrounds, hero sky
-        'cc-stone': '#6B7280', // muted grey — secondary text
+        // Primary brand colors — from the Confluence Colorado logo
+        'cc-navy':  '#004667', // Deep Teal — nav, footer, headings
+        'cc-sky':   '#009dd6', // River Blue — CTAs, links, accents
+        'cc-orange':'#b44b00', // Burnt Copper — donate button, highlights
+        // Complementary palette — Colorado landscape
+        'cc-sage':  '#6B8F71', // Sage — nature/growth accents
+        'cc-sand':  '#F5E6D3', // Sandstone — card backgrounds, warm neutral
+        'cc-slate': '#2C3E50', // Slate — dark sections, footer
+        'cc-warm':  '#F8F4F0', // Warm Gray — alternate section backgrounds
+        'cc-dark':  '#1A1A2E', // Dark — high-contrast text
+        'cc-stone': '#6B7280', // Mid Gray — secondary text, captions
       },
       fontFamily: {
         display: ['Jost', 'sans-serif'],
-        body:    ['"Source Sans 3"', 'sans-serif'],
-        accent:  ['Bitter', 'serif'],
+        body:    ['Jost', 'sans-serif'],
+        accent:  ['Merriweather', 'Georgia', 'serif'],
       },
       letterSpacing: {
         display: '0.08em',
