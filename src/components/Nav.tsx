@@ -37,7 +37,7 @@ export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [programsOpen, setProgramsOpen] = useState(false)
   const location = useLocation()
-  const isHome = location.pathname === '/'
+  const isHome = ['/', '/about', '/impact'].includes(location.pathname)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)

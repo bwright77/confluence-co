@@ -35,7 +35,7 @@ export default function About() {
   return (
     <>
       {/* Page hero */}
-      <section className="relative h-[60vh] min-h-[420px] flex items-end overflow-hidden">
+      <section className="relative h-[65vh] min-h-[460px] flex items-end overflow-hidden">
         <img
           src={heroPhoto}
           alt=""
@@ -43,12 +43,16 @@ export default function About() {
           className="absolute inset-0 w-full h-full object-cover object-left"
           style={{ filter: 'saturate(0.72) contrast(1.08)' }}
         />
-        <div className="absolute inset-0" style={{ background: 'rgba(0, 44, 70, 0.32)' }} />
+        <div className="absolute inset-0" style={{ background: 'rgba(0, 44, 70, 0.45)' }} />
         <div
           className="absolute inset-0"
           style={{ background: 'linear-gradient(to top, rgba(0,20,35,0.92) 0%, rgba(0,20,35,0.60) 40%, transparent 100%)' }}
         />
-        <div className="relative z-10 container-site pb-14 pt-32">
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(to bottom, rgba(0,20,35,0.55) 0%, transparent 35%)' }}
+        />
+        <div className="relative z-10 container-site pb-14">
           <p className="font-display font-semibold uppercase tracking-poster text-cc-sky text-xs md:text-sm mb-4">
             About Us
           </p>
@@ -211,20 +215,28 @@ export default function About() {
       </section>
 
       {/* Legal + CTA */}
-      <section className="section-pad bg-cc-sand">
-        <div className="container-site">
+      <section className="relative section-pad bg-cc-dark overflow-hidden">
+        {/* Decorative landscape shapes */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <svg viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice" className="absolute bottom-0 w-full h-full">
+            <path fill="#004667" opacity="0.5" d="M0,320 V200 Q200,160 400,180 Q600,200 800,170 Q1000,140 1200,165 Q1340,180 1440,160 V320 Z" />
+            <path fill="#009dd6" opacity="0.2" d="M0,320 V250 Q300,225 600,235 Q900,245 1200,230 Q1340,222 1440,225 V320 Z" />
+            <path fill="#3D5E42" opacity="0.4" d="M0,320 V275 Q120,265 180,255 L200,238 L220,255 Q320,268 440,260 L460,243 L480,260 Q640,272 800,265 L820,248 L840,265 Q1000,272 1200,265 Q1340,260 1440,262 V320 Z" />
+          </svg>
+        </div>
+        <div className="relative z-10 container-site">
           <div className="max-w-2xl mx-auto text-center">
             <p className="font-display font-semibold uppercase tracking-poster text-cc-orange text-xs md:text-sm mb-4">
               A 501(c)(3) Nonprofit
             </p>
-            <h2 className="heading-display text-2xl md:text-3xl text-cc-navy mb-4">
+            <h2 className="heading-display text-2xl md:text-3xl text-white mb-4">
               Transparency &amp; Trust
             </h2>
-            <p className="font-body text-cc-stone text-base leading-relaxed mb-4">
+            <p className="font-body text-white/60 text-base leading-relaxed mb-4">
               Confluence Colorado is a registered 501(c)(3) nonprofit organization. EIN 88-1757678.
               Your donation may be tax-deductible to the full extent permitted by law.
             </p>
-            <p className="font-body text-cc-stone text-sm leading-relaxed mb-8">
+            <p className="font-body text-white/60 text-sm leading-relaxed mb-8">
               Our programs are built in partnership with Wright Adventures, a consulting practice
               with over 15 years of experience building conservation, youth development, and
               environmental programs across Colorado and the Southwest.
@@ -233,7 +245,7 @@ export default function About() {
               <Link to="/about/team" className="btn-primary">
                 Meet the Team
               </Link>
-              <Link to="/impact" className="btn-secondary">
+              <Link to="/impact" className="bg-transparent text-white font-display font-bold uppercase tracking-display text-sm px-6 py-3 rounded border-2 border-white/50 transition-all duration-200 hover:border-white hover:bg-white/10">
                 See Our Impact
               </Link>
             </div>
