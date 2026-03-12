@@ -14,7 +14,14 @@ interface NavItem {
 }
 
 const NAV_LINKS: NavItem[] = [
-  { label: 'About', href: '/about' },
+  {
+    label: 'About',
+    href: '/about',
+    children: [
+      { label: 'About Us', href: '/about' },
+      { label: 'Team & Board', href: '/about/team' },
+    ],
+  },
   {
     label: 'Programs',
     href: '/programs',
@@ -35,7 +42,7 @@ const NAV_LINKS: NavItem[] = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [programsOpen, setProgramsOpen] = useState(false)
+  const [openMenu, setOpenMenu] = useState<string | null>(null)
   const location = useLocation()
   const isHome = ['/', '/about', '/impact'].includes(location.pathname)
 
@@ -48,7 +55,7 @@ export default function Nav() {
   // Close mobile menu on navigation
   useEffect(() => {
     setMobileOpen(false)
-    setProgramsOpen(false)
+    setOpenMenu(null)
   }, [location.pathname])
 
   // Prevent body scroll when mobile menu is open
@@ -90,17 +97,17 @@ export default function Nav() {
                 <div
                   key={link.label}
                   className="relative"
-                  onMouseEnter={() => setProgramsOpen(true)}
-                  onMouseLeave={() => setProgramsOpen(false)}
+                  onMouseEnter={() => setOpenMenu(link.label)}
+                  onMouseLeave={() => setOpenMenu(null)}
                 >
                   <button
                     className="flex items-center gap-1 text-white font-display font-semibold text-sm uppercase tracking-display hover:text-cc-sky transition-colors"
-                    aria-expanded={programsOpen}
+                    aria-expanded={openMenu === link.label}
                     aria-haspopup="true"
                   >
                     {link.label}
                     <svg
-                      className={`w-3 h-3 transition-transform duration-200 ${programsOpen ? 'rotate-180' : ''}`}
+                      className={`w-3 h-3 transition-transform duration-200 ${openMenu === link.label ? 'rotate-180' : ''}`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       aria-hidden="true"
@@ -113,7 +120,7 @@ export default function Nav() {
                     </svg>
                   </button>
 
-                  {programsOpen && (
+                  {openMenu === link.label && (
                     <div className="absolute top-full left-0 mt-2 w-56 bg-cc-navy border border-white/10 rounded shadow-2xl overflow-hidden">
                       {link.children.map((child) => (
                         <NavLink

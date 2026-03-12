@@ -10,7 +10,7 @@ Website redesign for [Confluence Colorado](https://confluenceco.org), a Denver-b
 |---|---|
 | Framework | React 18 + TypeScript (Vite) |
 | Styling | Tailwind CSS 3 with custom brand tokens |
-| Animation | Framer Motion (parallax, scroll-driven) |
+| Animation | Framer Motion (scroll-driven) |
 | Routing | React Router v6 |
 | Hosting | Vercel (auto-deploy from `main`) |
 | Analytics | Plausible (cookieless, privacy-first) |
@@ -68,7 +68,7 @@ src/
 │   ├── Logo.tsx      # CCBug, CCStacked, CCHorizontal (inline SVG)
 │   ├── Nav.tsx       # Sticky nav with dropdown + mobile overlay
 │   ├── Footer.tsx    # Full footer with links, contact, newsletter
-│   ├── ParallaxHero.tsx      # 5-layer Firewatch-style SVG landscape
+│   ├── Hero.tsx              # Full-viewport photo hero
 │   ├── ImpactBar.tsx         # Count-up stat band
 │   ├── ProgramCards.tsx      # 6 program cards with SVG illustrations
 │   ├── TestimonialCarousel.tsx
@@ -97,7 +97,7 @@ src/
 | Phase | Scope | Status |
 |---|---|---|
 | 0 — Foundation | Routes, layout, nav, footer, CI, Plausible | Complete |
-| 1 — Home Page | Parallax hero, impact bar, program cards, testimonials, CTA | Complete |
+| 1 — Home Page | Hero, impact bar, program cards, testimonials, CTA | Complete |
 | 2 — About & Team | Mission/values, timeline, team grid, partner logos | Pending |
 | 3 — Program Pages | 6 program templates with poster illustrations + photo galleries | Pending |
 | 4 — Donate & Get Involved | Stripe integration, volunteer form, Mailchimp signup | Pending |
@@ -126,7 +126,7 @@ All components are built to WCAG 2.1 AA targets:
 - Skip-to-content link on every page
 - Visible focus indicators (`focus-visible` with `cc-sky` outline)
 - ARIA labels on all interactive elements and landmark regions
-- `prefers-reduced-motion` — all parallax, animations, and auto-advance disabled
+- `prefers-reduced-motion` — all animations and auto-advance disabled
 - Semantic HTML throughout
 
 ## Contact

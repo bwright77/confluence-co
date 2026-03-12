@@ -4,7 +4,7 @@ import { useInView } from '../hooks/useInView'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
 /**
- * Dual-CTA section with a dusk parallax landscape background.
+ * Dual-CTA section with a dusk landscape background.
  * "Support Our Work" → Donate | "Get Involved" → Volunteer/newsletter
  */
 export default function CTASection() {
