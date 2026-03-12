@@ -19,9 +19,9 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "Mo' Betta Green Marketplace is founded on the principles of food literacy, environmental stewardship, and social responsibility. We love partnering with Confluence Colorado to use nature to connect people to HEAL (Health, eating, active living).",
+      "Mo' Betta Greens Marketplace is founded on the principles of food literacy, environmental stewardship, and social responsibility. We love partnering with Confluence Colorado to use nature to connect people to HEAL (Health, eating, active living).",
     name: 'Beverly Grant',
-    title: 'Mo\u2019 Betta Green Marketplace',
+    title: "Mo' Betta Greens Marketplace",
     initials: 'BG',
     accentColor: '#009dd6',
   },

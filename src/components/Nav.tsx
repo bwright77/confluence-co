@@ -22,7 +22,7 @@ const NAV_LINKS: NavItem[] = [
       { label: 'Youth Pathways', href: '/programs/pathways' },
       { label: 'Watershed Restoration', href: '/programs/watershed' },
       { label: 'Lorraine Granado Park', href: '/programs/lgcp' },
-      { label: 'Mo Betta Green', href: '/programs/mo-betta' },
+      { label: "Mo' Betta Greens", href: '/programs/mo-betta' },
       { label: 'Outdoor Recreation', href: '/programs/recreation' },
       { label: 'Cultural Programs', href: '/programs/cultural' },
     ],

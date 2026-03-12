@@ -30,7 +30,7 @@ const BOARD: BoardMember[] = [
   {
     name: 'Beverly Grant',
     photo: 'https://confluenceco.org/wp-content/uploads/2022/08/8_0_200_200_beverly_grant-768x698.jpg',
-    bio: "Founder and Director of Mo' Betta Green Marketplace, Ms. Beverly Grant is a Denver native and social justice advocate. Beverly has been nourishing, educating, and serving the community since 2010.",
+    bio: "Founder and Director of Mo' Betta Greens Marketplace, Ms. Beverly Grant is a Denver native and social justice advocate. Beverly has been nourishing, educating, and serving the community since 2010.",
   },
   {
     name: 'Makalah Emanuel',

@@ -58,7 +58,7 @@ const GOALS = [
     color: '#4A3A0A',
     accentColor: '#b44b00',
     headline: '5 community farms & markets',
-    body: 'Expanding Mo\'Betta\'s model across Denver\'s underserved neighborhoods — five urban farms operating year-round, supplying fresh produce and nutrition education to communities that need it most.',
+    body: 'Expanding Mo\'Betta Greens\' model across Denver\'s underserved neighborhoods — five urban farms operating year-round, supplying fresh produce and nutrition education to communities that need it most.',
   },
   {
     area: 'Natural Resource Conservation',

@@ -149,7 +149,7 @@ export default function About() {
               {
                 period: '2018–2022',
                 org: 'Lincoln Hills Cares — Career Pathways',
-                body: 'Through Wright Adventures, Shane secured over $700,000/yr to build the Career Pathways program for Lincoln Hills Cares, expanding the model to include the SPRAY Council (South Platte River Advisory Youth), urban agriculture through Mo\'Betta Green Marketplace, and connections to Lincoln Hills\' legacy of Black outdoor recreation in Colorado. The Pathways program grew to employ over 50 youth per year.',
+                body: 'Through Wright Adventures, Shane secured over $700,000/yr to build the Career Pathways program for Lincoln Hills Cares, expanding the model to include the SPRAY Council (South Platte River Advisory Youth), urban agriculture through Mo\'Betta Greens Marketplace, and connections to Lincoln Hills\' legacy of Black outdoor recreation in Colorado. The Pathways program grew to employ over 50 youth per year.',
               },
               {
                 period: '2022–Present',
