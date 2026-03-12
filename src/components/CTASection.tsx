@@ -125,7 +125,7 @@ export default function CTASection() {
 
         {/* Impact framing micro-copy */}
         <motion.p
-          className="font-body text-white/40 text-sm mt-8 italic"
+          className="font-body text-white/70 text-sm mt-8 italic"
           variants={reduced ? undefined : fadeUp}
           initial={reduced ? undefined : 'hidden'}
           animate={inView || reduced ? 'visible' : 'hidden'}
