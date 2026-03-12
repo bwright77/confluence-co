@@ -108,7 +108,7 @@ export default function ProgramCards() {
       <div className="container-site">
         <div className="text-center mb-12 md:mb-16">
           <p className="font-display font-semibold uppercase tracking-poster text-cc-orange text-xs md:text-sm mb-3">
-            What we do
+            Our Programs
           </p>
           <h2
             id="programs-heading"
