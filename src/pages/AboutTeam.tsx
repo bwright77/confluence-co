@@ -7,7 +7,7 @@ const SHANE = {
   name: 'Shane Wright',
   title: 'Executive Director',
   photo: 'https://confluenceco.org/wp-content/uploads/2025/02/shane-216x300.png',
-  bio: 'Shane Wright is a husband and father who lives in West Colfax, Denver, Colorado, who came of age guiding rivers and mountains in Colorado and Washington State. With a Masters in Nonprofit Management from Regis University and an undergraduate degree in Sociology from Western State College of Colorado "where champions are made out of thin air", Shane has over 15 years of experience raising money and building programs for youth, nature, and his community. When he is not working on community-based environmental projects, he loves to spend time with his wife Erin, their three boys, Aidan, Noah, and Griffin, and their dog Ruby.',
+  bio: 'Shane Wright is a husband and father who lives in West Colfax, Denver, Colorado, who came of age guiding rivers and mountains in Colorado and Washington State. With a Masters in Nonprofit Management from Regis University and an undergraduate degree in Sociology from Western State College of Colorado "where champions are made out of thin air", Shane has over 17 years of experience raising money and building programs for youth, nature, and his community. He served on the Denver Parks and Recreation Advisory Board from 2012 to 2019, representing Councilwoman Robin Kneich, where he contributed to the historic designation of Red Rocks Park and Amphitheatre. When he is not working on community-based environmental projects, he loves to spend time with his wife Erin, their three boys, Aidan, Noah, and Griffin, and their dog Ruby.',
 }
 
 interface BoardMember {

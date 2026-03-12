@@ -132,7 +132,7 @@ export default function About() {
               id="story-heading"
               className="heading-display text-3xl md:text-4xl text-cc-navy max-w-2xl mx-auto"
             >
-              15 Years in the Making
+              17 Years in the Making
             </h2>
           </div>
 
@@ -143,8 +143,8 @@ export default function About() {
             {[
               {
                 period: '2009–2018',
-                org: 'Groundwork Denver — Green Team',
-                body: 'Shane built the Green Team program: paid crews of young environmentalists who take on projects improving Denver\'s urban environment. The Green Team model established the core approach — youth as paid staff, not volunteers; environmental justice as the lens; relationship with land and community as the outcome. During this period, Shane raised over $3 million to build Groundwork Denver\'s Youth, Food, Water, and Natural Resource programs.',
+                org: 'Groundwork Colorado — Green Team',
+                body: 'Shane built the Green Team program: paid crews of young environmentalists improving Denver\'s urban environment. He raised over $3 million to build Groundwork Colorado\'s Youth, Food, Water, and Natural Resource programs — expanding into watershed planning and restoration along Bear Creek and the South Platte River. The model that emerged was simple and enduring: youth as paid staff, not volunteers; environmental justice as the lens; relationship with land and community as the outcome. One of his proudest accomplishments from this era was developing a new generation of conservation leaders, many of whom had never previously had a relationship with the natural world.',
               },
               {
                 period: '2018–2022',

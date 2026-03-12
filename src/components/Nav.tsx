@@ -121,7 +121,8 @@ export default function Nav() {
                   </button>
 
                   {openMenu === link.label && (
-                    <div className="absolute top-full left-0 mt-2 w-56 bg-cc-navy border border-white/10 rounded shadow-2xl overflow-hidden">
+                    <div className="absolute top-full left-0 pt-2 w-56" style={{ marginTop: '-1px' }}>
+                    <div className="bg-cc-navy border border-white/10 rounded shadow-2xl overflow-hidden">
                       {link.children.map((child) => (
                         <NavLink
                           key={child.href}
@@ -137,6 +138,7 @@ export default function Nav() {
                           {child.label}
                         </NavLink>
                       ))}
+                    </div>
                     </div>
                   )}
                 </div>
