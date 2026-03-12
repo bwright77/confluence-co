@@ -243,7 +243,7 @@ export default function Impact() {
           <svg viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice" className="absolute bottom-0 w-full h-full">
             <path fill="#004667" opacity="0.5" d="M0,320 V200 Q200,160 400,180 Q600,200 800,170 Q1000,140 1200,165 Q1340,180 1440,160 V320 Z" />
             <path fill="#009dd6" opacity="0.2" d="M0,320 V250 Q300,225 600,235 Q900,245 1200,230 Q1340,222 1440,225 V320 Z" />
-            <path fill="#3D5E42" opacity="0.4" d="M0,320 V275 Q120,265 180,255 L200,238 L220,255 Q320,268 440,260 L460,243 L480,260 Q640,272 800,265 L820,248 L840,265 Q1000,272 1200,265 Q1340,260 1440,262 V320 Z" />
+            <path fill="#3D5E42" opacity="0.4" d="M0,320 V278 Q200,260 400,268 Q600,276 800,262 Q1000,250 1200,260 Q1340,267 1440,264 V320 Z" />
           </svg>
         </div>
         <div className="relative z-10 container-site max-w-2xl mx-auto text-center">
