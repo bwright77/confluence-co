@@ -91,7 +91,7 @@ export default function ParallaxHero() {
             className="font-body text-white/80 max-w-xl mx-auto leading-relaxed mb-9 md:mb-11"
             style={{ fontSize: 'clamp(0.95rem, 1.8vw, 1.2rem)' }}
           >
-            Connecting Denver's underserved youth to land, water, and community
+            Connecting Denver's youth to land, water, and community
             through environmental stewardship and outdoor education.
           </p>
 

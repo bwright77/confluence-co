@@ -1,6 +1,6 @@
 # Confluence Colorado — confluenceco.org
 
-Website redesign for [Confluence Colorado](https://confluenceco.org), a Denver-based 501(c)(3) nonprofit connecting underserved youth to land, water, and community through environmental stewardship and outdoor education programs.
+Website redesign for [Confluence Colorado](https://confluenceco.org), a Denver-based 501(c)(3) nonprofit connecting youth to land, water, and community through environmental stewardship and outdoor education programs.
 
 > *the confluence of people and place*
 

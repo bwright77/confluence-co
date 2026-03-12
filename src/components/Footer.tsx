@@ -38,7 +38,7 @@ export default function Footer() {
             <p className="font-body text-cc-navy/65 text-sm leading-relaxed">
               {/* TODO: Replace with verbatim mission statement from Shane */}
               Building the next generation of environmental stewards by connecting Denver's
-              underserved youth to the land, water, and community they call home.
+              youth to the land, water, and community they call home.
             </p>
           </div>
 
