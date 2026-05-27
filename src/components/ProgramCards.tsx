@@ -54,8 +54,8 @@ const PROGRAMS: Program[] = [
     color: '#2C3E50',
     accentColor: '#009dd6',
     Icon: Scales,
-    image: '/programs/first-creek/crew-walking.jpg',
-    imageAlt: 'Crew walking with tools toward a U.S. Fish and Wildlife Service truck',
+    image: '/programs/lgcp/community-meeting-circle.jpg',
+    imageAlt: 'Swansea residents seated in a wide circle at Lorraine Granado Community Park for a Steering Committee meeting',
   },
   {
     slug: 'lgcp',
