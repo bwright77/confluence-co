@@ -35,6 +35,9 @@ cta:
     label: Support this program
     href: /donate?program=lgcp
 
+heroImage: /programs/lgcp/hero.jpg
+heroImageAlt: Community members gathered at a picnic table at Lorraine Granado Community Park in West Denver at sunset
+
 seo:
   description: Confluence Colorado partners with the surrounding community to restore Lorraine Granado Community Park as a place of stewardship, recreation, and cultural memory.
 ---
