@@ -19,6 +19,8 @@ interface Program {
   color: string
   accentColor: string
   Icon: React.ElementType
+  image?: string
+  imageAlt?: string
 }
 
 const PROGRAMS: Program[] = [
@@ -30,6 +32,8 @@ const PROGRAMS: Program[] = [
     color: '#004667',
     accentColor: '#009dd6',
     Icon: Handshake,
+    image: '/programs/first-creek/group-portrait.jpg',
+    imageAlt: 'Confluence Colorado youth crew on a log at Rocky Mountain Arsenal',
   },
   {
     slug: 'watershed',
@@ -39,6 +43,8 @@ const PROGRAMS: Program[] = [
     color: '#1B3A52',
     accentColor: '#009dd6',
     Icon: Drop,
+    image: '/programs/first-creek/group-digging.jpg',
+    imageAlt: 'Volunteer crew planting native trees along First Creek',
   },
   {
     slug: 'civic',
@@ -48,6 +54,8 @@ const PROGRAMS: Program[] = [
     color: '#2C3E50',
     accentColor: '#009dd6',
     Icon: Scales,
+    image: '/programs/first-creek/crew-walking.jpg',
+    imageAlt: 'Crew walking with tools toward a U.S. Fish and Wildlife Service truck',
   },
   {
     slug: 'lgcp',
@@ -57,6 +65,8 @@ const PROGRAMS: Program[] = [
     color: '#3D5E42',
     accentColor: '#6B8F71',
     Icon: Leaf,
+    image: '/programs/first-creek/bison-skyline.jpg',
+    imageAlt: 'Bison herd grazing at Rocky Mountain Arsenal with the Denver skyline behind',
   },
   {
     slug: 'recreation',
@@ -66,6 +76,8 @@ const PROGRAMS: Program[] = [
     color: '#1B3A4B',
     accentColor: '#009dd6',
     Icon: Bicycle,
+    image: '/programs/first-creek/planting-trees.jpg',
+    imageAlt: 'Crew member tending newly planted aspens on the prairie',
   },
   {
     slug: 'mo-betta',
@@ -75,6 +87,8 @@ const PROGRAMS: Program[] = [
     color: '#4A3A0A',
     accentColor: '#b44b00',
     Icon: Storefront,
+    image: '/programs/first-creek/bison-skyline.jpg',
+    imageAlt: 'Open land at Rocky Mountain Arsenal with the Denver skyline behind',
   },
 ]
 
@@ -144,19 +158,42 @@ export default function ProgramCards() {
                   className="relative h-44 flex items-center justify-center overflow-hidden"
                   style={{ backgroundColor: program.color }}
                 >
-                  {/* Background texture — subtle horizontal lines (WPA style) */}
-                  <div
-                    className="absolute inset-0 opacity-5"
-                    style={{
-                      backgroundImage: 'repeating-linear-gradient(0deg, white, white 1px, transparent 1px, transparent 8px)',
-                    }}
-                    aria-hidden="true"
-                  />
+                  {program.image ? (
+                    <>
+                      {/* Background photo */}
+                      <img
+                        src={program.image}
+                        alt={program.imageAlt ?? ''}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      {/* Area-color tint to preserve identity + grade the photo */}
+                      <div
+                        className="absolute inset-0"
+                        style={{ backgroundColor: program.color, opacity: 0.55 }}
+                        aria-hidden="true"
+                      />
+                      {/* Vignette for icon legibility */}
+                      <div
+                        className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-black/25"
+                        aria-hidden="true"
+                      />
+                    </>
+                  ) : (
+                    /* Background texture — subtle horizontal lines (WPA style) */
+                    <div
+                      className="absolute inset-0 opacity-5"
+                      style={{
+                        backgroundImage: 'repeating-linear-gradient(0deg, white, white 1px, transparent 1px, transparent 8px)',
+                      }}
+                      aria-hidden="true"
+                    />
+                  )}
 
                   {/* Phosphor duotone icon */}
                   <program.Icon
                     weight="duotone"
-                    className="w-20 h-20 text-white transition-transform duration-500 group-hover:scale-110"
+                    className="relative w-20 h-20 text-white drop-shadow-lg transition-transform duration-500 group-hover:scale-110"
                     aria-hidden="true"
                   />
 

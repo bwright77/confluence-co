@@ -1,0 +1,48 @@
+- slug: youth-pathways
+  name: Youth Pathways
+  shortName: Youth
+  description: Paid employment and career pathways for youth ages 14–24.
+  colorToken: burnt-copper
+  icon: compass
+
+- slug: watershed-restoration
+  name: Watershed Restoration
+  shortName: Watershed
+  description: Protecting and restoring the South Platte River and Front Range waterways.
+  colorToken: river-blue
+  icon: wave
+
+- slug: natural-resource-conservation
+  name: Natural Resource Conservation
+  shortName: Conservation
+  description: Stewarding parks, open space, and natural areas through community partnership.
+  colorToken: deep-teal
+  icon: mountain
+
+- slug: outdoor-recreation-stream
+  name: Outdoor Recreation & STREAM
+  shortName: Outdoor & STREAM
+  description: Place-based STREAM (Science, Technology, Reading, Engineering, Arts, Math) education in the outdoors.
+  colorToken: river-blue
+  icon: binoculars
+
+- slug: civic-engagement
+  name: Civic Engagement
+  shortName: Civic
+  description: Community-led decision-making, advocacy, and place-based stewardship.
+  colorToken: burnt-copper
+  icon: people
+
+- slug: public-health-urban-agriculture
+  name: Public Health & Urban Agriculture
+  shortName: Food & Health
+  description: Urban farming, food access, and community health in partnership with Mo Betta Green Marketplace.
+  colorToken: burnt-copper
+  icon: leaf
+
+- slug: cultural-programs
+  name: Cultural Programs
+  shortName: Cultural
+  description: Programs honoring Indigenous, Hispanic, and Black cultural heritage in conservation and recreation.
+  colorToken: deep-teal
+  icon: circle
