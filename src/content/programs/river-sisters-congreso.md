@@ -38,6 +38,9 @@ cta:
     label: Support this work
     href: /donate?program=river-sisters-congreso
 
+heroImage: /programs/river-sisters-congreso/hero.jpg
+heroImageAlt: Confluence Park at the meeting of Cherry Creek and the South Platte River in Denver
+
 seo:
   description: Confluence Colorado are Partner Members of the River Sisters Congreso — a coalition of Indigenous, Chicano/Mexicano, and community leaders advancing cultural guardianship, environmental justice, and personhood for the South Platte River.
 ---

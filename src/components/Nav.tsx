@@ -33,7 +33,14 @@ export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState<string | null>(null)
   const location = useLocation()
-  const isHome = ['/', '/about', '/impact'].includes(location.pathname)
+  // Routes whose top section has its own dark/full-bleed hero — let the nav
+  // sit transparently over it until the user scrolls past.
+  const DARK_HERO_PREFIXES = ['/about', '/impact', '/programs', '/focus-areas', '/news']
+  const hasDarkHero =
+    location.pathname === '/' ||
+    DARK_HERO_PREFIXES.some(
+      (p) => location.pathname === p || location.pathname.startsWith(p + '/')
+    )
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -53,7 +60,7 @@ export default function Nav() {
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
-  const navBg = scrolled || !isHome
+  const navBg = scrolled || !hasDarkHero
     ? 'bg-cc-navy shadow-lg'
     : 'bg-transparent'
 
