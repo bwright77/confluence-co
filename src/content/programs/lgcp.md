@@ -43,6 +43,12 @@ cta:
 heroImage: /programs/lgcp/hero.jpg
 heroImageAlt: Community members gathered at a picnic table at Lorraine Granado Community Park in Swansea at sunset
 
+gallery:
+  - src: /programs/lgcp/community-meeting-circle.jpg
+    alt: Swansea residents seated in a wide circle of folding chairs at Lorraine Granado Community Park for a Steering Committee meeting
+  - src: /programs/lgcp/community-meeting-detail.jpg
+    alt: Detail of Steering Committee participants at Lorraine Granado Community Park with translation earpieces and program flyers
+
 seo:
   description: Confluence Colorado partners with Swansea residents to restore Lorraine Granado Community Park as a place of stewardship, recreation, and cultural memory honoring environmental-justice organizer Lorraine Granado.
 ---

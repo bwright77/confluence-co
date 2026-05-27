@@ -35,9 +35,16 @@ cta:
     label: Support this program
     href: /donate?program=spray-council
 
+heroImage: /programs/spray-council/spray-council.jpg
+heroImageAlt: SPRAY Council members gathered on the South Platte riverbank for a field session
+
 seo:
   description: Confluence Colorado is updating and implementing the South Platte River Advisory Youth Council plan — a youth-to-youth guide to a healthier South Platte River.
 ---
+
+## Recognition
+
+In **2025**, the SPRAY Council's work — in partnership with Confluence Colorado — received the **Exemplar Award** from the **Colorado Water Conservation Board**, recognizing the Council's youth-led, watershed-wide approach to South Platte River planning and stewardship.
 
 ## The plan
 

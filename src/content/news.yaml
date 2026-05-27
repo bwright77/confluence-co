@@ -1,0 +1,90 @@
+- id: spray-cwcb-exemplar-award-2025
+  date: "2025-11-01"  # TODO: confirm exact award date with Shane
+  title: SPRAY Council wins the 2025 CWCB Exemplar Award
+  body: |
+    The **South Platte River Advisory Youth (SPRAY) Council** — in partnership with Confluence Colorado — has been honored with the **Exemplar Award** from the **Colorado Water Conservation Board** for 2025. The award recognizes the Council's youth-led, watershed-wide approach to planning, stewardship, and community engagement along the South Platte.
+
+    Huge congratulations to the youth planners who *are* the Council. This is your award.
+  image: /news/spray-cwcb-exemplar-award-2025.jpg
+  imageAlt: Announcement banner for the 2025 Colorado Water Conservation Board Exemplar Award given to the SPRAY Council
+  imageFit: contain
+  link:
+    label: SPRAY Council program
+    href: /programs/spray-council
+  tags:
+    - watershed-restoration
+    - youth-pathways
+    - civic-engagement
+
+- id: lgcp-community-meeting-may-2026
+  date: "2026-05-15"
+  title: Steering Committee gathered in the park
+  body: |
+    The Lorraine Granado Community Park Steering Committee held our monthly meeting *in* the park this week — a circle of folding chairs under the new shade cover, with neighbors stopping by to share what they want to see restored. Translation earpieces, program flyers in English and Spanish, and a lot of ideas.
+
+    The survey is still open. If you live in Globeville-Elyria-Swansea, your voice shapes the next phase.
+  image: /programs/lgcp/community-meeting-circle.jpg
+  imageAlt: Swansea residents seated in a wide circle of folding chairs at Lorraine Granado Community Park for a Steering Committee meeting
+  link:
+    label: Take the survey
+    href: /programs/lgcp
+  tags:
+    - civic-engagement
+    - natural-resource-conservation
+
+- id: first-creek-planting-may-2026
+  date: "2026-05-16"
+  title: Trees in the ground at First Creek
+  body: |
+    A youth crew joined Friends of the Front Range Wildlife Refuges and the U.S. Fish and Wildlife Service for native tree and shrub plantings along the First Creek corridor at Rocky Mountain Arsenal. Aspens, riparian shrubs, lessons about why this creek matters all the way downstream to Commerce City.
+
+    The work continues through the summer.
+  image: /programs/first-creek/group-digging.jpg
+  imageAlt: Volunteers digging holes along the First Creek corridor for native plantings
+  link:
+    label: First Creek program
+    href: /programs/first-creek-rocky-mountain-arsenal
+  tags:
+    - watershed-restoration
+    - youth-pathways
+
+- id: spray-council-field-session-may-2026
+  date: "2026-05-26"
+  title: SPRAY Council on the South Platte
+  body: |
+    The SPRAY Council took the plan into the field — sampling water, reading the river, talking through implementation priorities from *Our River, Our Voices, Our Future*. Youth-led, watershed-wide, by design.
+  image: /programs/spray-council/spray-council.jpg
+  imageAlt: SPRAY Council members gathered on the South Platte riverbank for a field session
+  link:
+    label: SPRAY Council program
+    href: /programs/spray-council
+  tags:
+    - watershed-restoration
+    - youth-pathways
+    - civic-engagement
+
+- id: green-workforce-cohort-launch-2026
+  date: "2026-04-01"
+  title: Green Workforce Pathways cohort kickoff
+  body: |
+    The 2026 Green Workforce Pathways cohort started this week. Fourteen Denver youth ages 16–24, twelve months of paid green-career training, partnerships with the U.S. Fish and Wildlife Service and Denver's Office of Climate Action, Sustainability, and Resiliency.
+  image: /programs/green-workforce-pathways/hero.png
+  imageAlt: Shane Wright with the Pathways youth cohort on the South Platte River
+  link:
+    label: Green Workforce Pathways
+    href: /programs/green-workforce-pathways
+  tags:
+    - youth-pathways
+    - natural-resource-conservation
+
+- id: river-sisters-partner-2026
+  date: "2026-02-15"
+  title: Partnering with the River Sisters Congreso
+  body: |
+    Shane Wright and Vivian Cervantes are Partner Members of the **River Sisters Congreso** — a coalition of Indigenous, Chicano/Mexicano, and community leaders advancing personhood for the South Platte River and the Turquoise Necklace cultural plan. We're proud to bring on-the-ground program experience to the Congreso's larger cultural and policy work.
+  link:
+    label: River Sisters Congreso
+    href: /programs/river-sisters-congreso
+  tags:
+    - cultural-programs
+    - civic-engagement

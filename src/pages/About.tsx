@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import { useReducedMotion } from '../hooks/useReducedMotion'
-import heroPhoto from '../assets/shane_pathways.png'
+const heroPhoto = '/programs/green-workforce-pathways/hero.png'
 
 const VALUES = [
   {

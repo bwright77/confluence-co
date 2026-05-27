@@ -54,6 +54,9 @@ cta:
     label: Get involved
     href: /get-involved
 
+heroImage: /programs/green-workforce-pathways/hero.png
+heroImageAlt: Shane Wright with Confluence Colorado Pathways youth on the South Platte River
+
 seo:
   description: Confluence Colorado's Green Workforce Pathways employs Denver youth ages 16–24 in paid green career training, in partnership with Denver's Office of Climate Action, Sustainability, and Resiliency.
 ---

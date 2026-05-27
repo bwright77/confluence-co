@@ -41,6 +41,9 @@ cta:
     label: Support this program
     href: /donate?program=colorado-watershed-project
 
+heroImage: /programs/colorado-watershed-project/hero.jpg
+heroImageAlt: Students in life jackets and helmets smiling on a green raft on the river during a Cottonwood Institute Colorado Watershed Project trip
+
 seo:
   description: A five-day, four-night summer field program for middle and high school students focused on Colorado watersheds, river ecosystems, and service-learning — delivered in partnership with Cottonwood Institute.
 ---

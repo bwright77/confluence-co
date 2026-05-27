@@ -78,15 +78,28 @@ export default function Programs() {
   return (
     <>
       {/* Page hero */}
-      <section className="bg-cc-navy pt-32 pb-12 md:pt-40 md:pb-16">
-        <div className="container-site">
+      <section className="relative bg-cc-navy pt-32 pb-12 md:pt-40 md:pb-20 overflow-hidden">
+        <img
+          src="/programs/first-creek/bison-skyline.jpg"
+          alt=""
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-cc-navy/70"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/30"
+          aria-hidden="true"
+        />
+        <div className="container-site relative">
           <p className="font-display text-xs font-semibold uppercase tracking-poster text-cc-sky">
             Our Work
           </p>
           <h1 className="heading-display mt-3 text-4xl text-white md:text-6xl md:leading-tight">
             Programs
           </h1>
-          <p className="mt-4 max-w-3xl font-body text-lg text-white/85 md:text-xl">
+          <p className="mt-4 max-w-3xl font-body text-lg text-white/90 md:text-xl">
             Specific, named initiatives — each with a community, a place, partners, and a story.
             Filter by focus area or status, or browse the full list below.
           </p>
