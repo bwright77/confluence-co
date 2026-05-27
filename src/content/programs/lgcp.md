@@ -5,7 +5,7 @@ shortName: LGCP
 tagline: Community-led restoration of a Swansea park honoring environmental-justice organizer Lorraine Granado.
 
 status: active
-startDate: "2022-01-01"  # TODO: confirm actual program start with Shane
+startDate: "2025-05-01"
 endDate: null            # ongoing
 featured: true
 
@@ -24,7 +24,6 @@ location:
 
 leadStaff:
   - vivian-cervantes
-  # TODO: confirm additional staff
 
 partners:
   - Cross Community Coalition
