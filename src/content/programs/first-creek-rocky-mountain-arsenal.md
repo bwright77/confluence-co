@@ -59,7 +59,7 @@ gallery:
   - src: /projects/first-creek/crew-walking.jpg
     alt: Confluence Colorado youth crew walking toward a U.S. Fish and Wildlife Service truck on the prairie
   - src: /projects/first-creek/planting-trees.jpg
-    alt: A crew member tending newly planted aspens inside a protective fence enclosure
+    alt: A crew member tending ready-to-be-planted trees inside a protective fence enclosure
   - src: /projects/first-creek/group-digging.jpg
     alt: Volunteers digging holes for native trees along the First Creek corridor
   - src: /projects/first-creek/group-portrait.jpg
