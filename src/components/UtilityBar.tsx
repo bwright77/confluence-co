@@ -8,14 +8,14 @@ export default function UtilityBar() {
 
   return (
     <>
-      <div className="bg-cc-navy">
+      <div className="bg-cc-sand">
         <div className="container-site flex h-9 items-center justify-between">
           <TranslateControl />
 
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
-            className="flex items-center gap-1.5 text-white/80 hover:text-white transition-colors text-xs font-display font-semibold uppercase tracking-display"
+            className="flex items-center gap-1.5 text-cc-navy/70 hover:text-cc-navy transition-colors text-xs font-display font-semibold uppercase tracking-display"
             aria-label="Search the site"
           >
             <MagnifyingGlass size={16} weight="bold" aria-hidden="true" />
