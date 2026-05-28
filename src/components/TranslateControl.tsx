@@ -8,8 +8,9 @@ import { GlobeHemisphereWest, CaretDown, Check } from '@phosphor-icons/react'
  *
  * Language resolution on load: an explicit saved choice (localStorage) wins;
  * otherwise we fall back to the active googtrans cookie, then auto-switch to
- * the browser's preferred language. The language list is filtered to what the
- * widget actually offers, so Navajo only appears if/when Google supports it.
+ * the browser's preferred language. Every language is always listed in the
+ * dropdown regardless of browser settings — locale only drives which one is
+ * auto-selected.
  */
 
 declare global {
@@ -99,9 +100,6 @@ function applyToWidget(lang: LangCode, attempt = 0) {
 
 export default function TranslateControl() {
   const [current, setCurrent] = useState<LangCode>('en')
-  // es is known-supported; the effect refines this to what the widget offers
-  // (adds Navajo if available, etc.).
-  const [available, setAvailable] = useState<LangCode[]>(['en', 'es'])
   const [open, setOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -139,26 +137,6 @@ export default function TranslateControl() {
     }
   }, [])
 
-  // Once the widget's <select> exists, keep only the languages it actually
-  // offers (English is always available as the page's original language).
-  useEffect(() => {
-    let tries = 0
-    const id = window.setInterval(() => {
-      const select = document.querySelector<HTMLSelectElement>('select.goog-te-combo')
-      if (select) {
-        const offered = new Set<LangCode>(['en'])
-        for (const opt of Array.from(select.options)) {
-          if (opt.value && isLangCode(opt.value)) offered.add(opt.value)
-        }
-        setAvailable(LANGUAGES.map((l) => l.code).filter((c) => offered.has(c)))
-        window.clearInterval(id)
-      } else if (++tries > 30) {
-        window.clearInterval(id)
-      }
-    }, 200)
-    return () => window.clearInterval(id)
-  }, [])
-
   // Close the popover on outside click or Escape.
   useEffect(() => {
     if (!open) return
@@ -191,7 +169,6 @@ export default function TranslateControl() {
   }
 
   const currentLang = LANGUAGES.find((l) => l.code === current) ?? LANGUAGES[0]
-  const visibleLanguages = LANGUAGES.filter((l) => available.includes(l.code))
 
   return (
     <div ref={containerRef} className="relative">
@@ -225,7 +202,7 @@ export default function TranslateControl() {
           <p className="px-3 pt-2.5 pb-1.5 font-display text-[0.65rem] font-semibold uppercase tracking-poster text-cc-stone">
             Translate this page
           </p>
-          {visibleLanguages.map((lang) => (
+          {LANGUAGES.map((lang) => (
             <button
               key={lang.code}
               type="button"
