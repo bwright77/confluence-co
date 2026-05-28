@@ -13,8 +13,8 @@ Website redesign for [Confluence Colorado](https://confluenceco.org), a Denver-b
 | Animation | Framer Motion (scroll-driven) |
 | Routing | React Router v6 |
 | Icons | Phosphor (`@phosphor-icons/react`) |
-| Content | Markdown + YAML (programs, focus areas, news) parsed at build with `js-yaml` + `react-markdown` |
-| Search | Client-side index over programs, focus areas, news, and key pages |
+| Content | Markdown + YAML (projects, program areas, news) parsed at build with `js-yaml` + `react-markdown` |
+| Search | Client-side index over projects, program areas, news, and key pages |
 | Translation | Google Website Translator widget (EN/ES) behind a custom control |
 | Hosting | Vercel (auto-deploy from `main`) |
 | Analytics | Plausible (cookieless, privacy-first) |
@@ -62,30 +62,52 @@ CI runs on every push and PR:
 
 (Tokens are defined in [`tailwind.config.js`](tailwind.config.js).)
 
+**Program-area colors** — each of the 6 program areas maps to one brand token (via `colorToken` in [`areas.yaml`](src/content/areas.yaml) → class sets in [`src/components/programs/areaColors.ts`](src/components/programs/areaColors.ts)). The home "What We Do" cards use the same colors.
+
+| Program area | Token |
+|---|---|
+| Youth Pathways | `cc-orange` |
+| Watershed Restoration | `cc-sky` |
+| Natural Resource Conservation | `cc-sage` |
+| Outdoor Recreation & STREAM | `cc-navy` |
+| Community Engagement | `cc-slate` |
+| Public Health & Urban Agriculture | `cc-stone` |
+
 **Fonts** (Google Fonts):
 - **Jost** — display/headings **and** body (single brand typeface from the logo)
 - **Merriweather** — pull quotes and accent text (`font-accent`)
 
 **Logo** — all three treatments (bug, stacked, horizontal) are inline React SVG components in [`src/components/Logo.tsx`](src/components/Logo.tsx). They accept a `variant` prop (`"dark"` swaps navy → white for use on dark backgrounds without losing the blue + orange).
 
+## Information architecture
+
+Two nouns drive the site, and the distinction matters:
+
+- **Program Areas** — the **6 fixed categories** the org organizes its work by: Youth Pathways, Watershed Restoration, Natural Resource Conservation, Outdoor Recreation & STREAM, Community Engagement, Public Health & Urban Agriculture. Defined in [`src/content/areas.yaml`](src/content/areas.yaml). Each has its own color token (see Brand). Live at `/program-areas/:slug` (per-area project list — there is **no** standalone index page; the grid lives atop `/projects`).
+- **Projects** — the specific, named initiatives (First Creek, SPRAY Council, LGCP, Green Workforce Pathways, etc.). A growing set. Live at `/projects` (list) and `/projects/:slug` (detail). Each project lists a flat `areas: string[]` — **one or more** program areas it fits into, with **no primary/lead** designation. Project `status` is `active` or `completed`.
+
+> **Naming note:** the product-facing surface says *Projects* and *Program Areas*, but internal code identifiers were deliberately left as `Program` / `programs.ts` / `src/content/programs/*.md` to limit churn. That split is intentional — the rename is *not* incomplete.
+
+Legacy `/programs`, `/programs/:slug`, `/focus-areas*`, and `/program-areas` (index) all redirect (client-side in [`src/routes/redirects.ts`](src/routes/redirects.ts) + server-side in [`vercel.json`](vercel.json)).
+
 ## Project Structure
 
-Programs, focus areas, and news are **content-driven**: programs are Markdown + YAML
-files in `src/content/programs/`, tagged with focus areas from `src/content/areas.yaml`.
+Projects, program areas, and news are **content-driven**: projects are Markdown + YAML
+files in `src/content/programs/`, tagged with program areas from `src/content/areas.yaml`.
 `src/data/` loads and schema-validates that content at build time. Pages render it through
-shared templates — there are no per-program page components.
+shared templates — there are no per-project page components.
 
 ```
 src/
 ├── content/          # Authoring source (no code)
-│   ├── programs/*.md # One file per program (frontmatter + Markdown body)
-│   ├── areas.yaml    # Focus-area taxonomy
+│   ├── programs/*.md # One file per project (frontmatter + Markdown body)
+│   ├── areas.yaml    # Program-area taxonomy (6 areas, each with a color token)
 │   └── news.yaml     # News timeline entries
 ├── data/             # Loads + validates content, builds derived data
-│   ├── programs.ts   # Parse/validate program frontmatter → Program[]
-│   ├── areas.ts      # Focus areas
+│   ├── programs.ts   # Parse/validate project frontmatter → Program[]; programsByArea()
+│   ├── areas.ts      # Program areas
 │   ├── news.ts       # News posts
-│   ├── searchIndex.ts# Client-side search index (programs, areas, news, pages)
+│   ├── searchIndex.ts# Client-side search index (projects, program areas, news, pages)
 │   └── types.ts
 ├── components/
 │   ├── Logo.tsx      # CCBug, CCStacked, CCHorizontal (inline SVG)
@@ -96,22 +118,22 @@ src/
 │   ├── Footer.tsx
 │   ├── Hero.tsx
 │   ├── ImpactBar.tsx
-│   ├── ProgramCards.tsx
+│   ├── ProgramCards.tsx     # Home "What We Do" — the 6 program areas (colors aligned to area tokens)
 │   ├── TestimonialCarousel.tsx
 │   ├── CTASection.tsx
-│   ├── programs/     # ProgramHero, ProgramBody, ProgramCard, filters, meta, etc.
+│   ├── programs/     # ProgramHero, ProgramBody, ProgramCard, AreaTag, areaColors, filters, meta, etc.
 │   └── news/         # LatestNews, NewsPost
-├── pages/            # Route-level pages (templates, not per-program)
+├── pages/            # Route-level pages (templates, not per-project)
 │   ├── Home.tsx
 │   ├── About.tsx / AboutTeam.tsx
-│   ├── Programs.tsx / ProgramDetail.tsx      # index + /programs/:slug
-│   ├── FocusAreas.tsx / FocusArea.tsx        # index + /focus-areas/:slug
+│   ├── Programs.tsx / ProgramDetail.tsx      # /projects + /projects/:slug (Programs.tsx also hosts the program-area grid)
+│   ├── ProgramArea.tsx                        # /program-areas/:slug (per-area project list; no index page)
 │   ├── Impact.tsx
 │   ├── GetInvolved.tsx                        # audience cards → mailto Shane
 │   ├── Donate.tsx
 │   ├── News.tsx
 │   └── NotFound.tsx
-├── routes/redirects.ts   # Legacy per-area routes → /focus-areas/:slug
+├── routes/redirects.ts   # Legacy /programs/* + /focus-areas/* → /projects /program-areas
 ├── layouts/Layout.tsx    # Nav + Footer wrapper, scroll-to-top on route change
 ├── hooks/                # useCountUp, useInView, useReducedMotion
 └── index.css             # Tailwind base + component layer (btn-*, heading-*, etc.)
@@ -124,7 +146,7 @@ src/
 | 0 — Foundation | Routes, layout, nav, footer, CI, Plausible | Complete |
 | 1 — Home Page | Hero, impact bar, program cards, testimonials, CTA | Complete |
 | 2 — About & Team | Mission/values, timeline, team grid, partner logos | In progress (placeholder copy) |
-| 3 — Programs IA | Content-driven programs + focus areas (Markdown/YAML), detail + index templates | Complete |
+| 3 — Projects IA | Content-driven projects + program areas (Markdown/YAML); flat area tagging, per-area colors, detail + per-area templates | Complete |
 | 4 — Donate & Get Involved | Get Involved reach-out hub (audience cards → mailto) done; Stripe + Mailchimp pending | Get Involved done; payments/email pending |
 | 5 — Impact & News | Impact goals page + News timeline | Complete (awaiting real metrics) |
 | — Site utilities | Search overlay + EN/ES Google Translate in a top utility bar | Complete |
@@ -143,7 +165,7 @@ The following content is placeholder and needs to be replaced before launch:
 - [ ] Team bios + photos (staff, board, program leads)
 - [x] EIN (footer shows 88-1757678)
 - [ ] Partner logos
-- [ ] Program copy review for all programs (drafted in `src/content/programs/`)
+- [ ] Project copy review for all projects (drafted in `src/content/programs/`)
 - [ ] Donation impact framing copy
 
 ## Accessibility
