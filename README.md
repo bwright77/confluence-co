@@ -193,10 +193,15 @@ The following content is placeholder and needs to be replaced before launch:
 - [ ] Project copy review for all projects (drafted in `src/content/programs/`)
 - [ ] Donation impact framing copy (provisional copy lives in [`src/lib/donate.ts`](src/lib/donate.ts)); confirm preset tiers + refund-policy wording
 
-**Stripe dashboard setup (config, not code; blocks donate launch, not the build):**
+## Donate Launch Checklist (Stripe dashboard — Ben)
 
+The donate flow is built; these are dashboard-only config tasks (no code) that
+Ben owns and that gate the donate **launch**, not the build. Test in Stripe
+test mode first, then repeat the per-mode items (receipts) in live mode.
+
+- [ ] `STRIPE_SECRET_KEY` set to a **live** key in Vercel (Production)
 - [ ] Nonprofit rate approved (2.2% + 30¢) — keeps the fee-cover figure accurate
-- [ ] Automatic email receipts on, with the tax-deductibility statement in the footer
+- [ ] Automatic email receipts on (per-mode), with the tax-deductibility statement
 - [ ] Statement descriptor set (`CONFLUENCE COLO`)
 - [ ] Checkout/receipt branding — logo, brand color `#004667`, support email
 - [ ] Bank account connected + payout schedule set
