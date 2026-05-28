@@ -34,7 +34,7 @@ export default function Footer() {
               aria-label="Confluence Colorado — home"
             >
               <CCBug variant="light" className="h-14 w-14 shrink-0" />
-              <div className="leading-none">
+              <div className="leading-none" translate="no">
                 <div
                   className="font-display font-bold uppercase text-cc-navy tracking-wide"
                   style={{ fontSize: 'clamp(1.1rem, 2vw, 1.45rem)', letterSpacing: '0.06em' }}
@@ -99,7 +99,7 @@ export default function Footer() {
             <h3 className="font-display font-bold text-sm uppercase tracking-poster text-cc-navy mb-4">
               Connect
             </h3>
-            <address className="not-italic font-body text-sm text-cc-navy/60 space-y-1 mb-4">
+            <address className="not-italic font-body text-sm text-cc-navy/60 space-y-1 mb-4" translate="no">
               <p>3000 Lawrence Street</p>
               <p>Denver, CO 80205</p>
               <p>

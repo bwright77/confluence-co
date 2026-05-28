@@ -77,7 +77,7 @@ export default function Nav() {
           {/* Logo — oversized bug mark + bold wordmark in HTML (readable at all sizes) */}
           <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Confluence Colorado — home">
             <CCBug variant="dark" className="h-12 w-12 md:h-14 md:w-14 shrink-0" />
-            <div className="leading-none">
+            <div className="leading-none" translate="no">
               <div className="font-display font-bold uppercase text-white tracking-wide"
                 style={{ fontSize: 'clamp(1.1rem, 2vw, 1.45rem)', letterSpacing: '0.06em' }}>
                 Confluence
