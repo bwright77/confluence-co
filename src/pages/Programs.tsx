@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Handshake, Drop, Leaf, Bicycle, Scales, Storefront } from '@phosphor-icons/react'
+import { Handshake, Drop, Leaf, Mountains, Scales, Storefront } from '@phosphor-icons/react'
 import type { Icon } from '@phosphor-icons/react'
 import { areas } from '../data/areas'
 import { programs, programsByArea } from '../data/programs'
@@ -16,7 +16,7 @@ const AREA_ICONS: Record<string, Icon> = {
   'youth-pathways': Handshake,
   'watershed-restoration': Drop,
   'natural-resource-conservation': Leaf,
-  'outdoor-recreation-stream': Bicycle,
+  'outdoor-recreation-stream': Mountains,
   'civic-engagement': Scales,
   'public-health-urban-agriculture': Storefront,
 }

@@ -5,7 +5,7 @@ import {
   Drop,
   Scales,
   Leaf,
-  Bicycle,
+  Mountains,
   Storefront,
 } from '@phosphor-icons/react'
 import { useInView } from '../hooks/useInView'
@@ -75,7 +75,7 @@ const PROGRAMS: Program[] = [
     tagline: 'Building Relationships Through Nature & STREAM Learning',
     color: '#004667',
     accentColor: '#004667',
-    Icon: Bicycle,
+    Icon: Mountains,
     image: '/projects/colorado-watershed-project/hero.jpg',
     imageAlt: 'Students in life jackets on a green raft during the Colorado Watershed Project',
   },
