@@ -57,6 +57,7 @@ CI runs on every push and PR:
 | `cc-orange` | `#b44b00` | Accent — donate button, highlights |
 | `cc-sage` | `#6B8F71` | Nature/growth accents (large/decorative) |
 | `cc-sage-ink` | `#4a6b51` | Sage **text on light** backgrounds (AA ≥ 4.5:1) |
+| `cc-clay` | `#7a4a28` | Earthy brown — Public Health/urban-ag area (AA both ways on light) |
 | `cc-sand` | `#F5E6D3` | Backgrounds — cards, warm sections |
 | `cc-warm` | `#F8F4F0` | Alternate section backgrounds |
 | `cc-slate` | `#2C3E50` | Dark sections |
