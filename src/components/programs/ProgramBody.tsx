@@ -11,17 +11,21 @@ export default function ProgramBody({ body }: ProgramBodyProps) {
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
-          h2: ({ node: _node, ...props }) => (
+          h2: ({ node: _node, children, ...props }) => (
             <h2
               className="heading-section mt-10 text-2xl text-cc-navy md:text-3xl first:mt-0"
               {...props}
-            />
+            >
+              {children}
+            </h2>
           ),
-          h3: ({ node: _node, ...props }) => (
+          h3: ({ node: _node, children, ...props }) => (
             <h3
               className="mt-8 font-display text-xl font-semibold text-cc-navy"
               {...props}
-            />
+            >
+              {children}
+            </h3>
           ),
           p: ({ node: _node, ...props }) => (
             <p className="mt-4 font-body text-base leading-relaxed text-cc-dark" {...props} />
@@ -35,13 +39,15 @@ export default function ProgramBody({ body }: ProgramBodyProps) {
           li: ({ node: _node, ...props }) => (
             <li className="leading-relaxed" {...props} />
           ),
-          a: ({ node: _node, ...props }) => (
+          a: ({ node: _node, children, ...props }) => (
             <a
               className="text-cc-sky-ink underline underline-offset-2 hover:text-cc-navy"
               target={props.href?.startsWith('http') ? '_blank' : undefined}
               rel={props.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
               {...props}
-            />
+            >
+              {children}
+            </a>
           ),
           strong: ({ node: _node, ...props }) => (
             <strong className="font-semibold text-cc-navy" {...props} />

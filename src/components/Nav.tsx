@@ -98,6 +98,11 @@ export default function Nav() {
           <div className="hidden lg:flex items-center gap-6 xl:gap-8">
             {NAV_LINKS.map((link) =>
               link.children ? (
+                // Disclosure container: hover/focus handlers coordinate the
+                // menu's open state; the interactive control is the <button>
+                // child (which has click + keyboard support), so the wrapper
+                // itself is intentionally not a role-bearing widget.
+                // eslint-disable-next-line jsx-a11y/no-static-element-interactions
                 <div
                   key={link.label}
                   className="relative"

@@ -44,7 +44,6 @@ export default function ProgramFilters({
       }
     }, 200)
     return () => window.clearTimeout(debounceRef.current)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryDraft])
 
   const isActive = (slug: string) => value.areas.includes(slug)

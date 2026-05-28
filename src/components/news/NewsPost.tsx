@@ -82,13 +82,15 @@ export default function NewsPost({ post }: NewsPostProps) {
                 <strong className="font-semibold text-cc-navy" {...props} />
               ),
               em: ({ node: _n, ...props }) => <em className="italic" {...props} />,
-              a: ({ node: _n, ...props }) => (
+              a: ({ node: _n, children, ...props }) => (
                 <a
                   className="text-cc-sky-ink underline underline-offset-2 hover:text-cc-navy"
                   target={props.href?.startsWith('http') ? '_blank' : undefined}
                   rel={props.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                   {...props}
-                />
+                >
+                  {children}
+                </a>
               ),
               ul: ({ node: _n, ...props }) => (
                 <ul className="mt-2 list-disc space-y-1 pl-5 font-body text-cc-dark" {...props} />
