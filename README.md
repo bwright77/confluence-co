@@ -18,8 +18,9 @@ Website redesign for [Confluence Colorado](https://confluenceco.org), a Denver-b
 | Translation | Google Website Translator widget (EN/ES) behind a custom control |
 | Hosting | Vercel (auto-deploy from `main`) |
 | Analytics | Plausible (cookieless, privacy-first) |
-| CI/CD | GitHub Actions — type-check + build on every push/PR |
-| Payments | Stripe (Phase 4 — not yet integrated) |
+| Linting | ESLint (flat config) with `eslint-plugin-jsx-a11y` — accessibility rules over `src` |
+| CI/CD | GitHub Actions — lint + type-check + build on every push/PR |
+| Payments | Stripe Checkout (hosted redirect via Vercel serverless `/api/*`) — donate flow scoped (Phase 4), not yet built |
 | Email | Mailchimp (Phase 4 — not yet integrated) |
 
 ## Local Development
@@ -40,7 +41,8 @@ npm run preview # preview the production build locally
 
 Vercel deploys automatically on every push to `main`. Pull requests get a preview deploy URL via the Vercel GitHub integration.
 
-CI runs on every push and PR:
+CI runs on every push and PR (`npm run lint` then `npm run build`):
+- `eslint .` — accessibility lint (`eslint-plugin-jsx-a11y`); also `npm run lint:a11y`
 - `tsc --noEmit` — type-check
 - `vite build` — production build validation
 
@@ -80,7 +82,7 @@ CI runs on every push and PR:
 | Natural Resource Conservation | `cc-sage` |
 | Outdoor Recreation & STREAM | `cc-navy` |
 | Community Engagement | `cc-slate` |
-| Public Health & Urban Agriculture | `cc-stone` |
+| Public Health & Urban Agriculture | `cc-clay` |
 
 **Fonts** (Google Fonts):
 - **Jost** — display/headings **and** body (single brand typeface from the logo)
@@ -156,7 +158,7 @@ src/
 | 1 — Home Page | Hero, impact bar, program cards, testimonials, CTA | Complete |
 | 2 — About & Team | Mission/values, timeline, team grid, partner logos | In progress (placeholder copy) |
 | 3 — Projects IA | Content-driven projects + program areas (Markdown/YAML); flat area tagging, per-area colors, detail + per-area templates | Complete |
-| 4 — Donate & Get Involved | Get Involved reach-out hub (audience cards → mailto) done; Stripe + Mailchimp pending | Get Involved done; payments/email pending |
+| 4 — Donate & Get Involved | Get Involved reach-out hub (audience cards → mailto) done; Stripe + Mailchimp pending | Get Involved done; donate flow (Stripe Checkout) scoped but not built; email pending |
 | 5 — Impact & News | Impact goals page + News timeline | Complete (awaiting real metrics) |
 | — Site utilities | Search overlay + EN/ES Google Translate in a top utility bar | Complete |
 | 6 — Polish & Launch | A11y audit, SEO, Lighthouse, DNS cutover | In progress — A11y AA pass done; SEO/Lighthouse/DNS pending |
@@ -192,6 +194,8 @@ All components are built to WCAG 2.1 AA targets:
   restore focus to their trigger on close (`useFocusTrap`)
 - **Carousel** — the testimonials auto-advance has a visible pause/play control
   (WCAG 2.2.2) in addition to the reduced-motion halt
+- **Enforced in CI** — `eslint-plugin-jsx-a11y` runs on every push/PR via
+  `npm run lint` (see [Build & Deploy](#build--deploy))
 
 ## Contact
 
