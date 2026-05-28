@@ -27,7 +27,7 @@ export default function RelatedPrograms({ current, limit = 3 }: RelatedProgramsP
       <div className="container-site">
         <h2 className="heading-section text-2xl text-cc-navy md:text-3xl">Related projects</h2>
         <p className="mt-2 font-body text-cc-stone">
-          Programs that share program areas with {current.shortName}.
+          Projects that share program areas with {current.shortName}.
         </p>
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {related.map((p) => (
