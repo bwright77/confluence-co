@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
@@ -43,7 +43,7 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ]
 
-const INTERVAL_MS = 6000
+const INTERVAL_MS = 8000
 
 export default function TestimonialCarousel() {
   const [current, setCurrent] = useState(0)
@@ -65,12 +65,26 @@ export default function TestimonialCarousel() {
     setCurrent(index)
   }, [current])
 
-  // Auto-advance — pause when reduced motion is on
+  // Auto-advance — pause when reduced motion is on. Depending on `current`
+  // restarts the timer on every change, including manual navigation/swipe.
   useEffect(() => {
     if (reduced) return
     const id = setInterval(next, INTERVAL_MS)
     return () => clearInterval(id)
-  }, [next, reduced])
+  }, [next, reduced, current])
+
+  // Touch swipe — left advances, right goes back
+  const touchStartX = useRef<number | null>(null)
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const dx = e.changedTouches[0].clientX - touchStartX.current
+    if (dx > 50) prev()
+    else if (dx < -50) next()
+    touchStartX.current = null
+  }
 
   const testimonial = TESTIMONIALS[current]
 
@@ -109,6 +123,8 @@ export default function TestimonialCarousel() {
             className="relative min-h-[220px] flex items-center"
             aria-live="polite"
             aria-atomic="true"
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
           >
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
@@ -143,11 +159,12 @@ export default function TestimonialCarousel() {
                     className="w-12 h-12 rounded-full flex items-center justify-center font-display font-bold text-sm text-white shrink-0"
                     style={{ backgroundColor: testimonial.accentColor }}
                     aria-hidden="true"
+                    translate="no"
                   >
                     {testimonial.initials}
                   </div>
                   <div className="text-left">
-                    <p className="font-display font-bold uppercase tracking-display text-white text-sm">
+                    <p className="font-display font-bold uppercase tracking-display text-white text-sm" translate="no">
                       {testimonial.name}
                     </p>
                     <p className="font-body text-white/60 text-xs">
