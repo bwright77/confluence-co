@@ -8,7 +8,7 @@ export default function UtilityBar() {
 
   return (
     <>
-      <div className="bg-cc-dark">
+      <div className="bg-cc-navy">
         <div className="container-site flex h-9 items-center justify-between">
           <TranslateControl />
 
