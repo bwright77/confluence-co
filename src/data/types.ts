@@ -42,6 +42,8 @@ export interface Target {
 export interface CtaLink {
   label: string
   href: string
+  /** Optional Spanish-language alternate, used when the visitor's language is Spanish. */
+  hrefEs?: string
 }
 
 export interface Cta {

@@ -36,6 +36,7 @@ cta:
   primary:
     label: Take the community survey
     href: https://docs.google.com/forms/d/e/1FAIpQLSd3kLbSjsRDfIbg1X2_pP5t8J6ynXzB4XKAvU_gbqudoT5cUQ/viewform?usp=header
+    hrefEs: https://forms.gle/bsJvawgzAvh6xdiy7
   secondary:
     label: Support this program
     href: /donate?program=lgcp

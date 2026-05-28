@@ -1,4 +1,5 @@
-import type { Program } from '../../data/types'
+import type { CtaLink, Program } from '../../data/types'
+import { useIsSpanish } from '../../hooks/useIsSpanish'
 import TargetStat from './TargetStat'
 
 interface ProgramMetaProps {
@@ -26,6 +27,8 @@ function formatDate(iso: string): string {
 }
 
 export default function ProgramMeta({ program }: ProgramMetaProps) {
+  const isSpanish = useIsSpanish()
+  const ctaHref = (link: CtaLink) => (isSpanish && link.hrefEs ? link.hrefEs : link.href)
   const hasFunder = !!program.funder
   const hasLocation = !!program.location && (program.location.city || program.location.watershed)
   const hasLeadStaff = !!program.leadStaff && program.leadStaff.length > 0
@@ -116,7 +119,7 @@ export default function ProgramMeta({ program }: ProgramMetaProps) {
         <div className="space-y-3">
           {program.cta.primary && (
             <a
-              href={program.cta.primary.href}
+              href={ctaHref(program.cta.primary)}
               className="btn-primary block w-full text-center"
             >
               {program.cta.primary.label}
@@ -124,7 +127,7 @@ export default function ProgramMeta({ program }: ProgramMetaProps) {
           )}
           {program.cta.secondary && (
             <a
-              href={program.cta.secondary.href}
+              href={ctaHref(program.cta.secondary)}
               className="btn-secondary block w-full text-center"
             >
               {program.cta.secondary.label}
