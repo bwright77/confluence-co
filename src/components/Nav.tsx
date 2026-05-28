@@ -42,8 +42,12 @@ export default function Nav() {
   // Routes whose top section has its own dark/full-bleed hero — let the nav
   // sit transparently over it until the user scrolls past.
   const DARK_HERO_PREFIXES = ['/about', '/impact', '/projects', '/program-areas', '/news', '/get-involved']
+  // Dark hero on the exact route only (children stay solid-nav): /donate has a
+  // photo hero, but /donate/thank-you is a light page.
+  const DARK_HERO_EXACT = ['/donate']
   const hasDarkHero =
     location.pathname === '/' ||
+    DARK_HERO_EXACT.includes(location.pathname) ||
     DARK_HERO_PREFIXES.some(
       (p) => location.pathname === p || location.pathname.startsWith(p + '/')
     )
