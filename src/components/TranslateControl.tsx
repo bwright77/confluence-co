@@ -88,10 +88,13 @@ function setGoogtransCookie(lang: LangCode) {
   for (const v of variants) document.cookie = v
 }
 
+// Drive the hidden Google combo. The widget script loads asynchronously, so on
+// first load the <select> may not exist yet — retry for a while (≈9s) before
+// giving up, which matters on slow mobile connections.
 function applyToWidget(lang: LangCode, attempt = 0) {
   const select = document.querySelector<HTMLSelectElement>('select.goog-te-combo')
   if (!select) {
-    if (attempt < 20) setTimeout(() => applyToWidget(lang, attempt + 1), 150)
+    if (attempt < 60) setTimeout(() => applyToWidget(lang, attempt + 1), 150)
     return
   }
   select.value = lang === 'en' ? '' : lang
@@ -128,10 +131,12 @@ export default function TranslateControl() {
       document.body.appendChild(script)
     }
 
-    // Auto-apply the resolved language when Google hasn't already translated to
-    // it (covers first-visit browser-based auto-switch). No saveChoice here —
-    // only an explicit pick should persist as the user's preference.
-    if (resolved !== 'en' && cookieLang !== resolved) {
+    // Actively drive the widget into the resolved language on load. Google's
+    // widget does not reliably translate from the googtrans cookie on its own,
+    // so we always set it for non-English (covers reloads where the cookie is
+    // already set, and first-visit browser-based auto-switch). No saveChoice
+    // here — only an explicit pick should persist as the user's preference.
+    if (resolved !== 'en') {
       setGoogtransCookie(resolved)
       applyToWidget(resolved)
     }
