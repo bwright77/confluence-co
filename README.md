@@ -20,7 +20,7 @@ Website redesign for [Confluence Colorado](https://confluenceco.org), a Denver-b
 | Analytics | Plausible (cookieless, privacy-first) |
 | Linting | ESLint (flat config) with `eslint-plugin-jsx-a11y` — accessibility rules over `src` |
 | CI/CD | GitHub Actions — lint + type-check + build on every push/PR |
-| Payments | Stripe Checkout (hosted redirect via Vercel serverless `/api/*`) — donate flow scoped (Phase 4), not yet built |
+| Payments | Stripe Checkout (hosted redirect via Vercel serverless `/api/*`) — donate flow built (Phase 4): one-time + monthly, optional fee-cover, per-project attribution |
 | Email | Mailchimp (Phase 4 — not yet integrated) |
 
 ## Local Development
@@ -133,6 +133,7 @@ src/
 │   ├── TestimonialCarousel.tsx
 │   ├── CTASection.tsx
 │   ├── programs/     # ProgramHero, ProgramBody, ProgramCard, AreaTag, areaColors, filters, meta, etc.
+│   ├── donate/       # Donate flow: FrequencyToggle, AmountSelector, FeeCoverToggle, ImpactFraming, ProgramContext
 │   └── news/         # LatestNews, NewsPost
 ├── pages/            # Route-level pages (templates, not per-project)
 │   ├── Home.tsx
@@ -141,14 +142,27 @@ src/
 │   ├── ProgramArea.tsx                        # /program-areas/:slug (per-area project list; no index page)
 │   ├── Impact.tsx
 │   ├── GetInvolved.tsx                        # audience cards → mailto Shane
-│   ├── Donate.tsx
+│   ├── Donate.tsx / DonateThankYou.tsx        # /donate + /donate/thank-you (Stripe Checkout)
 │   ├── News.tsx
 │   └── NotFound.tsx
+├── lib/donate.ts         # Shared donate constants + fee math (also imported by the serverless API — keep Vite-free)
 ├── routes/redirects.ts   # Legacy /programs/* + /focus-areas/* → /projects /program-areas
 ├── layouts/Layout.tsx    # Nav + Footer wrapper, scroll-to-top on route change
 ├── hooks/                # useCountUp, useInView, useReducedMotion
 └── index.css             # Tailwind base + component layer (btn-*, heading-*, etc.)
 ```
+
+Serverless functions live at repo-root `api/` (outside `src/`, so they're excluded
+from the Vite build and the `tsc`/ESLint pass — Vercel compiles them independently):
+
+- `api/create-checkout-session.ts` — `POST` → creates a Stripe Checkout Session (one-time
+  `payment` or monthly `subscription`), returns `{ url }` for a client-side redirect.
+- `api/checkout-session.ts` — `GET` → returns a non-sensitive session summary (amount, mode,
+  program) to personalize the thank-you page. No PII is exposed.
+
+Both read `STRIPE_SECRET_KEY` (server-only) and pin the Stripe API version. To run the flow
+locally, copy `.env.example` → `.env.local` with Stripe **test** keys and use `vercel dev`
+(`npm run dev` serves the SPA but not the `api/` functions).
 
 ## Build Phases
 
@@ -158,7 +172,7 @@ src/
 | 1 — Home Page | Hero, impact bar, program cards, testimonials, CTA | Complete |
 | 2 — About & Team | Mission/values, timeline, team grid, partner logos | In progress (placeholder copy) |
 | 3 — Projects IA | Content-driven projects + program areas (Markdown/YAML); flat area tagging, per-area colors, detail + per-area templates | Complete |
-| 4 — Donate & Get Involved | Get Involved reach-out hub (audience cards → mailto) done; Stripe + Mailchimp pending | Get Involved done; donate flow (Stripe Checkout) scoped but not built; email pending |
+| 4 — Donate & Get Involved | Get Involved reach-out hub (audience cards → mailto) + Stripe donate flow; Mailchimp pending | Get Involved + Stripe donate flow done; email (Mailchimp) pending |
 | 5 — Impact & News | Impact goals page + News timeline | Complete (awaiting real metrics) |
 | — Site utilities | Search overlay + EN/ES Google Translate in a top utility bar | Complete |
 | 6 — Polish & Launch | A11y audit, SEO, Lighthouse, DNS cutover | In progress — A11y AA pass done; SEO/Lighthouse/DNS pending |
@@ -177,7 +191,16 @@ The following content is placeholder and needs to be replaced before launch:
 - [x] EIN (footer shows 88-1757678)
 - [ ] Partner logos
 - [ ] Project copy review for all projects (drafted in `src/content/programs/`)
-- [ ] Donation impact framing copy
+- [ ] Donation impact framing copy (provisional copy lives in [`src/lib/donate.ts`](src/lib/donate.ts)); confirm preset tiers + refund-policy wording
+
+**Stripe dashboard setup (config, not code; blocks donate launch, not the build):**
+
+- [ ] Nonprofit rate approved (2.2% + 30¢) — keeps the fee-cover figure accurate
+- [ ] Automatic email receipts on, with the tax-deductibility statement in the footer
+- [ ] Statement descriptor set (`CONFLUENCE COLO`)
+- [ ] Checkout/receipt branding — logo, brand color `#004667`, support email
+- [ ] Bank account connected + payout schedule set
+- [ ] (Recommended) swap `STRIPE_SECRET_KEY` for a restricted key
 
 ## Accessibility
 

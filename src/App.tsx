@@ -9,6 +9,7 @@ import ProgramArea from './pages/ProgramArea'
 import Impact from './pages/Impact'
 import GetInvolved from './pages/GetInvolved'
 import Donate from './pages/Donate'
+import DonateThankYou from './pages/DonateThankYou'
 import News from './pages/News'
 import NotFound from './pages/NotFound'
 import { programAreaRedirects } from './routes/redirects'
@@ -58,6 +59,7 @@ export default function App() {
           <Route path="/impact" element={<Impact />} />
           <Route path="/get-involved" element={<GetInvolved />} />
           <Route path="/donate" element={<Donate />} />
+          <Route path="/donate/thank-you" element={<DonateThankYou />} />
           <Route path="/news" element={<News />} />
           <Route path="*" element={<NotFound />} />
         </Route>
