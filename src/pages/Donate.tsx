@@ -97,13 +97,28 @@ export default function Donate() {
   return (
     <>
       {/* Page header */}
-      <section className="bg-cc-navy pt-32 pb-12 md:pt-40 md:pb-16">
-        <div className="container-site max-w-3xl text-center">
+      <section className="relative overflow-hidden pt-32 pb-12 md:pt-40 md:pb-16">
+        <img
+          src="/projects/mo-betta/greens-seeds.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          style={{ filter: 'saturate(0.9) contrast(1.04)' }}
+        />
+        <div className="absolute inset-0" style={{ background: 'rgba(0, 44, 70, 0.58)' }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to bottom, rgba(0,20,35,0.60) 0%, rgba(0,20,35,0.28) 50%, rgba(0,20,35,0.60) 100%)',
+          }}
+        />
+        <div className="container-site relative z-10 max-w-3xl text-center">
           <p className="mb-3 font-display text-xs font-semibold uppercase tracking-poster text-cc-sky-bright md:text-sm">
             Support the Work
           </p>
           <h1 className="heading-display text-4xl text-white md:text-5xl">Donate</h1>
-          <p className="mx-auto mt-4 max-w-xl font-body text-lg leading-relaxed text-white/75">
+          <p className="mx-auto mt-4 max-w-xl font-body text-lg leading-relaxed text-white/85">
             Your gift puts youth to work restoring rivers, growing food, and caring for parks
             across Denver. Every dollar stays close to home.
           </p>
