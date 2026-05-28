@@ -2,7 +2,7 @@ import { programs } from './programs'
 import { areas } from './areas'
 import { newsPosts } from './news'
 
-export type SearchResultType = 'Program' | 'Program Area' | 'News' | 'Page'
+export type SearchResultType = 'Project' | 'Program Area' | 'News' | 'Page'
 
 export interface SearchDoc {
   title: string
@@ -34,16 +34,10 @@ const STATIC_PAGES: Omit<SearchDoc, 'haystack'>[] = [
     description: 'Meet our staff, board, and program leads.',
   },
   {
-    title: 'Programs',
+    title: 'Projects',
     type: 'Page',
-    href: '/programs',
-    description: 'Browse all of our environmental stewardship programs.',
-  },
-  {
-    title: 'Program Areas',
-    type: 'Page',
-    href: '/program-areas',
-    description: 'The areas of work that organize our projects.',
+    href: '/projects',
+    description: 'Browse all of our environmental stewardship projects.',
   },
   {
     title: 'Impact',
@@ -77,8 +71,8 @@ function buildDocs(): SearchDoc[] {
   for (const p of programs) {
     docs.push({
       title: p.title,
-      type: 'Program',
-      href: `/programs/${p.slug}`,
+      type: 'Project',
+      href: `/projects/${p.slug}`,
       description: p.tagline,
       haystack: [
         p.title,
@@ -150,7 +144,7 @@ export function search(query: string, limit = 8): SearchDoc[] {
     }
 
     // Lightly favor more specific content over index pages.
-    if (doc.type === 'Program') score += 1
+    if (doc.type === 'Project') score += 1
 
     return { doc, score }
   })

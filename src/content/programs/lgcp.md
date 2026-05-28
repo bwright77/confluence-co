@@ -40,13 +40,13 @@ cta:
     label: Support this program
     href: /donate?program=lgcp
 
-heroImage: /programs/lgcp/hero.jpg
+heroImage: /projects/lgcp/hero.jpg
 heroImageAlt: Community members gathered at a picnic table at Lorraine Granado Community Park in Swansea at sunset
 
 gallery:
-  - src: /programs/lgcp/community-meeting-circle.jpg
+  - src: /projects/lgcp/community-meeting-circle.jpg
     alt: Swansea residents seated in a wide circle of folding chairs at Lorraine Granado Community Park for a Steering Committee meeting
-  - src: /programs/lgcp/community-meeting-detail.jpg
+  - src: /projects/lgcp/community-meeting-detail.jpg
     alt: Detail of Steering Committee participants at Lorraine Granado Community Park with translation earpieces and program flyers
 
 seo:
@@ -63,7 +63,7 @@ The Steering Committee meets monthly, engaging residents who are eager to see th
 
 ## About Lorraine Granado
 
-![Lorraine Granado at Swansea Park, 2016](/programs/lgcp/lorraine-granado.jpg)
+![Lorraine Granado at Swansea Park, 2016](/projects/lgcp/lorraine-granado.jpg)
 
 Lorraine Granado (April 16, 1948 – December 8, 2019) was an American environmental, peace, and social justice activist whose decades of work in North Denver — particularly in Swansea — left a lasting legacy of community organizing and accountability.
 

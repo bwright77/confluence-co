@@ -12,7 +12,7 @@ export default function ProgramDetail() {
 
   useEffect(() => {
     if (!program) {
-      document.title = 'Program not found · Confluence Colorado'
+      document.title = 'Project not found · Confluence Colorado'
       return
     }
     const title = program.seo?.title ?? `${program.title} · Confluence Colorado`
@@ -32,15 +32,15 @@ export default function ProgramDetail() {
   if (!program) {
     return (
       <section className="section-pad container-site pt-32">
-        <h1 className="heading-display text-3xl text-cc-navy md:text-4xl">Program not found</h1>
+        <h1 className="heading-display text-3xl text-cc-navy md:text-4xl">Project not found</h1>
         <p className="mt-4 font-body text-cc-stone">
-          We couldn't find a program with that name.
+          We couldn't find a project with that name.
         </p>
         <Link
-          to="/programs"
+          to="/projects"
           className="mt-6 inline-block font-display text-sm font-semibold uppercase tracking-display text-cc-sky underline hover:text-cc-navy"
         >
-          ← Back to all programs
+          ← Back to all projects
         </Link>
       </section>
     )

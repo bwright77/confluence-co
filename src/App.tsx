@@ -6,7 +6,6 @@ import AboutTeam from './pages/AboutTeam'
 import Programs from './pages/Programs'
 import ProgramDetail from './pages/ProgramDetail'
 import ProgramArea from './pages/ProgramArea'
-import ProgramAreas from './pages/ProgramAreas'
 import Impact from './pages/Impact'
 import GetInvolved from './pages/GetInvolved'
 import Donate from './pages/Donate'
@@ -19,6 +18,11 @@ function LegacyAreaRedirect() {
   return <Navigate to={`/program-areas/${slug ?? ''}`} replace />
 }
 
+function LegacyProjectRedirect() {
+  const { slug } = useParams<{ slug: string }>()
+  return <Navigate to={`/projects/${slug ?? ''}`} replace />
+}
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -28,18 +32,24 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/about/team" element={<AboutTeam />} />
 
-          <Route path="/programs" element={<Programs />} />
+          <Route path="/projects" element={<Programs />} />
 
           {/* Legacy per-area routes redirect to /program-areas/:slug.
-              Defined before /programs/:slug so they take precedence. */}
+              Static paths rank above the /projects/:slug and /programs/:slug params. */}
           {Object.entries(programAreaRedirects).map(([from, to]) => (
             <Route key={from} path={from} element={<Navigate to={to} replace />} />
           ))}
 
-          <Route path="/programs/:slug" element={<ProgramDetail />} />
+          <Route path="/projects/:slug" element={<ProgramDetail />} />
 
-          <Route path="/program-areas" element={<ProgramAreas />} />
+          {/* Legacy /programs links → /projects */}
+          <Route path="/programs" element={<Navigate to="/projects" replace />} />
+          <Route path="/programs/:slug" element={<LegacyProjectRedirect />} />
+
           <Route path="/program-areas/:slug" element={<ProgramArea />} />
+
+          {/* The program-areas index lives on /projects now; old links → /projects */}
+          <Route path="/program-areas" element={<Navigate to="/projects" replace />} />
 
           {/* Legacy /focus-areas links → /program-areas */}
           <Route path="/focus-areas" element={<Navigate to="/program-areas" replace />} />

@@ -23,7 +23,7 @@ const NAV_LINKS: NavItem[] = [
       { label: 'Team & Board', href: '/about/team' },
     ],
   },
-  { label: 'Programs', href: '/programs' },
+  { label: 'Projects', href: '/projects' },
   { label: 'Impact', href: '/impact' },
   { label: 'Get Involved', href: '/get-involved' },
   { label: 'News', href: '/news' },
@@ -36,7 +36,7 @@ export default function Nav() {
   const location = useLocation()
   // Routes whose top section has its own dark/full-bleed hero — let the nav
   // sit transparently over it until the user scrolls past.
-  const DARK_HERO_PREFIXES = ['/about', '/impact', '/programs', '/program-areas', '/news', '/get-involved']
+  const DARK_HERO_PREFIXES = ['/about', '/impact', '/projects', '/program-areas', '/news', '/get-involved']
   const hasDarkHero =
     location.pathname === '/' ||
     DARK_HERO_PREFIXES.some(

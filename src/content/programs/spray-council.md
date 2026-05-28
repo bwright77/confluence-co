@@ -35,7 +35,7 @@ cta:
     label: Support this program
     href: /donate?program=spray-council
 
-heroImage: /programs/spray-council/spray-council.jpg
+heroImage: /projects/spray-council/spray-council.jpg
 heroImageAlt: SPRAY Council members gathered on the South Platte riverbank for a field session
 
 seo:

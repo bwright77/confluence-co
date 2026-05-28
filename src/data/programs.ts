@@ -51,8 +51,8 @@ function validateProgram(
   }
 
   const status = data.status as string
-  if (status !== 'active' && status !== 'upcoming' && status !== 'completed') {
-    fail(filename, `status must be one of active|upcoming|completed (got "${status}")`)
+  if (status !== 'active' && status !== 'completed') {
+    fail(filename, `status must be one of active|completed (got "${status}")`)
   }
 
   if (status === 'completed' && !data.endDate) {

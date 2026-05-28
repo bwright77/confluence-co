@@ -52,17 +52,17 @@ cta:
     label: Volunteer with the crew
     href: /get-involved
 
-heroImage: /programs/first-creek/bison-skyline.jpg
+heroImage: /projects/first-creek/bison-skyline.jpg
 heroImageAlt: Bison herd grazing at Rocky Mountain Arsenal National Wildlife Refuge with the Denver skyline and Front Range behind
 
 gallery:
-  - src: /programs/first-creek/crew-walking.jpg
+  - src: /projects/first-creek/crew-walking.jpg
     alt: Confluence Colorado youth crew walking toward a U.S. Fish and Wildlife Service truck on the prairie
-  - src: /programs/first-creek/planting-trees.jpg
+  - src: /projects/first-creek/planting-trees.jpg
     alt: A crew member tending newly planted aspens inside a protective fence enclosure
-  - src: /programs/first-creek/group-digging.jpg
+  - src: /projects/first-creek/group-digging.jpg
     alt: Volunteers digging holes for native trees along the First Creek corridor
-  - src: /programs/first-creek/group-portrait.jpg
+  - src: /projects/first-creek/group-portrait.jpg
     alt: The First Creek planting crew posed together on a fallen log after a day of work
 
 seo:

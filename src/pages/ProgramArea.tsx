@@ -24,10 +24,10 @@ export default function ProgramArea() {
           Program area not found
         </h1>
         <Link
-          to="/program-areas"
+          to="/projects"
           className="mt-6 inline-block font-display text-sm font-semibold uppercase tracking-display text-cc-sky underline hover:text-cc-navy"
         >
-          ← All program areas
+          ← All projects
         </Link>
       </section>
     )
@@ -51,8 +51,8 @@ export default function ProgramArea() {
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 font-body text-sm text-white/80">
               <li>
-                <Link to="/program-areas" className="hover:text-white">
-                  Program Areas
+                <Link to="/projects" className="hover:text-white">
+                  Projects
                 </Link>
               </li>
               <li aria-hidden="true">/</li>
@@ -96,7 +96,7 @@ export default function ProgramArea() {
                 No projects are tagged under {area.shortName} yet.
               </p>
               <Link
-                to="/programs"
+                to="/projects"
                 className="mt-4 inline-block font-display text-sm font-semibold uppercase tracking-display text-cc-sky underline hover:text-cc-navy"
               >
                 See all projects →

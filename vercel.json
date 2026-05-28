@@ -9,6 +9,9 @@
     { "source": "/programs/recreation", "destination": "/program-areas/outdoor-recreation-stream", "permanent": true },
     { "source": "/programs/cultural", "destination": "/program-areas/civic-engagement", "permanent": true },
     { "source": "/programs/civic", "destination": "/program-areas/civic-engagement", "permanent": true },
+    { "source": "/programs/:slug", "destination": "/projects/:slug", "permanent": true },
+    { "source": "/programs", "destination": "/projects", "permanent": true },
+    { "source": "/program-areas", "destination": "/projects", "permanent": true },
     { "source": "/focus-areas/cultural-programs", "destination": "/program-areas/civic-engagement", "permanent": true },
     { "source": "/focus-areas", "destination": "/program-areas", "permanent": true },
     { "source": "/focus-areas/:slug", "destination": "/program-areas/:slug", "permanent": true }

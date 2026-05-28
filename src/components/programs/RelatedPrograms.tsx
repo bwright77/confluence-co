@@ -25,7 +25,7 @@ export default function RelatedPrograms({ current, limit = 3 }: RelatedProgramsP
   return (
     <section className="bg-cc-warm section-pad">
       <div className="container-site">
-        <h2 className="heading-section text-2xl text-cc-navy md:text-3xl">Related programs</h2>
+        <h2 className="heading-section text-2xl text-cc-navy md:text-3xl">Related projects</h2>
         <p className="mt-2 font-body text-cc-stone">
           Programs that share program areas with {current.shortName}.
         </p>

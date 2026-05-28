@@ -26,68 +26,68 @@ interface Program {
 const PROGRAMS: Program[] = [
   {
     slug: 'pathways',
-    href: '/programs/pathways',
+    href: '/program-areas/youth-pathways',
     title: 'Pathways',
     tagline: 'Youth/Leadership Development and Workforce Advancement',
     color: '#004667',
     accentColor: '#009dd6',
     Icon: Handshake,
-    image: '/programs/first-creek/group-portrait.jpg',
+    image: '/projects/first-creek/group-portrait.jpg',
     imageAlt: 'Confluence Colorado youth crew on a log at Rocky Mountain Arsenal',
   },
   {
     slug: 'watershed',
-    href: '/programs/watershed',
+    href: '/program-areas/watershed-restoration',
     title: 'Watershed Restoration',
     tagline: 'South Platte River Environmental Restoration',
     color: '#1B3A52',
     accentColor: '#009dd6',
     Icon: Drop,
-    image: '/programs/spray-council/spray-council.jpg',
+    image: '/projects/spray-council/spray-council.jpg',
     imageAlt: 'SPRAY Council members gathered on the South Platte riverbank for a field session',
   },
   {
     slug: 'civic',
-    href: '/programs/civic',
+    href: '/program-areas/civic-engagement',
     title: 'Community Engagement',
     tagline: 'Community-led decision-making, organizing, and place-based stewardship.',
     color: '#2C3E50',
     accentColor: '#009dd6',
     Icon: Scales,
-    image: '/programs/lgcp/community-meeting-circle.jpg',
+    image: '/projects/lgcp/community-meeting-circle.jpg',
     imageAlt: 'Swansea residents seated in a wide circle at Lorraine Granado Community Park for a Steering Committee meeting',
   },
   {
     slug: 'lgcp',
-    href: '/programs/lgcp',
+    href: '/program-areas/natural-resource-conservation',
     title: 'Natural Resource Conservation',
     tagline: 'Environmental & Social Resilience',
     color: '#3D5E42',
     accentColor: '#6B8F71',
     Icon: Leaf,
-    image: '/programs/first-creek/bison-skyline.jpg',
+    image: '/projects/first-creek/bison-skyline.jpg',
     imageAlt: 'Bison herd grazing at Rocky Mountain Arsenal with the Denver skyline behind',
   },
   {
     slug: 'recreation',
-    href: '/programs/recreation',
+    href: '/program-areas/outdoor-recreation-stream',
     title: 'Outdoor Recreation',
     tagline: 'Building Relationships Through Nature & STREAM Learning',
     color: '#1B3A4B',
     accentColor: '#009dd6',
     Icon: Bicycle,
-    image: '/programs/colorado-watershed-project/hero.jpg',
+    image: '/projects/colorado-watershed-project/hero.jpg',
     imageAlt: 'Students in life jackets on a green raft during the Colorado Watershed Project',
   },
   {
     slug: 'mo-betta',
-    href: '/programs/mo-betta',
+    href: '/program-areas/public-health-urban-agriculture',
     title: 'Public Health',
     tagline: 'Urban Farming, Agriculture & Community Markets',
     color: '#4A3A0A',
     accentColor: '#b44b00',
     Icon: Storefront,
-    image: '/programs/mo-betta/greens-seeds.jpg',
+    image: '/projects/mo-betta/greens-seeds.jpg',
     imageAlt: 'Fresh greens and seed packets from Mo Betta Green Marketplace',
   },
 ]
@@ -122,7 +122,7 @@ export default function ProgramCards() {
       <div className="container-site">
         <div className="text-center mb-12 md:mb-16">
           <p className="font-display font-semibold uppercase tracking-poster text-cc-orange text-xs md:text-sm mb-3">
-            Our Programs
+            Program Areas
           </p>
           <h2
             id="programs-heading"
@@ -131,7 +131,7 @@ export default function ProgramCards() {
             What We Do
           </h2>
           <p className="font-body text-cc-stone text-base md:text-lg max-w-2xl mx-auto">
-            Six programs connecting Denver's youth to land, water, and community —
+            Six program areas connecting Denver's youth to land, water, and community —
             building the next generation of environmental and civic leaders.
           </p>
         </div>
@@ -226,8 +226,8 @@ export default function ProgramCards() {
         </motion.div>
 
         <div className="text-center mt-10">
-          <Link to="/programs" className="btn-secondary">
-            All Programs
+          <Link to="/projects" className="btn-secondary">
+            Explore Projects
           </Link>
         </div>
       </div>

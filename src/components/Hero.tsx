@@ -97,10 +97,10 @@ export default function Hero() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              to="/programs"
+              to="/projects"
               className="font-display font-bold uppercase tracking-display text-cc-navy bg-white px-8 py-4 rounded text-sm md:text-base transition-all duration-200 hover:bg-cc-sand hover:scale-105 shadow-lg"
             >
-              Explore Programs
+              Explore Projects
             </Link>
             <Link
               to="/donate"

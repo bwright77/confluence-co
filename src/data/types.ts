@@ -1,4 +1,4 @@
-export type ProgramStatus = 'active' | 'upcoming' | 'completed'
+export type ProgramStatus = 'active' | 'completed'
 
 export type AreaColorToken =
   | 'burnt-copper'

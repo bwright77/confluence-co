@@ -1,5 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { Handshake, Drop, Leaf, Bicycle, Scales, Storefront } from '@phosphor-icons/react'
+import type { Icon } from '@phosphor-icons/react'
 import { areas } from '../data/areas'
 import { programs, programsByArea } from '../data/programs'
 import ProgramCard from '../components/programs/ProgramCard'
@@ -7,7 +9,17 @@ import ProgramFilters, { type ProgramFilterState } from '../components/programs/
 import { areaColors } from '../components/programs/areaColors'
 import type { ProgramStatus } from '../data/types'
 
-const VALID_STATUSES: (ProgramStatus | 'all')[] = ['all', 'active', 'upcoming', 'completed']
+const VALID_STATUSES: (ProgramStatus | 'all')[] = ['all', 'active', 'completed']
+
+// Program-area icons, matching the home "What We Do" set.
+const AREA_ICONS: Record<string, Icon> = {
+  'youth-pathways': Handshake,
+  'watershed-restoration': Drop,
+  'natural-resource-conservation': Leaf,
+  'outdoor-recreation-stream': Bicycle,
+  'civic-engagement': Scales,
+  'public-health-urban-agriculture': Storefront,
+}
 
 function parseFilters(params: URLSearchParams): ProgramFilterState {
   const areaCsv = params.get('areas') ?? ''
@@ -35,7 +47,7 @@ export default function Programs() {
   const filters = useMemo(() => parseFilters(searchParams), [searchParams])
 
   useEffect(() => {
-    document.title = 'Programs · Confluence Colorado'
+    document.title = 'Projects · Confluence Colorado'
   }, [])
 
   const filtered = useMemo(() => {
@@ -78,7 +90,7 @@ export default function Programs() {
       {/* Page hero */}
       <section className="relative bg-cc-navy pt-32 pb-12 md:pt-40 md:pb-20 overflow-hidden">
         <img
-          src="/programs/first-creek/bison-skyline.jpg"
+          src="/projects/first-creek/bison-skyline.jpg"
           alt=""
           className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         />
@@ -95,25 +107,60 @@ export default function Programs() {
             Our Work
           </p>
           <h1 className="heading-display mt-3 text-4xl text-white md:text-6xl md:leading-tight">
-            Programs
+            Projects
           </h1>
           <p className="mt-4 max-w-3xl font-body text-lg text-white/90 md:text-xl">
             Specific, named initiatives — each with a community, a place, partners, and a story.
-            Filter by program area or status, or browse the full list below.
+            We accomplish the goals of each program area by doing projects.
           </p>
-          <div className="mt-6">
-            <a
-              href="#program-areas"
-              className="inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-display text-cc-sky hover:text-white"
-            >
-              Browse by program area
-              <span aria-hidden="true">↓</span>
-            </a>
+        </div>
+      </section>
+
+      {/* Browse by program area */}
+      <section id="program-areas" className="bg-cc-warm section-pad">
+        <div className="container-site">
+          <h2 className="heading-section text-2xl text-cc-navy md:text-3xl">
+            Browse by program area
+          </h2>
+          <p className="mt-2 max-w-3xl font-body text-cc-stone">
+            Program areas are the six categories we organize our work by. A project can fit into one
+            or several of them.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {areas.map((area) => {
+              const count = programsByArea(area.slug).length
+              const colors = areaColors(area.colorToken)
+              const AreaIcon = AREA_ICONS[area.slug]
+              return (
+                <Link
+                  key={area.slug}
+                  to={`/program-areas/${area.slug}`}
+                  className="group flex flex-col rounded-lg border border-cc-stone/15 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                >
+                  {AreaIcon && (
+                    <span
+                      className={`mb-4 flex h-12 w-12 items-center justify-center rounded-full ${colors.bgSoft} ${colors.text}`}
+                      aria-hidden="true"
+                    >
+                      <AreaIcon size={24} weight="duotone" />
+                    </span>
+                  )}
+                  <h3 className="font-display text-lg font-bold text-cc-navy group-hover:text-cc-sky">
+                    {area.name}
+                  </h3>
+                  <p className="mt-2 flex-1 font-body text-sm text-cc-stone">{area.description}</p>
+                  <p className={`mt-3 font-display text-xs font-semibold uppercase tracking-display ${colors.text}`}>
+                    {count} {count === 1 ? 'project' : 'projects'}
+                  </p>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* Filters + grid */}
+      {/* Filters + project grid */}
       <section className="section-pad">
         <div className="container-site">
           <ProgramFilters
@@ -127,7 +174,7 @@ export default function Programs() {
           {filtered.length === 0 ? (
             <div className="mt-12 rounded-lg border border-dashed border-cc-stone/30 bg-cc-warm p-10 text-center">
               <p className="font-display text-lg font-semibold text-cc-navy">
-                No programs match these filters.
+                No projects match these filters.
               </p>
               <button
                 type="button"
@@ -144,51 +191,6 @@ export default function Programs() {
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Browse by program area */}
-      <section id="program-areas" className="bg-cc-warm section-pad">
-        <div className="container-site">
-          <h2 className="heading-section text-2xl text-cc-navy md:text-3xl">
-            Browse by program area
-          </h2>
-          <p className="mt-2 max-w-3xl font-body text-cc-stone">
-            Program areas are the categories we organize our work by. A project can fit into one
-            or several of them.
-          </p>
-
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {areas.map((area) => {
-              const count = programsByArea(area.slug).length
-              const colors = areaColors(area.colorToken)
-              return (
-                <Link
-                  key={area.slug}
-                  to={`/program-areas/${area.slug}`}
-                  className="group flex flex-col rounded-lg border border-cc-stone/15 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-                >
-                  <div className={`h-1 w-12 rounded-full ${colors.bg}`} aria-hidden="true" />
-                  <h3 className="mt-3 font-display text-lg font-bold text-cc-navy group-hover:text-cc-sky">
-                    {area.name}
-                  </h3>
-                  <p className="mt-2 flex-1 font-body text-sm text-cc-stone">{area.description}</p>
-                  <p className="mt-3 font-display text-xs font-semibold uppercase tracking-display text-cc-stone">
-                    {count} {count === 1 ? 'project' : 'projects'}
-                  </p>
-                </Link>
-              )
-            })}
-          </div>
-
-          <div className="mt-8">
-            <Link
-              to="/program-areas"
-              className="font-display text-sm font-semibold uppercase tracking-display text-cc-sky hover:text-cc-navy"
-            >
-              See all program areas →
-            </Link>
-          </div>
         </div>
       </section>
     </>

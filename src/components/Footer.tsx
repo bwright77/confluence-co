@@ -4,10 +4,10 @@ import { CCBug } from './Logo'
 import { programs as activePrograms } from '../data/programs'
 
 const projectLinks = [
-  { label: 'All Projects', href: '/programs' },
+  { label: 'All Projects', href: '/projects' },
   ...activePrograms
     .filter((p) => p.status === 'active')
-    .map((p) => ({ label: p.shortName, href: `/programs/${p.slug}` })),
+    .map((p) => ({ label: p.shortName, href: `/projects/${p.slug}` })),
 ]
 
 const orgLinks = [

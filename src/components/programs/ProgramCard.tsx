@@ -15,7 +15,7 @@ export default function ProgramCard({ program }: ProgramCardProps) {
 
   return (
     <Link
-      to={`/programs/${program.slug}`}
+      to={`/projects/${program.slug}`}
       className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-cc-stone/15 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-xl focus-visible:-translate-y-1 focus-visible:shadow-xl"
       aria-label={`${program.title} — ${program.tagline}`}
     >

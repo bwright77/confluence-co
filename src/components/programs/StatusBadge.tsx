@@ -17,13 +17,6 @@ const STATUS_CONFIG: Record<
     border: 'border-cc-sky',
     dot: 'bg-white',
   },
-  upcoming: {
-    label: 'Upcoming',
-    bg: 'bg-transparent',
-    text: 'text-cc-orange',
-    border: 'border-cc-orange',
-    dot: 'bg-cc-orange',
-  },
   completed: {
     label: 'Completed',
     bg: 'bg-cc-stone/15',

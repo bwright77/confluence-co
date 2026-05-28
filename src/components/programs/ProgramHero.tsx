@@ -54,8 +54,8 @@ export default function ProgramHero({ program }: ProgramHeroProps) {
         <nav aria-label="Breadcrumb" className="mb-6">
           <ol className="flex items-center gap-2 font-body text-sm text-white/80">
             <li>
-              <Link to="/programs" className="hover:text-white">
-                Programs
+              <Link to="/projects" className="hover:text-white">
+                Projects
               </Link>
             </li>
             <li aria-hidden="true">/</li>

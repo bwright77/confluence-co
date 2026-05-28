@@ -108,7 +108,7 @@ export default function GetInvolved() {
       {/* Page hero */}
       <section className="relative flex h-[55vh] min-h-[420px] items-end overflow-hidden">
         <img
-          src="/programs/first-creek/group-digging.jpg"
+          src="/projects/first-creek/group-digging.jpg"
           alt=""
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover object-center"

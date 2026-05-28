@@ -41,7 +41,7 @@ cta:
     label: Support this program
     href: /donate?program=colorado-watershed-project
 
-heroImage: /programs/colorado-watershed-project/hero.jpg
+heroImage: /projects/colorado-watershed-project/hero.jpg
 heroImageAlt: Students in life jackets and helmets smiling on a green raft on the river during a Cottonwood Institute Colorado Watershed Project trip
 
 seo:

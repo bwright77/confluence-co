@@ -53,7 +53,7 @@ cta:
     label: Get involved
     href: /get-involved
 
-heroImage: /programs/green-workforce-pathways/hero.png
+heroImage: /projects/green-workforce-pathways/hero.png
 heroImageAlt: Shane Wright with Confluence Colorado Pathways youth on the South Platte River
 
 seo:

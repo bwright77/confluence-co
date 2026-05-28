@@ -19,7 +19,6 @@ interface ProgramFiltersProps {
 const STATUS_OPTIONS: { value: ProgramStatus | 'all'; label: string }[] = [
   { value: 'all', label: 'All' },
   { value: 'active', label: 'Active' },
-  { value: 'upcoming', label: 'Upcoming' },
   { value: 'completed', label: 'Completed' },
 ]
 
@@ -134,12 +133,12 @@ export default function ProgramFilters({
       <div className="mt-5 flex flex-wrap items-center gap-4 border-t border-cc-stone/10 pt-4">
         <div className="flex-1 min-w-[16rem]">
           <label htmlFor="program-search" className="sr-only">
-            Search programs
+            Search projects
           </label>
           <input
             id="program-search"
             type="search"
-            placeholder="Search programs…"
+            placeholder="Search projects…"
             value={queryDraft}
             onChange={(e) => setQueryDraft(e.target.value)}
             className="w-full rounded-md border border-cc-stone/25 bg-white px-3 py-2 font-body text-sm text-cc-dark placeholder:text-cc-stone focus:border-cc-sky focus:outline-none"
@@ -148,7 +147,7 @@ export default function ProgramFilters({
 
         <div className="font-body text-sm text-cc-stone">
           <span className="font-semibold text-cc-dark">{visible}</span> of {total}{' '}
-          {total === 1 ? 'program' : 'programs'}
+          {total === 1 ? 'project' : 'projects'}
         </div>
 
         {anyActive && (
