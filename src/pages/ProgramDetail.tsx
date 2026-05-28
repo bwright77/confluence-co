@@ -101,7 +101,7 @@ export default function ProgramDetail() {
             Support our work
           </h2>
           <p className="mt-3 font-body text-white/85">
-            Every program above is fueled by community. Get involved or contribute today.
+            Every project above is fueled by community. Get involved or contribute today.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
             <Link to="/donate" className="btn-primary">
