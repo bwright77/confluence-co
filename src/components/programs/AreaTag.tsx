@@ -23,7 +23,7 @@ export default function AreaTag({ area, size = 'sm', variant = 'solid', classNam
 
   return (
     <Link
-      to={`/focus-areas/${area.slug}`}
+      to={`/program-areas/${area.slug}`}
       className={`inline-flex items-center rounded-full border font-display font-semibold uppercase tracking-display transition-opacity hover:opacity-80 ${variantClasses} ${sizeClasses} ${className}`}
     >
       {size === 'sm' ? area.shortName : area.name}

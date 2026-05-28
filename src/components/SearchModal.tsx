@@ -10,7 +10,7 @@ interface SearchModalProps {
 
 const TYPE_STYLES: Record<string, string> = {
   Program: 'bg-cc-sky/10 text-cc-sky',
-  'Focus Area': 'bg-cc-sage/15 text-cc-sage',
+  'Program Area': 'bg-cc-sage/15 text-cc-sage',
   News: 'bg-cc-orange/10 text-cc-orange',
   Page: 'bg-cc-navy/10 text-cc-navy',
 }
@@ -126,7 +126,7 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
           ) : (
             <p className="px-4 py-8 text-center font-body text-sm text-cc-stone">
               {trimmed.length < 2
-                ? 'Type to search programs, news, focus areas, and pages.'
+                ? 'Type to search programs, news, program areas, and pages.'
                 : `No results for “${trimmed}”.`}
             </p>
           )}

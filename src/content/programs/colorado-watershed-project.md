@@ -9,8 +9,8 @@ startDate: "2026-06-01"  # TODO: confirm 2026 program dates
 endDate: "2026-08-31"    # offered June–August annually
 featured: true
 
-primaryArea: outdoor-recreation-stream
-secondaryAreas:
+areas:
+  - outdoor-recreation-stream
   - watershed-restoration
   - youth-pathways
 

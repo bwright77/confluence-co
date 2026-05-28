@@ -9,8 +9,8 @@ startDate: "2026-01-01"  # TODO: confirm plan-update start date
 endDate: null            # ongoing
 featured: true
 
-primaryArea: watershed-restoration
-secondaryAreas:
+areas:
+  - watershed-restoration
   - youth-pathways
   - civic-engagement
 

@@ -16,26 +16,26 @@
   name: Natural Resource Conservation
   shortName: Conservation
   description: Stewarding parks, open space, and natural areas through community partnership.
-  colorToken: deep-teal
+  colorToken: sage
   icon: mountain
 
 - slug: outdoor-recreation-stream
   name: Outdoor Recreation & STREAM
   shortName: Outdoor & STREAM
   description: Place-based STREAM (Science, Technology, Reading, Engineering, Arts, Math) education in the outdoors.
-  colorToken: river-blue
+  colorToken: deep-teal
   icon: binoculars
 
 - slug: civic-engagement
   name: Community Engagement
   shortName: Community
   description: Community-led decision-making, organizing, and place-based stewardship.
-  colorToken: burnt-copper
+  colorToken: slate
   icon: people
 
 - slug: public-health-urban-agriculture
   name: Public Health & Urban Agriculture
   shortName: Food & Health
   description: Urban farming, food access, and community health in partnership with Mo Betta Green Marketplace.
-  colorToken: burnt-copper
+  colorToken: stone
   icon: leaf

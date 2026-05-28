@@ -77,7 +77,7 @@ export default function ProgramFilters({
         {/* Areas (multi-select pills) */}
         <div>
           <div className="font-display text-xs font-semibold uppercase tracking-display text-cc-stone">
-            Focus areas
+            Program areas
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             {areas.map((area) => {

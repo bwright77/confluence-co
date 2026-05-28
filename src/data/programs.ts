@@ -37,8 +37,7 @@ function validateProgram(
     'status',
     'startDate',
     'featured',
-    'primaryArea',
-    'secondaryAreas',
+    'areas',
   ] as const
 
   for (const key of required) {
@@ -60,29 +59,20 @@ function validateProgram(
     fail(filename, `completed programs must have endDate set`)
   }
 
-  const primaryArea = data.primaryArea as string
-  if (!areaBySlug[primaryArea]) {
-    fail(filename, `primaryArea "${primaryArea}" is not in areas.yaml`)
+  if (!Array.isArray(data.areas) || data.areas.length === 0) {
+    fail(filename, `areas must be a non-empty list of program-area slugs`)
   }
+  const areas = data.areas as string[]
 
-  if (!Array.isArray(data.secondaryAreas)) {
-    fail(filename, `secondaryAreas must be a list`)
-  }
-  const secondaryAreas = data.secondaryAreas as string[]
-
-  for (const slug of secondaryAreas) {
+  const seen = new Set<string>()
+  for (const slug of areas) {
     if (!areaBySlug[slug]) {
-      fail(filename, `secondaryAreas contains "${slug}" which is not in areas.yaml`)
+      fail(filename, `areas contains "${slug}" which is not in areas.yaml`)
     }
-    if (slug === primaryArea) {
-      fail(filename, `primaryArea "${primaryArea}" must not also appear in secondaryAreas`)
+    if (seen.has(slug)) {
+      fail(filename, `areas contains duplicate "${slug}"`)
     }
-  }
-
-  if (secondaryAreas.length > 4) {
-    console.warn(
-      `[programs.ts] ${filename}: secondaryAreas has ${secondaryAreas.length} entries — cap is 4 (soft warning)`
-    )
+    seen.add(slug)
   }
 
   if (data.heroImage && !data.heroImageAlt) {
@@ -102,8 +92,7 @@ function validateProgram(
     startDate: data.startDate as string,
     endDate: (data.endDate as string | null) ?? null,
     featured: Boolean(data.featured),
-    primaryArea,
-    secondaryAreas,
+    areas,
     funder: data.funder as Program['funder'],
     location: data.location as Program['location'],
     leadStaff: data.leadStaff as string[] | undefined,
@@ -145,20 +134,8 @@ export function getProgram(slug: string): Program | undefined {
   return programBySlug[slug]
 }
 
-export interface ProgramsByAreaOptions {
-  includeSecondary?: boolean
-}
-
-export function programsByArea(
-  areaSlug: string,
-  opts: ProgramsByAreaOptions = {}
-): Program[] {
-  const includeSecondary = opts.includeSecondary ?? false
-  return programs.filter((p) => {
-    if (p.primaryArea === areaSlug) return true
-    if (includeSecondary && p.secondaryAreas.includes(areaSlug)) return true
-    return false
-  })
+export function programsByArea(areaSlug: string): Program[] {
+  return programs.filter((p) => p.areas.includes(areaSlug))
 }
 
 export const featuredPrograms: Program[] = programs.filter((p) => p.featured)

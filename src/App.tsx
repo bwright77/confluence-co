@@ -1,18 +1,23 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom'
 import Layout from './layouts/Layout'
 import Home from './pages/Home'
 import About from './pages/About'
 import AboutTeam from './pages/AboutTeam'
 import Programs from './pages/Programs'
 import ProgramDetail from './pages/ProgramDetail'
-import FocusArea from './pages/FocusArea'
-import FocusAreas from './pages/FocusAreas'
+import ProgramArea from './pages/ProgramArea'
+import ProgramAreas from './pages/ProgramAreas'
 import Impact from './pages/Impact'
 import GetInvolved from './pages/GetInvolved'
 import Donate from './pages/Donate'
 import News from './pages/News'
 import NotFound from './pages/NotFound'
 import { programAreaRedirects } from './routes/redirects'
+
+function LegacyAreaRedirect() {
+  const { slug } = useParams<{ slug: string }>()
+  return <Navigate to={`/program-areas/${slug ?? ''}`} replace />
+}
 
 export default function App() {
   return (
@@ -25,7 +30,7 @@ export default function App() {
 
           <Route path="/programs" element={<Programs />} />
 
-          {/* Legacy per-area routes redirect to /focus-areas/:slug.
+          {/* Legacy per-area routes redirect to /program-areas/:slug.
               Defined before /programs/:slug so they take precedence. */}
           {Object.entries(programAreaRedirects).map(([from, to]) => (
             <Route key={from} path={from} element={<Navigate to={to} replace />} />
@@ -33,8 +38,12 @@ export default function App() {
 
           <Route path="/programs/:slug" element={<ProgramDetail />} />
 
-          <Route path="/focus-areas" element={<FocusAreas />} />
-          <Route path="/focus-areas/:slug" element={<FocusArea />} />
+          <Route path="/program-areas" element={<ProgramAreas />} />
+          <Route path="/program-areas/:slug" element={<ProgramArea />} />
+
+          {/* Legacy /focus-areas links → /program-areas */}
+          <Route path="/focus-areas" element={<Navigate to="/program-areas" replace />} />
+          <Route path="/focus-areas/:slug" element={<LegacyAreaRedirect />} />
 
           <Route path="/impact" element={<Impact />} />
           <Route path="/get-involved" element={<GetInvolved />} />

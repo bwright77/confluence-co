@@ -38,6 +38,33 @@ export const AREA_COLOR_CLASSES: Record<AreaColorToken, AreaColorClasses> = {
     ring: 'ring-cc-navy',
     gradient: 'bg-gradient-to-br from-cc-navy to-cc-sky',
   },
+  sage: {
+    bg: 'bg-cc-sage',
+    bgSoft: 'bg-cc-sage/10',
+    text: 'text-cc-sage',
+    textOn: 'text-white',
+    border: 'border-cc-sage',
+    ring: 'ring-cc-sage',
+    gradient: 'bg-gradient-to-br from-cc-sage to-cc-navy',
+  },
+  slate: {
+    bg: 'bg-cc-slate',
+    bgSoft: 'bg-cc-slate/10',
+    text: 'text-cc-slate',
+    textOn: 'text-white',
+    border: 'border-cc-slate',
+    ring: 'ring-cc-slate',
+    gradient: 'bg-gradient-to-br from-cc-slate to-cc-dark',
+  },
+  stone: {
+    bg: 'bg-cc-stone',
+    bgSoft: 'bg-cc-stone/10',
+    text: 'text-cc-stone',
+    textOn: 'text-white',
+    border: 'border-cc-stone',
+    ring: 'ring-cc-stone',
+    gradient: 'bg-gradient-to-br from-cc-stone to-cc-slate',
+  },
 }
 
 export function areaColors(token: AreaColorToken): AreaColorClasses {

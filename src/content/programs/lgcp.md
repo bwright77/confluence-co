@@ -9,8 +9,8 @@ startDate: "2025-05-01"
 endDate: null            # ongoing
 featured: true
 
-primaryArea: civic-engagement
-secondaryAreas:
+areas:
+  - civic-engagement
   - natural-resource-conservation
   - outdoor-recreation-stream
 

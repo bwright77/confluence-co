@@ -9,8 +9,9 @@ interface ProgramCardProps {
 }
 
 export default function ProgramCard({ program }: ProgramCardProps) {
-  const primaryArea = areaBySlug[program.primaryArea]
-  const colors = primaryArea ? areaColors(primaryArea.colorToken) : null
+  const cardAreas = program.areas.map((slug) => areaBySlug[slug]).filter(Boolean)
+  const lead = cardAreas[0]
+  const colors = lead ? areaColors(lead.colorToken) : null
 
   return (
     <Link
@@ -45,21 +46,27 @@ export default function ProgramCard({ program }: ProgramCardProps) {
           <StatusBadge status={program.status} />
         </div>
 
-        {/* Primary area indicator strip */}
-        {primaryArea && colors && (
+        {/* Area indicator strip */}
+        {colors && (
           <div className={`absolute bottom-0 left-0 right-0 h-1 ${colors.bg}`} aria-hidden="true" />
         )}
       </div>
 
       {/* Body */}
       <div className="flex flex-1 flex-col p-5">
-        {primaryArea && colors && (
-          <div className="mb-2">
-            <span
-              className={`inline-flex items-center rounded-full border border-transparent px-2.5 py-1 font-display text-[0.7rem] font-semibold uppercase tracking-display ${colors.bg} ${colors.textOn}`}
-            >
-              {primaryArea.shortName}
-            </span>
+        {cardAreas.length > 0 && (
+          <div className="mb-2 flex flex-wrap gap-1.5">
+            {cardAreas.map((area) => {
+              const ac = areaColors(area.colorToken)
+              return (
+                <span
+                  key={area.slug}
+                  className={`inline-flex items-center rounded-full border border-transparent px-2.5 py-1 font-display text-[0.7rem] font-semibold uppercase tracking-display ${ac.bg} ${ac.textOn}`}
+                >
+                  {area.shortName}
+                </span>
+              )
+            })}
           </div>
         )}
 
@@ -68,25 +75,6 @@ export default function ProgramCard({ program }: ProgramCardProps) {
         </h3>
 
         <p className="mt-2 font-body text-sm text-cc-stone">{program.tagline}</p>
-
-        {/* Secondary areas */}
-        {program.secondaryAreas.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {program.secondaryAreas.map((slug) => {
-              const area = areaBySlug[slug]
-              if (!area) return null
-              const sc = areaColors(area.colorToken)
-              return (
-                <span
-                  key={slug}
-                  className={`inline-flex items-center rounded-full border bg-white px-2 py-0.5 font-body text-[0.65rem] font-medium ${sc.text} ${sc.border}`}
-                >
-                  {area.shortName}
-                </span>
-              )
-            })}
-          </div>
-        )}
 
         {program.funder && (
           <div className="mt-auto pt-4 font-body text-xs text-cc-stone">

@@ -133,7 +133,7 @@ export default function NewsPost({ post }: NewsPostProps) {
                 return (
                   <Link
                     key={slug}
-                    to={`/focus-areas/${area.slug}`}
+                    to={`/program-areas/${area.slug}`}
                     className={`inline-flex items-center rounded-full border bg-white px-2.5 py-0.5 font-display text-[0.65rem] font-semibold uppercase tracking-display ${colors.text} ${colors.border}`}
                   >
                     {area.shortName}

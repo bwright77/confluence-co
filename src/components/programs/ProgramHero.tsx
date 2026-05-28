@@ -10,8 +10,9 @@ interface ProgramHeroProps {
 }
 
 export default function ProgramHero({ program }: ProgramHeroProps) {
-  const primaryArea = areaBySlug[program.primaryArea]
-  const colors = primaryArea ? areaColors(primaryArea.colorToken) : null
+  const heroAreas = program.areas.map((slug) => areaBySlug[slug]).filter(Boolean)
+  const lead = heroAreas[0]
+  const colors = lead ? areaColors(lead.colorToken) : null
 
   return (
     <section
@@ -64,10 +65,12 @@ export default function ProgramHero({ program }: ProgramHeroProps) {
           </ol>
         </nav>
 
-        {/* Status + Primary Area row */}
+        {/* Status + Program Area row */}
         <div className="mb-5 flex flex-wrap items-center gap-2">
           <StatusBadge status={program.status} size="md" />
-          {primaryArea && <AreaTag area={primaryArea} size="md" variant="solid" />}
+          {heroAreas.map((area) => (
+            <AreaTag key={area.slug} area={area} size="md" variant="solid" />
+          ))}
         </div>
 
         <h1 className="heading-display text-4xl text-white md:text-6xl md:leading-tight">
@@ -77,28 +80,6 @@ export default function ProgramHero({ program }: ProgramHeroProps) {
         <p className="mt-4 max-w-3xl font-accent text-lg italic text-white/90 md:text-xl">
           {program.tagline}
         </p>
-
-        {/* Secondary areas */}
-        {program.secondaryAreas.length > 0 && (
-          <div className="mt-6 flex flex-wrap items-center gap-2">
-            <span className="font-display text-xs uppercase tracking-display text-white/70">
-              Also tagged:
-            </span>
-            {program.secondaryAreas.map((slug) => {
-              const area = areaBySlug[slug]
-              if (!area) return null
-              return (
-                <Link
-                  key={slug}
-                  to={`/focus-areas/${area.slug}`}
-                  className="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-2.5 py-1 font-body text-xs font-medium text-white transition-colors hover:bg-white/20"
-                >
-                  {area.shortName}
-                </Link>
-              )
-            })}
-          </div>
-        )}
       </div>
     </section>
   )

@@ -9,8 +9,8 @@ startDate: "2026-04-09"
 endDate: "2027-06-01"
 featured: true
 
-primaryArea: watershed-restoration
-secondaryAreas:
+areas:
+  - watershed-restoration
   - youth-pathways
   - natural-resource-conservation
 

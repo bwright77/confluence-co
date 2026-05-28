@@ -4,6 +4,9 @@ export type AreaColorToken =
   | 'burnt-copper'
   | 'river-blue'
   | 'deep-teal'
+  | 'sage'
+  | 'slate'
+  | 'stone'
 
 export interface Area {
   slug: string
@@ -67,8 +70,8 @@ export interface Program {
   endDate: string | null
   featured: boolean
 
-  primaryArea: string
-  secondaryAreas: string[]
+  /** Program areas this project fits into — any number, no primary/lead. */
+  areas: string[]
 
   funder?: Funder
   location?: Location

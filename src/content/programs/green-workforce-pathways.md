@@ -9,8 +9,8 @@ startDate: "2026-04-01"  # TODO: confirm actual contract start with Shane
 endDate: "2027-03-31"    # TODO: confirm; assumed 12-month term
 featured: true
 
-primaryArea: youth-pathways
-secondaryAreas:
+areas:
+  - youth-pathways
   - natural-resource-conservation
   - civic-engagement
 

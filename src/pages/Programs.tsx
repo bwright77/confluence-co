@@ -43,9 +43,7 @@ export default function Programs() {
     return programs.filter((p) => {
       if (filters.status !== 'all' && p.status !== filters.status) return false
       if (filters.areas.length > 0) {
-        const matches = filters.areas.some(
-          (slug) => p.primaryArea === slug || p.secondaryAreas.includes(slug)
-        )
+        const matches = filters.areas.some((slug) => p.areas.includes(slug))
         if (!matches) return false
       }
       if (q) {
@@ -101,14 +99,14 @@ export default function Programs() {
           </h1>
           <p className="mt-4 max-w-3xl font-body text-lg text-white/90 md:text-xl">
             Specific, named initiatives — each with a community, a place, partners, and a story.
-            Filter by focus area or status, or browse the full list below.
+            Filter by program area or status, or browse the full list below.
           </p>
           <div className="mt-6">
             <a
-              href="#focus-areas"
+              href="#program-areas"
               className="inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-display text-cc-sky hover:text-white"
             >
-              Browse by focus area
+              Browse by program area
               <span aria-hidden="true">↓</span>
             </a>
           </div>
@@ -149,25 +147,25 @@ export default function Programs() {
         </div>
       </section>
 
-      {/* Browse by focus area */}
-      <section id="focus-areas" className="bg-cc-warm section-pad">
+      {/* Browse by program area */}
+      <section id="program-areas" className="bg-cc-warm section-pad">
         <div className="container-site">
           <h2 className="heading-section text-2xl text-cc-navy md:text-3xl">
-            Browse by focus area
+            Browse by program area
           </h2>
           <p className="mt-2 max-w-3xl font-body text-cc-stone">
-            Focus areas are the categories programs are tagged under. Each program has one primary
-            area and may touch on others.
+            Program areas are the categories we organize our work by. A project can fit into one
+            or several of them.
           </p>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {areas.map((area) => {
-              const count = programsByArea(area.slug, { includeSecondary: true }).length
+              const count = programsByArea(area.slug).length
               const colors = areaColors(area.colorToken)
               return (
                 <Link
                   key={area.slug}
-                  to={`/focus-areas/${area.slug}`}
+                  to={`/program-areas/${area.slug}`}
                   className="group flex flex-col rounded-lg border border-cc-stone/15 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   <div className={`h-1 w-12 rounded-full ${colors.bg}`} aria-hidden="true" />
@@ -176,7 +174,7 @@ export default function Programs() {
                   </h3>
                   <p className="mt-2 flex-1 font-body text-sm text-cc-stone">{area.description}</p>
                   <p className="mt-3 font-display text-xs font-semibold uppercase tracking-display text-cc-stone">
-                    {count} {count === 1 ? 'program' : 'programs'}
+                    {count} {count === 1 ? 'project' : 'projects'}
                   </p>
                 </Link>
               )
@@ -185,10 +183,10 @@ export default function Programs() {
 
           <div className="mt-8">
             <Link
-              to="/focus-areas"
+              to="/program-areas"
               className="font-display text-sm font-semibold uppercase tracking-display text-cc-sky hover:text-cc-navy"
             >
-              See all focus areas →
+              See all program areas →
             </Link>
           </div>
         </div>

@@ -3,13 +3,15 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "redirects": [
-    { "source": "/programs/pathways", "destination": "/focus-areas/youth-pathways", "permanent": true },
-    { "source": "/programs/watershed", "destination": "/focus-areas/watershed-restoration", "permanent": true },
-    { "source": "/programs/mo-betta", "destination": "/focus-areas/public-health-urban-agriculture", "permanent": true },
-    { "source": "/programs/recreation", "destination": "/focus-areas/outdoor-recreation-stream", "permanent": true },
-    { "source": "/programs/cultural", "destination": "/focus-areas/civic-engagement", "permanent": true },
-    { "source": "/focus-areas/cultural-programs", "destination": "/focus-areas/civic-engagement", "permanent": true },
-    { "source": "/programs/civic", "destination": "/focus-areas/civic-engagement", "permanent": true }
+    { "source": "/programs/pathways", "destination": "/program-areas/youth-pathways", "permanent": true },
+    { "source": "/programs/watershed", "destination": "/program-areas/watershed-restoration", "permanent": true },
+    { "source": "/programs/mo-betta", "destination": "/program-areas/public-health-urban-agriculture", "permanent": true },
+    { "source": "/programs/recreation", "destination": "/program-areas/outdoor-recreation-stream", "permanent": true },
+    { "source": "/programs/cultural", "destination": "/program-areas/civic-engagement", "permanent": true },
+    { "source": "/programs/civic", "destination": "/program-areas/civic-engagement", "permanent": true },
+    { "source": "/focus-areas/cultural-programs", "destination": "/program-areas/civic-engagement", "permanent": true },
+    { "source": "/focus-areas", "destination": "/program-areas", "permanent": true },
+    { "source": "/focus-areas/:slug", "destination": "/program-areas/:slug", "permanent": true }
   ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
