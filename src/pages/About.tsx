@@ -96,7 +96,7 @@ export default function About() {
       <section className="section-pad bg-cc-navy text-white" ref={tocRef}>
         <div className="container-site">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="font-display font-semibold uppercase tracking-poster text-cc-sky text-xs md:text-sm mb-4">
+            <p className="font-display font-semibold uppercase tracking-poster text-cc-sky-bright text-xs md:text-sm mb-4">
               Theory of Change
             </p>
             <motion.blockquote
@@ -160,7 +160,7 @@ export default function About() {
               <div key={chapter.period} className="relative pl-12 md:pl-16 pb-12 last:pb-0">
                 {/* Timeline dot */}
                 <div className="absolute left-2 md:left-4 top-1.5 w-4 h-4 rounded-full bg-cc-sky border-2 border-white shadow-sm" aria-hidden="true" />
-                <p className="font-display font-semibold uppercase tracking-poster text-cc-sky text-xs mb-1">
+                <p className="font-display font-semibold uppercase tracking-poster text-cc-sky-ink text-xs mb-1">
                   {chapter.period}
                 </p>
                 <h3 className="font-display font-bold text-cc-navy text-lg md:text-xl mb-3">

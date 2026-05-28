@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Pause, Play } from '@phosphor-icons/react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
 interface Testimonial {
@@ -48,6 +49,7 @@ const INTERVAL_MS = 8000
 export default function TestimonialCarousel() {
   const [current, setCurrent] = useState(0)
   const [direction, setDirection] = useState(1)
+  const [isPaused, setIsPaused] = useState(false)
   const reduced = useReducedMotion()
 
   const next = useCallback(() => {
@@ -65,13 +67,13 @@ export default function TestimonialCarousel() {
     setCurrent(index)
   }, [current])
 
-  // Auto-advance — pause when reduced motion is on. Depending on `current`
-  // restarts the timer on every change, including manual navigation/swipe.
+  // Auto-advance — halted by reduced motion or an explicit pause. Depending on
+  // `current` restarts the timer on every change, including manual nav/swipe.
   useEffect(() => {
-    if (reduced) return
+    if (reduced || isPaused) return
     const id = setInterval(next, INTERVAL_MS)
     return () => clearInterval(id)
-  }, [next, reduced, current])
+  }, [next, reduced, isPaused, current])
 
   // Touch swipe — left advances, right goes back
   const touchStartX = useRef<number | null>(null)
@@ -112,7 +114,7 @@ export default function TestimonialCarousel() {
       <div className="container-site relative z-10">
         <p
           id="testimonials-heading"
-          className="text-center font-display font-semibold uppercase tracking-poster text-cc-sky text-xs md:text-sm mb-12 md:mb-16"
+          className="text-center font-display font-semibold uppercase tracking-poster text-cc-sky-bright text-xs md:text-sm mb-12 md:mb-16"
         >
           Voices from the confluence
         </p>
@@ -189,13 +191,12 @@ export default function TestimonialCarousel() {
             </button>
 
             {/* Dot indicators */}
-            <div className="flex gap-2" role="tablist" aria-label="Testimonial navigation">
+            <div className="flex gap-2" role="group" aria-label="Choose testimonial">
               {TESTIMONIALS.map((_, i) => (
                 <button
                   key={i}
-                  role="tab"
-                  aria-selected={i === current}
-                  aria-label={`Testimonial ${i + 1} of ${TESTIMONIALS.length}`}
+                  aria-label={`Show testimonial ${i + 1} of ${TESTIMONIALS.length}`}
+                  aria-current={i === current ? 'true' : undefined}
                   onClick={() => goTo(i)}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     i === current ? 'bg-cc-sky w-6' : 'bg-white/30 hover:bg-white/60'
@@ -213,6 +214,21 @@ export default function TestimonialCarousel() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
+
+            {/* Pause / play auto-advance (hidden when motion is already reduced) */}
+            {!reduced && (
+              <button
+                onClick={() => setIsPaused((p) => !p)}
+                className="text-white/50 hover:text-white transition-colors p-2"
+                aria-label={isPaused ? 'Play testimonials' : 'Pause testimonials'}
+              >
+                {isPaused ? (
+                  <Play className="w-5 h-5" weight="fill" aria-hidden="true" />
+                ) : (
+                  <Pause className="w-5 h-5" weight="fill" aria-hidden="true" />
+                )}
+              </button>
+            )}
           </div>
         </div>
       </div>

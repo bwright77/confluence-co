@@ -9,15 +9,20 @@ export default {
       colors: {
         // Primary brand colors — from the Confluence Colorado logo
         'cc-navy':  '#004667', // Deep Teal — nav, footer, headings
-        'cc-sky':   '#009dd6', // River Blue — CTAs, links, accents
+        'cc-sky':   '#009dd6', // River Blue — large display/decorative + brand accents
         'cc-orange':'#b44b00', // Burnt Copper — donate button, highlights
+        // Accessible River Blue shades for small text (cc-sky is too mid-tone to meet
+        // AA at body sizes against either white or navy).
+        'cc-sky-ink':    '#006d94', // sky text on light backgrounds (AA ≥ 4.5:1)
+        'cc-sky-bright': '#5cc3ea', // sky text on navy/dark backgrounds (AA ≥ 4.5:1)
         // Complementary palette — Colorado landscape
-        'cc-sage':  '#6B8F71', // Sage — nature/growth accents
+        'cc-sage':  '#6B8F71', // Sage — nature/growth accents (large/decorative)
+        'cc-sage-ink': '#4a6b51', // sage text on light backgrounds (AA ≥ 4.5:1)
         'cc-sand':  '#F5E6D3', // Sandstone — card backgrounds, warm neutral
         'cc-slate': '#2C3E50', // Slate — dark sections, footer
         'cc-warm':  '#F8F4F0', // Warm Gray — alternate section backgrounds
         'cc-dark':  '#1A1A2E', // Dark — high-contrast text
-        'cc-stone': '#6B7280', // Mid Gray — secondary text, captions
+        'cc-stone': '#5b626e', // Mid Gray — secondary text, captions (AA on white/warm/sand)
       },
       fontFamily: {
         display: ['Jost', 'sans-serif'],

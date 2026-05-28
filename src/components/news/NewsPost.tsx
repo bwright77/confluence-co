@@ -84,7 +84,7 @@ export default function NewsPost({ post }: NewsPostProps) {
               em: ({ node: _n, ...props }) => <em className="italic" {...props} />,
               a: ({ node: _n, ...props }) => (
                 <a
-                  className="text-cc-sky underline underline-offset-2 hover:text-cc-navy"
+                  className="text-cc-sky-ink underline underline-offset-2 hover:text-cc-navy"
                   target={props.href?.startsWith('http') ? '_blank' : undefined}
                   rel={props.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                   {...props}
@@ -147,7 +147,7 @@ export default function NewsPost({ post }: NewsPostProps) {
               href={post.link.href}
               target={post.link.href.startsWith('http') ? '_blank' : undefined}
               rel={post.link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="ml-auto font-display text-xs font-semibold uppercase tracking-display text-cc-sky hover:text-cc-navy"
+              className="ml-auto font-display text-xs font-semibold uppercase tracking-display text-cc-sky-ink hover:text-cc-navy"
             >
               {post.link.label} →
             </a>

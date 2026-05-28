@@ -49,7 +49,7 @@ export default function Footer() {
                 </div>
               </div>
             </Link>
-            <p className="font-body text-cc-navy/65 text-sm leading-relaxed">
+            <p className="font-body text-cc-navy/80 text-sm leading-relaxed">
               {/* TODO: Replace with verbatim mission statement from Shane */}
               Building the next generation of environmental stewards by connecting Denver's
               youth to the land, water, and community they call home.
@@ -66,7 +66,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="font-body text-sm text-cc-navy/60 hover:text-cc-navy transition-colors"
+                    className="font-body text-sm text-cc-navy/80 hover:text-cc-navy transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -85,7 +85,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="font-body text-sm text-cc-navy/60 hover:text-cc-navy transition-colors"
+                    className="font-body text-sm text-cc-navy/80 hover:text-cc-navy transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -134,7 +134,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Confluence Colorado on ${social.label}`}
-                  className="w-9 h-9 flex items-center justify-center text-cc-navy/50 hover:text-cc-sky transition-colors"
+                  className="w-9 h-9 flex items-center justify-center text-cc-navy/80 hover:text-cc-sky-ink transition-colors"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d={social.icon} />
@@ -150,11 +150,11 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-cc-navy/15">
         <div className="container-site py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="font-body text-xs text-cc-navy/45">
+          <p className="font-body text-xs text-cc-navy/75">
             © 2026 Confluence Colorado. All rights reserved.{' '}
             EIN 88-1757678 · 501(c)(3) nonprofit · Your donation may be tax-deductible.
           </p>
-          <p className="font-body text-xs text-cc-navy/35 italic">
+          <p className="font-body text-xs text-cc-navy/75 italic">
             the confluence of people and place
           </p>
         </div>

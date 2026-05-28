@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { CCBug } from './Logo'
 import UtilityBar from './UtilityBar'
+import { useFocusTrap } from '../hooks/useFocusTrap'
 
 interface NavChild {
   label: string
@@ -33,7 +34,11 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState<string | null>(null)
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
   const location = useLocation()
+
+  // Trap focus in the mobile menu, close on Escape, restore focus on close.
+  useFocusTrap(mobileOpen, mobileMenuRef, () => setMobileOpen(false))
   // Routes whose top section has its own dark/full-bleed hero — let the nav
   // sit transparently over it until the user scrolls past.
   const DARK_HERO_PREFIXES = ['/about', '/impact', '/projects', '/program-areas', '/news', '/get-involved']
@@ -98,9 +103,21 @@ export default function Nav() {
                   className="relative"
                   onMouseEnter={() => setOpenMenu(link.label)}
                   onMouseLeave={() => setOpenMenu(null)}
+                  onBlur={(e) => {
+                    // Close once focus leaves the trigger + submenu entirely.
+                    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+                      setOpenMenu(null)
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') setOpenMenu(null)
+                  }}
                 >
                   <button
-                    className="flex items-center gap-1 text-white font-display font-semibold text-sm uppercase tracking-display hover:text-cc-sky transition-colors"
+                    onClick={() =>
+                      setOpenMenu(openMenu === link.label ? null : link.label)
+                    }
+                    className="flex items-center gap-1 text-white font-display font-semibold text-sm uppercase tracking-display hover:text-cc-sky-bright transition-colors"
                     aria-expanded={openMenu === link.label}
                     aria-haspopup="true"
                   >
@@ -129,8 +146,8 @@ export default function Nav() {
                           className={({ isActive }) =>
                             `block px-4 py-3 font-body text-sm transition-colors border-l-2 ${
                               isActive
-                                ? 'text-cc-sky border-cc-sky bg-white/5'
-                                : 'text-white/90 border-transparent hover:text-cc-sky hover:border-cc-sky hover:bg-white/5'
+                                ? 'text-cc-sky-bright border-cc-sky bg-white/5'
+                                : 'text-white/90 border-transparent hover:text-cc-sky-bright hover:border-cc-sky hover:bg-white/5'
                             }`
                           }
                         >
@@ -147,7 +164,7 @@ export default function Nav() {
                   to={link.href}
                   className={({ isActive }) =>
                     `font-display font-semibold text-sm uppercase tracking-display transition-colors ${
-                      isActive ? 'text-cc-sky' : 'text-white hover:text-cc-sky'
+                      isActive ? 'text-cc-sky-bright' : 'text-white hover:text-cc-sky-bright'
                     }`
                   }
                 >
@@ -180,12 +197,16 @@ export default function Nav() {
 
       {/* Mobile full-screen overlay */}
       <div
+        ref={mobileMenuRef}
         className={`lg:hidden fixed inset-0 z-[60] bg-cc-dark transition-opacity duration-300 ${
-          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          mobileOpen
+            ? 'opacity-100 visible pointer-events-auto'
+            : 'opacity-0 invisible pointer-events-none'
         }`}
         aria-modal="true"
         role="dialog"
         aria-label="Navigation menu"
+        aria-hidden={!mobileOpen}
       >
         {/* Decorative landscape background */}
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">

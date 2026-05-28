@@ -37,7 +37,7 @@ export default function ProgramBody({ body }: ProgramBodyProps) {
           ),
           a: ({ node: _node, ...props }) => (
             <a
-              className="text-cc-sky underline underline-offset-2 hover:text-cc-navy"
+              className="text-cc-sky-ink underline underline-offset-2 hover:text-cc-navy"
               target={props.href?.startsWith('http') ? '_blank' : undefined}
               rel={props.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
               {...props}

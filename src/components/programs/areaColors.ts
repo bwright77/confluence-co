@@ -21,9 +21,11 @@ export const AREA_COLOR_CLASSES: Record<AreaColorToken, AreaColorClasses> = {
     gradient: 'bg-gradient-to-br from-cc-orange to-cc-orange/70',
   },
   'river-blue': {
-    bg: 'bg-cc-sky',
+    // bg/text use accessible ink shades so small chips (white-on-color and
+    // color-on-white) meet AA; bgSoft/border/ring/gradient keep the bright brand sky.
+    bg: 'bg-cc-sky-ink',
     bgSoft: 'bg-cc-sky/10',
-    text: 'text-cc-sky',
+    text: 'text-cc-sky-ink',
     textOn: 'text-white',
     border: 'border-cc-sky',
     ring: 'ring-cc-sky',
@@ -39,9 +41,9 @@ export const AREA_COLOR_CLASSES: Record<AreaColorToken, AreaColorClasses> = {
     gradient: 'bg-gradient-to-br from-cc-navy to-cc-sky',
   },
   sage: {
-    bg: 'bg-cc-sage',
+    bg: 'bg-cc-sage-ink',
     bgSoft: 'bg-cc-sage/10',
-    text: 'text-cc-sage',
+    text: 'text-cc-sage-ink',
     textOn: 'text-white',
     border: 'border-cc-sage',
     ring: 'ring-cc-sage',

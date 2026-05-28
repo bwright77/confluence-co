@@ -38,7 +38,7 @@ export default function ProgramDetail() {
         </p>
         <Link
           to="/projects"
-          className="mt-6 inline-block font-display text-sm font-semibold uppercase tracking-display text-cc-sky underline hover:text-cc-navy"
+          className="mt-6 inline-block font-display text-sm font-semibold uppercase tracking-display text-cc-sky-ink underline hover:text-cc-navy"
         >
           ← Back to all projects
         </Link>

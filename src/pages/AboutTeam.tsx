@@ -68,7 +68,7 @@ export default function AboutTeam() {
       {/* Page hero */}
       <section className="bg-cc-navy text-white pt-32 pb-20">
         <div className="container-site">
-          <p className="font-display font-semibold uppercase tracking-poster text-cc-sky text-xs md:text-sm mb-4">
+          <p className="font-display font-semibold uppercase tracking-poster text-cc-sky-bright text-xs md:text-sm mb-4">
             Team &amp; Board
           </p>
           <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-white max-w-2xl">
@@ -100,7 +100,7 @@ export default function AboutTeam() {
               >
                 {SHANE.name}
               </h2>
-              <p className="font-display font-semibold uppercase tracking-display text-cc-sky text-sm mb-6">
+              <p className="font-display font-semibold uppercase tracking-display text-cc-sky-ink text-sm mb-6">
                 {SHANE.title}
               </p>
               <p className="font-body text-cc-stone text-base md:text-lg leading-relaxed">

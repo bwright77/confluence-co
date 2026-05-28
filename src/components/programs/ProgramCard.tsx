@@ -70,7 +70,7 @@ export default function ProgramCard({ program }: ProgramCardProps) {
           </div>
         )}
 
-        <h3 className="font-display text-xl font-bold text-cc-navy group-hover:text-cc-sky">
+        <h3 className="font-display text-xl font-bold text-cc-navy group-hover:text-cc-sky-ink">
           {program.title}
         </h3>
 

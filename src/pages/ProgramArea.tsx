@@ -25,7 +25,7 @@ export default function ProgramArea() {
         </h1>
         <Link
           to="/projects"
-          className="mt-6 inline-block font-display text-sm font-semibold uppercase tracking-display text-cc-sky underline hover:text-cc-navy"
+          className="mt-6 inline-block font-display text-sm font-semibold uppercase tracking-display text-cc-sky-ink underline hover:text-cc-navy"
         >
           ← All projects
         </Link>
@@ -97,7 +97,7 @@ export default function ProgramArea() {
               </p>
               <Link
                 to="/projects"
-                className="mt-4 inline-block font-display text-sm font-semibold uppercase tracking-display text-cc-sky underline hover:text-cc-navy"
+                className="mt-4 inline-block font-display text-sm font-semibold uppercase tracking-display text-cc-sky-ink underline hover:text-cc-navy"
               >
                 See all projects →
               </Link>

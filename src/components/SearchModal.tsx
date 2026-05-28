@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MagnifyingGlass, X, ArrowRight } from '@phosphor-icons/react'
 import { search } from '../data/searchIndex'
+import { useFocusTrap } from '../hooks/useFocusTrap'
 
 interface SearchModalProps {
   open: boolean
@@ -9,40 +10,37 @@ interface SearchModalProps {
 }
 
 const TYPE_STYLES: Record<string, string> = {
-  Project: 'bg-cc-sky/10 text-cc-sky',
-  'Program Area': 'bg-cc-sage/15 text-cc-sage',
+  Project: 'bg-cc-sky/10 text-cc-sky-ink',
+  'Program Area': 'bg-cc-sage/15 text-cc-sage-ink',
   News: 'bg-cc-orange/10 text-cc-orange',
   Page: 'bg-cc-navy/10 text-cc-navy',
 }
 
 export default function SearchModal({ open, onClose }: SearchModalProps) {
   const [query, setQuery] = useState('')
-  const inputRef = useRef<HTMLInputElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
 
   const results = useMemo(() => search(query), [query])
 
-  // Focus the input when opened; reset query when closed.
+  // Trap focus inside the dialog, close on Escape, and restore focus on close.
+  // The search input is the first focusable, so it receives focus on open.
+  useFocusTrap(open, dialogRef, onClose)
+
+  // Reset the query when closed.
   useEffect(() => {
-    if (open) {
-      const id = window.setTimeout(() => inputRef.current?.focus(), 50)
-      return () => window.clearTimeout(id)
-    }
-    setQuery('')
+    if (!open) setQuery('')
   }, [open])
 
-  // Close on Escape; lock body scroll while open.
+  // Lock body scroll while open.
   useEffect(() => {
     if (!open) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
-    document.addEventListener('keydown', onKey)
     const prevOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     return () => {
-      document.removeEventListener('keydown', onKey)
       document.body.style.overflow = prevOverflow
     }
-  }, [open, onClose])
+  }, [open])
 
   if (!open) return null
 
@@ -55,6 +53,7 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
 
   return (
     <div
+      ref={dialogRef}
       className="fixed inset-0 z-[80] flex items-start justify-center px-4 pt-24 sm:pt-32"
       role="dialog"
       aria-modal="true"
@@ -70,7 +69,6 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
         <div className="flex items-center gap-3 border-b border-cc-navy/10 px-4">
           <MagnifyingGlass size={20} weight="bold" className="text-cc-stone shrink-0" aria-hidden="true" />
           <input
-            ref={inputRef}
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}

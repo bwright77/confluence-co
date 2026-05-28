@@ -51,16 +51,24 @@ CI runs on every push and PR:
 | Token | Hex | Usage |
 |---|---|---|
 | `cc-navy` | `#004667` | Primary — nav, footer, headings |
-| `cc-sky` | `#009dd6` | Secondary — CTAs, links, accents |
+| `cc-sky` | `#009dd6` | River Blue — large display + decorative/brand accents |
+| `cc-sky-ink` | `#006d94` | Sky **text on light** backgrounds (AA ≥ 4.5:1) |
+| `cc-sky-bright` | `#5cc3ea` | Sky **text on navy/dark** backgrounds (AA ≥ 4.5:1) |
 | `cc-orange` | `#b44b00` | Accent — donate button, highlights |
-| `cc-sage` | `#6B8F71` | Nature/growth accents |
+| `cc-sage` | `#6B8F71` | Nature/growth accents (large/decorative) |
+| `cc-sage-ink` | `#4a6b51` | Sage **text on light** backgrounds (AA ≥ 4.5:1) |
 | `cc-sand` | `#F5E6D3` | Backgrounds — cards, warm sections |
 | `cc-warm` | `#F8F4F0` | Alternate section backgrounds |
 | `cc-slate` | `#2C3E50` | Dark sections |
 | `cc-dark` | `#1A1A2E` | Deep — utility bar, high-contrast |
-| `cc-stone` | `#6B7280` | Secondary text, captions |
+| `cc-stone` | `#5b626e` | Secondary text, captions (AA on white/warm/sand) |
 
 (Tokens are defined in [`tailwind.config.js`](tailwind.config.js).)
+
+> **Contrast note:** `cc-sky` and `cc-sage` are mid-tones that fail WCAG AA for
+> small text against both light and dark backgrounds, so they're reserved for
+> large display text, fills, and decoration. For body/label text use the `-ink`
+> shades on light backgrounds and `cc-sky-bright` on navy/dark.
 
 **Program-area colors** — each of the 6 program areas maps to one brand token (via `colorToken` in [`areas.yaml`](src/content/areas.yaml) → class sets in [`src/components/programs/areaColors.ts`](src/components/programs/areaColors.ts)). The home "What We Do" cards use the same colors.
 
@@ -150,7 +158,7 @@ src/
 | 4 — Donate & Get Involved | Get Involved reach-out hub (audience cards → mailto) done; Stripe + Mailchimp pending | Get Involved done; payments/email pending |
 | 5 — Impact & News | Impact goals page + News timeline | Complete (awaiting real metrics) |
 | — Site utilities | Search overlay + EN/ES Google Translate in a top utility bar | Complete |
-| 6 — Polish & Launch | A11y audit, SEO, Lighthouse, DNS cutover | Pending |
+| 6 — Polish & Launch | A11y audit, SEO, Lighthouse, DNS cutover | In progress — A11y AA pass done; SEO/Lighthouse/DNS pending |
 | 7 — Post-Launch | Headless CMS, events calendar | Future |
 
 ## Content Pending from Shane Wright
@@ -176,6 +184,13 @@ All components are built to WCAG 2.1 AA targets:
 - ARIA labels on all interactive elements and landmark regions
 - `prefers-reduced-motion` — all animations and auto-advance disabled
 - Semantic HTML throughout
+- **Color contrast** — text meets AA (≥ 4.5:1); see the contrast note under
+  [Brand](#brand) for the `-ink` / `-bright` text shades
+- **Keyboard** — desktop nav dropdowns open via click/Enter and close on
+  Esc/blur; the mobile menu and search overlay trap focus, close on Esc, and
+  restore focus to their trigger on close (`useFocusTrap`)
+- **Carousel** — the testimonials auto-advance has a visible pause/play control
+  (WCAG 2.2.2) in addition to the reduced-motion halt
 
 ## Contact
 

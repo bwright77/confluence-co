@@ -207,7 +207,7 @@ export default function ProgramCards() {
 
                 {/* Card text */}
                 <div className="bg-white p-5 flex flex-col flex-1">
-                  <h3 className="font-display font-bold uppercase tracking-display text-cc-navy text-lg mb-1 group-hover:text-cc-sky transition-colors duration-200">
+                  <h3 className="font-display font-bold uppercase tracking-display text-cc-navy text-lg mb-1 group-hover:text-cc-sky-ink transition-colors duration-200">
                     {program.title}
                   </h3>
                   <p className="font-body text-cc-stone text-sm leading-relaxed mb-4 flex-1">

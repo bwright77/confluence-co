@@ -146,7 +146,7 @@ export default function Programs() {
                       <AreaIcon size={24} weight="duotone" />
                     </span>
                   )}
-                  <h3 className="font-display text-lg font-bold text-cc-navy group-hover:text-cc-sky">
+                  <h3 className="font-display text-lg font-bold text-cc-navy group-hover:text-cc-sky-ink">
                     {area.name}
                   </h3>
                   <p className="mt-2 flex-1 font-body text-sm text-cc-stone">{area.description}</p>
@@ -179,7 +179,7 @@ export default function Programs() {
               <button
                 type="button"
                 onClick={clearAll}
-                className="mt-4 font-display text-sm font-semibold uppercase tracking-display text-cc-sky underline hover:text-cc-navy"
+                className="mt-4 font-display text-sm font-semibold uppercase tracking-display text-cc-sky-ink underline hover:text-cc-navy"
               >
                 Clear filters
               </button>

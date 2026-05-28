@@ -123,7 +123,7 @@ export default function TranslateControl() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1.5 text-cc-navy/70 hover:text-cc-navy transition-colors text-xs font-display font-semibold uppercase tracking-display"
+        className="flex items-center gap-1.5 text-cc-navy/80 hover:text-cc-navy transition-colors text-xs font-display font-semibold uppercase tracking-display"
         aria-haspopup="true"
         aria-expanded={open}
         aria-label="Translate this page"

@@ -11,7 +11,7 @@ export default function News() {
     <>
       <section className="bg-cc-navy pt-32 pb-10 md:pt-40 md:pb-12">
         <div className="container-site">
-          <p className="font-display text-xs font-semibold uppercase tracking-poster text-cc-sky">
+          <p className="font-display text-xs font-semibold uppercase tracking-poster text-cc-sky-bright">
             Field notes
           </p>
           <h1 className="heading-display mt-3 text-4xl text-white md:text-5xl md:leading-tight">
@@ -20,7 +20,7 @@ export default function News() {
           <p className="mt-3 max-w-2xl font-body text-base text-white/85 md:text-lg">
             Short updates from the river, the field, and the work — newest first.
           </p>
-          <div className="mt-5 flex flex-wrap items-center gap-3 font-display text-xs font-semibold uppercase tracking-display text-cc-sky">
+          <div className="mt-5 flex flex-wrap items-center gap-3 font-display text-xs font-semibold uppercase tracking-display text-cc-sky-bright">
             <span>Follow along:</span>
             <a
               href="https://www.facebook.com/profile.php?id=61573593181872"

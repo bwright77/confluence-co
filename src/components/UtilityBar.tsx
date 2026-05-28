@@ -15,7 +15,7 @@ export default function UtilityBar() {
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
-            className="flex items-center gap-1.5 text-cc-navy/70 hover:text-cc-navy transition-colors text-xs font-display font-semibold uppercase tracking-display"
+            className="flex items-center gap-1.5 text-cc-navy/80 hover:text-cc-navy transition-colors text-xs font-display font-semibold uppercase tracking-display"
             aria-label="Search the site"
           >
             <MagnifyingGlass size={16} weight="bold" aria-hidden="true" />

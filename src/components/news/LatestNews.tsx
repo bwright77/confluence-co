@@ -30,7 +30,7 @@ export default function LatestNews({ limit = 3 }: LatestNewsProps) {
               href="https://www.facebook.com/profile.php?id=61573593181872"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cc-sky hover:text-cc-navy"
+              className="text-cc-sky-ink hover:text-cc-navy"
             >
               Facebook
             </a>
@@ -39,12 +39,12 @@ export default function LatestNews({ limit = 3 }: LatestNewsProps) {
               href="https://www.instagram.com/coloradoconfluence/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cc-sky hover:text-cc-navy"
+              className="text-cc-sky-ink hover:text-cc-navy"
             >
               Instagram
             </a>
             <span aria-hidden="true" className="text-cc-stone/40">·</span>
-            <Link to="/news" className="text-cc-sky hover:text-cc-navy">
+            <Link to="/news" className="text-cc-sky-ink hover:text-cc-navy">
               All news →
             </Link>
           </div>

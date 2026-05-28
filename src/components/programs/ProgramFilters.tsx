@@ -154,7 +154,7 @@ export default function ProgramFilters({
           <button
             type="button"
             onClick={clearAll}
-            className="font-display text-xs font-semibold uppercase tracking-display text-cc-sky hover:text-cc-navy"
+            className="font-display text-xs font-semibold uppercase tracking-display text-cc-sky-ink hover:text-cc-navy"
           >
             Clear filters
           </button>
