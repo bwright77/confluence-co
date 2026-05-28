@@ -54,7 +54,7 @@ export default function ProgramBody({ body }: ProgramBodyProps) {
             />
           ),
           img: ({ node: _node, alt, ...props }) => (
-            <figure className="my-6">
+            <figure className="my-6 sm:mx-auto sm:max-w-sm">
               <img
                 alt={alt ?? ''}
                 loading="lazy"

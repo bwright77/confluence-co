@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { CCBug } from './Logo'
+import UtilityBar from './UtilityBar'
 
 interface NavChild {
   label: string
@@ -66,7 +67,9 @@ export default function Nav() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
+      <header className="fixed top-0 left-0 right-0 z-50">
+        <UtilityBar />
+        <div className={`transition-all duration-300 ${navBg}`}>
         <nav
           className="container-site flex items-center justify-between h-20 lg:h-24"
           aria-label="Main navigation"
@@ -172,6 +175,7 @@ export default function Nav() {
             </svg>
           </button>
         </nav>
+        </div>
       </header>
 
       {/* Mobile full-screen overlay */}

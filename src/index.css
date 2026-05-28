@@ -69,6 +69,22 @@
   }
 }
 
+/* Google Website Translator — suppress its injected top banner and body offset
+   so our custom translate control is the only visible UI. */
+.goog-te-banner-frame,
+.skiptranslate iframe {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+/* Keep the hidden widget out of the layout. */
+#google_translate_element {
+  display: none;
+}
+
 /* Reduce motion — respect user preference */
 @media (prefers-reduced-motion: reduce) {
   * {
