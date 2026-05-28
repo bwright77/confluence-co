@@ -80,8 +80,6 @@ export default function ProgramCard({ program }: ProgramCardProps) {
           <div className="mt-auto pt-4 font-body text-xs text-cc-stone">
             Funded by{' '}
             <span className="font-semibold text-cc-dark">{program.funder.shortName}</span>
-            {' · '}
-            <span>{program.funder.amountDisplay}</span>
           </div>
         )}
       </div>

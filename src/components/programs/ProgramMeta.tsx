@@ -58,11 +58,7 @@ export default function ProgramMeta({ program }: ProgramMetaProps) {
             {program.funder.shortName}
           </div>
           <div className="mt-0.5 font-body text-sm text-cc-stone">{program.funder.name}</div>
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-body text-sm">
-            <span className="font-semibold text-cc-orange">{program.funder.amountDisplay}</span>
-            <span className="text-cc-stone">·</span>
-            <span className="text-cc-dark">{program.funder.term}</span>
-          </div>
+          <div className="mt-3 font-body text-sm text-cc-dark">{program.funder.term}</div>
           <div className="mt-2 font-body text-xs text-cc-stone">{program.funder.program}</div>
         </div>
       )}
