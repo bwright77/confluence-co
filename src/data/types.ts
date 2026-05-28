@@ -6,7 +6,7 @@ export type AreaColorToken =
   | 'deep-teal'
   | 'sage'
   | 'slate'
-  | 'stone'
+  | 'clay'
 
 export interface Area {
   slug: string

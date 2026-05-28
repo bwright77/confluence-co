@@ -18,6 +18,7 @@ export default {
         // Complementary palette — Colorado landscape
         'cc-sage':  '#6B8F71', // Sage — nature/growth accents (large/decorative)
         'cc-sage-ink': '#4a6b51', // sage text on light backgrounds (AA ≥ 4.5:1)
+        'cc-clay':  '#7a4a28', // Clay — earthy brown (Public Health/urban-ag area); AA both ways on light
         'cc-sand':  '#F5E6D3', // Sandstone — card backgrounds, warm neutral
         'cc-slate': '#2C3E50', // Slate — dark sections, footer
         'cc-warm':  '#F8F4F0', // Warm Gray — alternate section backgrounds

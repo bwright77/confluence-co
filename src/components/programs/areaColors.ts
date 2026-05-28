@@ -58,14 +58,16 @@ export const AREA_COLOR_CLASSES: Record<AreaColorToken, AreaColorClasses> = {
     ring: 'ring-cc-slate',
     gradient: 'bg-gradient-to-br from-cc-slate to-cc-dark',
   },
-  stone: {
-    bg: 'bg-cc-stone',
-    bgSoft: 'bg-cc-stone/10',
-    text: 'text-cc-stone',
+  clay: {
+    // Earthy brown — dark enough to meet AA both as white-on-color (solid chips)
+    // and color-on-white (outline text).
+    bg: 'bg-cc-clay',
+    bgSoft: 'bg-cc-clay/10',
+    text: 'text-cc-clay',
     textOn: 'text-white',
-    border: 'border-cc-stone',
-    ring: 'ring-cc-stone',
-    gradient: 'bg-gradient-to-br from-cc-stone to-cc-slate',
+    border: 'border-cc-clay',
+    ring: 'ring-cc-clay',
+    gradient: 'bg-gradient-to-br from-cc-clay to-cc-navy',
   },
 }
 
