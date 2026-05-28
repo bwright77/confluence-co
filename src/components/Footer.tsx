@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import ccStacked from '../../CC-Stacked.svg'
+import { CCBug } from './Logo'
 
 import { programs as activePrograms } from '../data/programs'
 
@@ -28,12 +28,26 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <Link to="/" aria-label="Confluence Colorado — home">
-              <img
-                src={ccStacked}
-                alt="Confluence Colorado"
-                className="h-44 w-auto mb-5"
-              />
+            <Link
+              to="/"
+              className="flex items-center gap-3 mb-5"
+              aria-label="Confluence Colorado — home"
+            >
+              <CCBug variant="light" className="h-14 w-14 shrink-0" />
+              <div className="leading-none">
+                <div
+                  className="font-display font-bold uppercase text-cc-navy tracking-wide"
+                  style={{ fontSize: 'clamp(1.1rem, 2vw, 1.45rem)', letterSpacing: '0.06em' }}
+                >
+                  Confluence
+                </div>
+                <div
+                  className="font-display font-semibold uppercase text-cc-sky tracking-widest"
+                  style={{ fontSize: 'clamp(0.7rem, 1.3vw, 0.9rem)', letterSpacing: '0.2em' }}
+                >
+                  Colorado
+                </div>
+              </div>
             </Link>
             <p className="font-body text-cc-navy/65 text-sm leading-relaxed">
               {/* TODO: Replace with verbatim mission statement from Shane */}
