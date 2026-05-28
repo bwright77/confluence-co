@@ -1,10 +1,15 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { GlobeHemisphereWest, CaretDown, Check } from '@phosphor-icons/react'
 
 /*
  * Custom UI on top of the Google Website Translator widget.
  * The real Google widget is rendered hidden (#google_translate_element);
  * our buttons drive its <select.goog-te-combo> so we control the styling.
+ *
+ * Language resolution on load: an explicit saved choice (localStorage) wins;
+ * otherwise we fall back to the active googtrans cookie, then auto-switch to
+ * the browser's preferred language. The language list is filtered to what the
+ * widget actually offers, so Navajo only appears if/when Google supports it.
  */
 
 declare global {
@@ -17,18 +22,54 @@ declare global {
 const LANGUAGES = [
   { code: 'en', label: 'English', short: 'EN' },
   { code: 'es', label: 'Español', short: 'ES' },
+  { code: 'nv', label: 'Diné Bizaad', short: 'NV' },
 ] as const
 
 type LangCode = (typeof LANGUAGES)[number]['code']
 
+// Non-source languages we offer (used for browser detection + widget config).
+const OFFERED: LangCode[] = LANGUAGES.map((l) => l.code).filter((c) => c !== 'en')
+
 const SCRIPT_ID = 'google-translate-script'
+const STORAGE_KEY = 'cc-lang'
+
+function isLangCode(value: string): value is LangCode {
+  return LANGUAGES.some((l) => l.code === value)
+}
 
 function readGoogtransCookie(): LangCode {
   const match = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/)
   if (match) {
-    const value = decodeURIComponent(match[1]) // e.g. "/en/es"
-    const target = value.split('/')[2]
-    if (target === 'es') return 'es'
+    const target = decodeURIComponent(match[1]).split('/')[2] ?? '' // e.g. "/en/es" → "es"
+    if (target !== 'en' && isLangCode(target)) return target
+  }
+  return 'en'
+}
+
+function readSavedChoice(): LangCode | null {
+  try {
+    const value = localStorage.getItem(STORAGE_KEY)
+    return value && isLangCode(value) ? value : null
+  } catch {
+    return null
+  }
+}
+
+function saveChoice(lang: LangCode) {
+  try {
+    localStorage.setItem(STORAGE_KEY, lang)
+  } catch {
+    /* private mode / storage disabled — auto-detection still applies */
+  }
+}
+
+// First browser-preferred language we can actually offer.
+function browserDefault(): LangCode {
+  const langs = navigator.languages?.length ? navigator.languages : [navigator.language]
+  for (const l of langs) {
+    const lower = l?.toLowerCase() ?? ''
+    const hit = OFFERED.find((code) => lower.startsWith(code))
+    if (hit) return hit
   }
   return 'en'
 }
@@ -37,7 +78,7 @@ function setGoogtransCookie(lang: LangCode) {
   const host = window.location.hostname
   // English = restore original, so clear the cookie variants.
   const expire = lang === 'en' ? 'expires=Thu, 01 Jan 1970 00:00:00 GMT;' : ''
-  const value = lang === 'en' ? '' : '/en/es'
+  const value = lang === 'en' ? '' : `/en/${lang}`
   const variants = [
     `googtrans=${value};${expire}path=/;`,
     `googtrans=${value};${expire}path=/;domain=${host};`,
@@ -58,29 +99,64 @@ function applyToWidget(lang: LangCode, attempt = 0) {
 
 export default function TranslateControl() {
   const [current, setCurrent] = useState<LangCode>('en')
+  // es is known-supported; the effect refines this to what the widget offers
+  // (adds Navajo if available, etc.).
+  const [available, setAvailable] = useState<LangCode[]>(['en', 'es'])
   const [open, setOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Load the Google Translate script once and mount its (hidden) widget.
+  // Load the Google Translate script, mount its hidden widget, and resolve the
+  // initial language (saved choice → cookie → browser default).
   useEffect(() => {
-    setCurrent(readGoogtransCookie())
+    const saved = readSavedChoice()
+    const cookieLang = readGoogtransCookie()
+    const resolved = saved ?? (cookieLang !== 'en' ? cookieLang : browserDefault())
+    setCurrent(resolved)
 
-    if (document.getElementById(SCRIPT_ID)) return
+    if (!document.getElementById(SCRIPT_ID)) {
+      window.googleTranslateElementInit = () => {
+        if (!window.google?.translate) return
+        new window.google.translate.TranslateElement(
+          { pageLanguage: 'en', includedLanguages: `en,${OFFERED.join(',')}`, autoDisplay: false },
+          'google_translate_element'
+        )
+      }
 
-    window.googleTranslateElementInit = () => {
-      if (!window.google?.translate) return
-      new window.google.translate.TranslateElement(
-        { pageLanguage: 'en', includedLanguages: 'en,es', autoDisplay: false },
-        'google_translate_element'
-      )
+      const script = document.createElement('script')
+      script.id = SCRIPT_ID
+      script.src =
+        'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'
+      script.async = true
+      document.body.appendChild(script)
     }
 
-    const script = document.createElement('script')
-    script.id = SCRIPT_ID
-    script.src =
-      'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'
-    script.async = true
-    document.body.appendChild(script)
+    // Auto-apply the resolved language when Google hasn't already translated to
+    // it (covers first-visit browser-based auto-switch). No saveChoice here —
+    // only an explicit pick should persist as the user's preference.
+    if (resolved !== 'en' && cookieLang !== resolved) {
+      setGoogtransCookie(resolved)
+      applyToWidget(resolved)
+    }
+  }, [])
+
+  // Once the widget's <select> exists, keep only the languages it actually
+  // offers (English is always available as the page's original language).
+  useEffect(() => {
+    let tries = 0
+    const id = window.setInterval(() => {
+      const select = document.querySelector<HTMLSelectElement>('select.goog-te-combo')
+      if (select) {
+        const offered = new Set<LangCode>(['en'])
+        for (const opt of Array.from(select.options)) {
+          if (opt.value && isLangCode(opt.value)) offered.add(opt.value)
+        }
+        setAvailable(LANGUAGES.map((l) => l.code).filter((c) => offered.has(c)))
+        window.clearInterval(id)
+      } else if (++tries > 30) {
+        window.clearInterval(id)
+      }
+    }, 200)
+    return () => window.clearInterval(id)
   }, [])
 
   // Close the popover on outside click or Escape.
@@ -103,6 +179,7 @@ export default function TranslateControl() {
   function choose(lang: LangCode) {
     setOpen(false)
     if (lang === current) return
+    saveChoice(lang) // explicit choice persists and wins over auto-detection
     setGoogtransCookie(lang)
     setCurrent(lang)
     if (lang === 'en') {
@@ -114,6 +191,7 @@ export default function TranslateControl() {
   }
 
   const currentLang = LANGUAGES.find((l) => l.code === current) ?? LANGUAGES[0]
+  const visibleLanguages = LANGUAGES.filter((l) => available.includes(l.code))
 
   return (
     <div ref={containerRef} className="relative">
@@ -147,7 +225,7 @@ export default function TranslateControl() {
           <p className="px-3 pt-2.5 pb-1.5 font-display text-[0.65rem] font-semibold uppercase tracking-poster text-cc-stone">
             Translate this page
           </p>
-          {LANGUAGES.map((lang) => (
+          {visibleLanguages.map((lang) => (
             <button
               key={lang.code}
               type="button"
