@@ -112,7 +112,7 @@ export default function About() {
               </p>
               <p className="font-body text-white/70 text-base md:text-lg leading-relaxed">
                 Confluence Colorado builds those relationships — through youth employment, watershed
-                restoration, urban agriculture, outdoor experiences, and civic engagement — so that
+                restoration, urban agriculture, outdoor experiences, and community engagement — so that
                 the communities most affected by environmental injustice become the leaders of
                 environmental stewardship.
               </p>

@@ -68,7 +68,7 @@ const GOALS = [
     body: 'From the Lorraine Granado Community Park to public lands across the Front Range, we\'re working toward 500 acres under active youth stewardship — connected, cared for, and loved.',
   },
   {
-    area: 'Civic Engagement',
+    area: 'Community Engagement',
     color: '#2C3E50',
     accentColor: '#009dd6',
     headline: 'Youth at every table',

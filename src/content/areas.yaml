@@ -27,9 +27,9 @@
   icon: binoculars
 
 - slug: civic-engagement
-  name: Civic Engagement
-  shortName: Civic
-  description: Community-led decision-making, advocacy, and place-based stewardship.
+  name: Community Engagement
+  shortName: Community
+  description: Community-led decision-making, organizing, and place-based stewardship.
   colorToken: burnt-copper
   icon: people
 
