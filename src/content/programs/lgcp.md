@@ -27,7 +27,7 @@ leadStaff:
 
 partners:
   - Cross Community Coalition
-  - Wright Adventures Organization
+  - Wright Adventures
   # TODO: confirm the rest of the steering committee orgs
 
 targets: []   # TODO: capture metrics — survey completions, restoration acreage, events held
@@ -62,6 +62,8 @@ Today, Lorraine Granado Community Park has fallen into disrepair, but Confluence
 The Steering Committee meets monthly, engaging residents who are eager to see the park brought back to life. Early successes, such as the installation of a new shade cover, demonstrate the committee's commitment and capacity to create lasting, positive change in the neighborhood.
 
 ## About Lorraine Granado
+
+![Lorraine Granado at Swansea Park, 2016](/programs/lgcp/lorraine-granado.jpg)
 
 Lorraine Granado (April 16, 1948 – December 8, 2019) was an American environmental, peace, and social justice activist whose decades of work in North Denver — particularly in Swansea — left a lasting legacy of community organizing and accountability.
 

@@ -7,7 +7,8 @@
     { "source": "/programs/watershed", "destination": "/focus-areas/watershed-restoration", "permanent": true },
     { "source": "/programs/mo-betta", "destination": "/focus-areas/public-health-urban-agriculture", "permanent": true },
     { "source": "/programs/recreation", "destination": "/focus-areas/outdoor-recreation-stream", "permanent": true },
-    { "source": "/programs/cultural", "destination": "/focus-areas/cultural-programs", "permanent": true },
+    { "source": "/programs/cultural", "destination": "/focus-areas/civic-engagement", "permanent": true },
+    { "source": "/focus-areas/cultural-programs", "destination": "/focus-areas/civic-engagement", "permanent": true },
     { "source": "/programs/civic", "destination": "/focus-areas/civic-engagement", "permanent": true }
   ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]

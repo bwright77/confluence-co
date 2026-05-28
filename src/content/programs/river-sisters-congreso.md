@@ -9,9 +9,8 @@ startDate: "2025-01-01"  # TODO: confirm coalition founding / Confluence partner
 endDate: null            # ongoing
 featured: true
 
-primaryArea: cultural-programs
+primaryArea: civic-engagement
 secondaryAreas:
-  - civic-engagement
   - watershed-restoration
 
 location:

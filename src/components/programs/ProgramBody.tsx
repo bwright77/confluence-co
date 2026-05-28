@@ -53,6 +53,21 @@ export default function ProgramBody({ body }: ProgramBodyProps) {
               {...props}
             />
           ),
+          img: ({ node: _node, alt, ...props }) => (
+            <figure className="my-6">
+              <img
+                alt={alt ?? ''}
+                loading="lazy"
+                className="block w-full rounded-lg border border-cc-stone/15 shadow-sm"
+                {...props}
+              />
+              {alt && (
+                <figcaption className="mt-2 font-body text-xs text-cc-stone">
+                  {alt}
+                </figcaption>
+              )}
+            </figure>
+          ),
         }}
       >
         {body}

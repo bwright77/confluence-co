@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom'
 import ccStacked from '../../CC-Stacked.svg'
 
-const programLinks = [
-  { label: 'All Programs', href: '/programs' },
-  { label: 'Youth Pathways', href: '/focus-areas/youth-pathways' },
-  { label: 'Watershed Restoration', href: '/focus-areas/watershed-restoration' },
-  { label: 'Natural Resource Conservation', href: '/focus-areas/natural-resource-conservation' },
-  { label: 'Civic & Community Engagement', href: '/focus-areas/civic-engagement' },
-  { label: 'Outdoor Recreation & STREAM', href: '/focus-areas/outdoor-recreation-stream' },
-  { label: 'Cultural Programs', href: '/focus-areas/cultural-programs' },
+import { programs as activePrograms } from '../data/programs'
+
+const projectLinks = [
+  { label: 'All Projects', href: '/programs' },
+  ...activePrograms
+    .filter((p) => p.status === 'active')
+    .map((p) => ({ label: p.shortName, href: `/programs/${p.slug}` })),
 ]
 
 const orgLinks = [
@@ -43,13 +42,13 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Programs links */}
+          {/* Projects links */}
           <div>
             <h3 className="font-display font-bold text-sm uppercase tracking-poster text-cc-navy mb-4">
-              Programs
+              Projects
             </h3>
             <ul className="space-y-2">
-              {programLinks.map((link) => (
+              {projectLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
@@ -129,31 +128,6 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-
-            {/* Newsletter signup */}
-            <form onSubmit={(e) => e.preventDefault()} aria-label="Newsletter signup">
-              <label
-                htmlFor="footer-email"
-                className="block font-display font-semibold text-xs uppercase tracking-display text-cc-navy/60 mb-2"
-              >
-                Stay in the loop
-              </label>
-              <div className="flex gap-2">
-                <input
-                  id="footer-email"
-                  type="email"
-                  placeholder="your@email.com"
-                  className="flex-1 bg-white border border-cc-navy/20 rounded px-3 py-2 font-body text-sm text-cc-navy placeholder:text-cc-navy/35 focus:outline-none focus:border-cc-sky"
-                  autoComplete="email"
-                />
-                <button
-                  type="submit"
-                  className="bg-cc-orange text-white font-display font-bold text-xs uppercase tracking-display px-4 py-2 rounded hover:bg-cc-navy transition-colors"
-                >
-                  Join
-                </button>
-              </div>
-            </form>
           </div>
 
         </div>

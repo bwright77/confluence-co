@@ -22,7 +22,7 @@ export default function LatestNews({ limit = 3 }: LatestNewsProps) {
               id="latest-news-heading"
               className="heading-display mt-2 text-3xl text-cc-navy md:text-4xl"
             >
-              Latest from the river
+              Latest from the Confluence
             </h2>
           </div>
           <div className="flex flex-wrap items-center gap-3 font-display text-xs font-semibold uppercase tracking-display">

@@ -39,10 +39,3 @@
   description: Urban farming, food access, and community health in partnership with Mo Betta Green Marketplace.
   colorToken: burnt-copper
   icon: leaf
-
-- slug: cultural-programs
-  name: Cultural Programs
-  shortName: Cultural
-  description: Programs honoring Indigenous, Hispanic, and Black cultural heritage in conservation and recreation.
-  colorToken: deep-teal
-  icon: circle

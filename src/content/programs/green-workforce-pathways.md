@@ -13,7 +13,6 @@ primaryArea: youth-pathways
 secondaryAreas:
   - natural-resource-conservation
   - civic-engagement
-  - cultural-programs
 
 funder:
   name: Denver Office of Climate Action, Sustainability, and Resiliency
