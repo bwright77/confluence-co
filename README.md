@@ -185,14 +185,14 @@ locally, copy `.env.example` → `.env.local` with Stripe **test** keys and use 
 The following content is placeholder and needs to be replaced before launch:
 
 - [x] Verbatim mission statement (approved by Shane 2026-05-29 — current copy stands)
-- [ ] Vision & values statements
-- [ ] Org history / key milestones (2022–present)
+- [x] Vision & values statements — approved by Shane 2026-05-29 (current copy stands)
+- [x] Org history / key milestones (2022–present) — approved by Shane 2026-05-29 (current copy stands)
 - [x] Real impact metrics / outcomes data (ImpactBar numbers) — confirmed by Shane 2026-05-29
 - [x] Verbatim testimonial quotes (Beverly Grant, Braylen Aldridge, Cam Juarez) — approved by Shane 2026-05-29
 - [x] Team bios + photos (staff, board, program leads) — approved by Shane 2026-05-29
 - [x] EIN (footer shows 88-1757678)
-- [ ] Partner logos
-- [ ] Project copy review for all projects (drafted in `src/content/programs/`)
+- [x] Partner logos — deferred to post-launch (Shane 2026-05-29); not a launch blocker
+- [x] Project copy review for all projects (drafted in `src/content/programs/`) — confirmed for now by Shane 2026-05-29
 - [x] Donation impact framing copy — provisional copy in [`src/lib/donate.ts`](src/lib/donate.ts) is **good to go for launch** (Shane 2026-05-29). Revisiting preset tiers + refund-policy wording down the road (post-launch refinement, not a blocker).
 
 ## Donate Launch Checklist (Stripe dashboard — Ben)
