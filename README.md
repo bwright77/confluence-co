@@ -184,11 +184,11 @@ locally, copy `.env.example` → `.env.local` with Stripe **test** keys and use 
 
 The following content is placeholder and needs to be replaced before launch:
 
-- [ ] Verbatim mission statement (currently placeholder in hero + footer)
+- [x] Verbatim mission statement (approved by Shane 2026-05-29 — current copy stands)
 - [ ] Vision & values statements
 - [ ] Org history / key milestones (2022–present)
 - [ ] Real impact metrics / outcomes data (ImpactBar numbers)
-- [ ] Verbatim testimonial quotes (Beverly Grant, Braylen Aldridge, Cam Juarez)
+- [x] Verbatim testimonial quotes (Beverly Grant, Braylen Aldridge, Cam Juarez) — approved by Shane 2026-05-29
 - [ ] Team bios + photos (staff, board, program leads)
 - [x] EIN (footer shows 88-1757678)
 - [ ] Partner logos

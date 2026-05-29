@@ -5,7 +5,7 @@ shortName: River Sisters
 tagline: A coalition of Indigenous, Chicano/Mexicano, and community leaders protecting and honoring the South Platte River — Shane Wright and Vivian Cervantes are Partner Members.
 
 status: active
-startDate: "2025-01-01"  # TODO: confirm coalition founding / Confluence partnership start with Shane
+startDate: "2019-01-01"  # Congreso founded 2019; Shane Wright present at the founding
 endDate: null            # ongoing
 featured: true
 
@@ -46,7 +46,7 @@ seo:
 
 ## About the Congreso
 
-The **River Sisters Congreso** is a coalition of Indigenous, Chicano/Mexicano, and community leaders dedicated to protecting and honoring the South Platte River. Their mission is to restore balance, health, and respect for the river as a living relative through cultural preservation, environmental justice, policy advocacy, and ceremonial practice. The work builds bridges between ancestral wisdom and modern environmental stewardship — advancing a vision of a just and sacred future where culture, ecology, and community well-being flow together.
+The **River Sisters Congreso** is a coalition of Indigenous, Chicano/Mexicano, and community leaders dedicated to protecting and honoring the South Platte River. Founded in 2019 — with Confluence Colorado's Shane Wright present at its founding — the coalition began its work that same year. Their mission is to restore balance, health, and respect for the river as a living relative through cultural preservation, environmental justice, policy advocacy, and ceremonial practice. The work builds bridges between ancestral wisdom and modern environmental stewardship — advancing a vision of a just and sacred future where culture, ecology, and community well-being flow together.
 
 Confluence Colorado's Shane Wright and Vivian Cervantes are Partner Members of the Congreso, contributing on-the-ground program experience and watershed-restoration work to the coalition's larger cultural and policy initiatives.
 

@@ -5,8 +5,8 @@ shortName: Green Workforce
 tagline: Paid green career pathways for Denver youth ages 16–24, in partnership with Denver CASR.
 
 status: active
-startDate: "2026-04-01"  # TODO: confirm actual contract start with Shane
-endDate: "2027-03-31"    # TODO: confirm; assumed 12-month term
+startDate: "2026-04-01"  # CASR funding term: April 2026 – March 2027
+endDate: "2027-03-31"    # program runs year-round
 featured: true
 
 areas:
@@ -62,7 +62,7 @@ seo:
 
 ## What this program does
 
-Green Workforce Pathways creates a dedicated green-workforce development phase within Confluence Colorado's broader Pathways model. Up to 14 youth ages 16–24 are employed and compensated for hands-on training in conservation and natural resource work, with up to 1,400 total paid work hours over the program term.
+Green Workforce Pathways creates a dedicated green-workforce development phase within Confluence Colorado's broader Pathways model. The program runs year-round; the current cycle is funded by Denver CASR from April 2026 through March 2027. Up to 14 youth ages 16–24 are employed and compensated for hands-on training in conservation and natural resource work, with up to 1,400 total paid work hours over the program term.
 
 Participants engage in:
 
