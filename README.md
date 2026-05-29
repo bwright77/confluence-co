@@ -208,6 +208,11 @@ test mode first, then repeat the per-mode items (receipts) in live mode.
 - [ ] Checkout/receipt branding — logo, brand color `#004667`, support email
 - [ ] Bank account connected + payout schedule set
 - [ ] (Recommended) swap `STRIPE_SECRET_KEY` for a restricted key
+- [x] Radar fraud rules — enabled the free built-in defaults (CVC-fail →
+  Block, AVS/postal-fail → Block, Request 3DS if supported). Custom rules +
+  the review queue need Radar for Fraud Teams ($0.07/txn) — skipped, not worth
+  it at our volume. Built-in card-testing rate limiting is automatic on all
+  tiers.
 
 ## Privacy & Compliance
 
