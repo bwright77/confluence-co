@@ -200,14 +200,15 @@ The following content is placeholder and needs to be replaced before launch:
 The donate flow is built; these are dashboard-only config tasks (no code) that
 Ben owns and that gate the donate **launch**, not the build. Test in Stripe
 test mode first, then repeat the per-mode items (receipts) in live mode.
+**All complete as of 2026-05-29 — the donate flow is live-ready.**
 
-- [ ] `STRIPE_SECRET_KEY` set to a **live** key in Vercel (Production)
-- [ ] Nonprofit rate approved (2.2% + 30¢) — keeps the fee-cover figure accurate
-- [ ] Automatic email receipts on (per-mode), with the tax-deductibility statement
-- [ ] Statement descriptor set (`CONFLUENCE COLO`)
-- [ ] Checkout/receipt branding — logo, brand color `#004667`, support email
-- [ ] Bank account connected + payout schedule set
-- [ ] (Recommended) swap `STRIPE_SECRET_KEY` for a restricted key
+- [x] `STRIPE_SECRET_KEY` set to a **live** key in Vercel (Production)
+- [x] Nonprofit rate approved (2.2% + 30¢) — keeps the fee-cover figure accurate
+- [x] Automatic email receipts on (per-mode), with the tax-deductibility statement
+- [x] Statement descriptor set (`CONFLUENCE COLO`)
+- [x] Checkout/receipt branding — logo, brand color `#004667`, support email
+- [x] Bank account connected + payout schedule set
+- [x] (Recommended) swap `STRIPE_SECRET_KEY` for a restricted key
 - [x] Radar fraud rules — enabled the free built-in defaults (CVC-fail →
   Block, AVS/postal-fail → Block, Request 3DS if supported). Custom rules +
   the review queue need Radar for Fraud Teams ($0.07/txn) — skipped, not worth
