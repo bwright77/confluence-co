@@ -51,7 +51,7 @@ export default function ImpactBar() {
     >
       <div className="container-site">
         <p className="text-center font-display font-semibold uppercase tracking-poster text-cc-sky text-xs md:text-sm mb-10 md:mb-12">
-          Our impact over the past 12 months
+          Our impact
         </p>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-4 divide-y-0 divide-white/10 lg:divide-y-0 lg:divide-x">
