@@ -31,7 +31,7 @@ function Stat({ value, suffix, label, trigger, duration }: StatProps) {
 /**
  * Dark-background band with 4 animated count-up statistics.
  * Triggers count-up animation when scrolled into view.
- * TODO: Replace placeholder values with real impact data from Shane.
+ * Values confirmed by Shane 2026-05-29. The one river to restore is the South Platte.
  */
 export default function ImpactBar() {
   const [ref, inView] = useInView<HTMLElement>({ threshold: 0.3 })

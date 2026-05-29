@@ -187,7 +187,7 @@ The following content is placeholder and needs to be replaced before launch:
 - [x] Verbatim mission statement (approved by Shane 2026-05-29 — current copy stands)
 - [ ] Vision & values statements
 - [ ] Org history / key milestones (2022–present)
-- [ ] Real impact metrics / outcomes data (ImpactBar numbers)
+- [x] Real impact metrics / outcomes data (ImpactBar numbers) — confirmed by Shane 2026-05-29
 - [x] Verbatim testimonial quotes (Beverly Grant, Braylen Aldridge, Cam Juarez) — approved by Shane 2026-05-29
 - [x] Team bios + photos (staff, board, program leads) — approved by Shane 2026-05-29
 - [x] EIN (footer shows 88-1757678)
