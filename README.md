@@ -17,7 +17,7 @@ Website redesign for [Confluence Colorado](https://confluenceco.org), a Denver-b
 | Search | Client-side index over projects, program areas, news, and key pages |
 | Translation | Google Website Translator widget (EN/ES) behind a custom control |
 | Hosting | Vercel (auto-deploy from `main`) |
-| Analytics | Plausible (cookieless, privacy-first) + Vercel Analytics (`@vercel/analytics/react`, mounted at the app root) |
+| Analytics | Plausible (cookieless, privacy-first) + Vercel Analytics (`@vercel/analytics/react`, mounted at the app root; enabled in the Vercel dashboard) |
 | SEO / Social | Open Graph + Twitter Card meta in `index.html`; branded share image at `public/og-image.png` |
 | Linting | ESLint (flat config) with `eslint-plugin-jsx-a11y` — accessibility rules over `src` |
 | CI/CD | GitHub Actions — lint + type-check + build on every push/PR |
