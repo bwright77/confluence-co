@@ -1,10 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { MagnifyingGlass } from '@phosphor-icons/react'
 import TranslateControl from './TranslateControl'
 import SearchModal from './SearchModal'
 
+export const OPEN_SEARCH_EVENT = 'cc:open-search'
+
 export default function UtilityBar() {
   const [searchOpen, setSearchOpen] = useState(false)
+
+  // Let any page open the search overlay (e.g. the 404 page) by dispatching
+  // a window event, since the modal's open state lives here.
+  useEffect(() => {
+    const open = () => setSearchOpen(true)
+    window.addEventListener(OPEN_SEARCH_EVENT, open)
+    return () => window.removeEventListener(OPEN_SEARCH_EVENT, open)
+  }, [])
 
   return (
     <>

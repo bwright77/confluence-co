@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import Layout from './layouts/Layout'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -11,6 +12,7 @@ import GetInvolved from './pages/GetInvolved'
 import Donate from './pages/Donate'
 import DonateThankYou from './pages/DonateThankYou'
 import News from './pages/News'
+import Privacy from './pages/Privacy'
 import NotFound from './pages/NotFound'
 import { programAreaRedirects } from './routes/redirects'
 
@@ -61,9 +63,11 @@ export default function App() {
           <Route path="/donate" element={<Donate />} />
           <Route path="/donate/thank-you" element={<DonateThankYou />} />
           <Route path="/news" element={<News />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+      <Analytics />
     </BrowserRouter>
   )
 }

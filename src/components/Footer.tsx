@@ -152,7 +152,10 @@ export default function Footer() {
         <div className="container-site py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-body text-xs text-cc-navy/75">
             © 2026 Confluence Colorado. All rights reserved.{' '}
-            EIN 88-1757678 · 501(c)(3) nonprofit · Your donation may be tax-deductible.
+            EIN 88-1757678 · 501(c)(3) nonprofit · Your donation may be tax-deductible.{' '}
+            <Link to="/privacy" className="underline underline-offset-2 hover:text-cc-navy">
+              Privacy Policy
+            </Link>
           </p>
           <p className="font-body text-xs text-cc-navy/75 italic">
             the confluence of people and place

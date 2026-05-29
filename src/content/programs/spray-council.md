@@ -5,7 +5,7 @@ shortName: SPRAY Council
 tagline: A youth-to-youth plan for a healthier South Platte River, written by the South Platte River Advisory Youth Council.
 
 status: active
-startDate: "2026-01-01"  # TODO: confirm plan-update start date
+startDate: "2026-01-01"
 endDate: null            # ongoing
 featured: true
 
@@ -21,11 +21,10 @@ location:
 
 leadStaff:
   - shane-wright
-  # TODO: add SPRAY Council youth advisor / coordinator slugs
 
-partners: []  # TODO: list partners involved in plan implementation
+partners: []
 
-targets: []   # TODO: capture metric targets from the plan's bullet points
+targets: []
 
 cta:
   primary:
@@ -55,8 +54,6 @@ In 2022, the SPRAY Council published *Our River, Our Voices, Our Future: A Youth
 ## What we're doing now
 
 Confluence Colorado is working with the SPRAY Council to update the plan and implement its action priorities.
-
-<!-- TODO: Add the bullet-point goals from the current plan and the implementation status of each. Source: https://www.magcloud.com/user/spraycouncil -->
 
 ## Why a youth council
 
