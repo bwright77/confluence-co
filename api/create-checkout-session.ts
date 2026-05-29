@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import Stripe from 'stripe'
 import { chargeCents, isValidAmount, isValidFrequency } from '../src/lib/donate'
+import { rejectIfBlocked } from './_guard'
 
 // Project (a.k.a. "program" in code) slugs → display titles. Hard-coded here
 // because the canonical source, src/data/programs.ts, relies on Vite's
@@ -28,6 +29,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.setHeader('Allow', 'POST')
     return res.status(405).json({ error: 'Method not allowed' })
   }
+
+  if (rejectIfBlocked(req, res)) return
 
   const body = (req.body ?? {}) as {
     amount?: unknown
