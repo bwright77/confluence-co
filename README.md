@@ -189,11 +189,11 @@ The following content is placeholder and needs to be replaced before launch:
 - [ ] Org history / key milestones (2022–present)
 - [ ] Real impact metrics / outcomes data (ImpactBar numbers)
 - [x] Verbatim testimonial quotes (Beverly Grant, Braylen Aldridge, Cam Juarez) — approved by Shane 2026-05-29
-- [ ] Team bios + photos (staff, board, program leads)
+- [x] Team bios + photos (staff, board, program leads) — approved by Shane 2026-05-29
 - [x] EIN (footer shows 88-1757678)
 - [ ] Partner logos
 - [ ] Project copy review for all projects (drafted in `src/content/programs/`)
-- [ ] Donation impact framing copy (provisional copy lives in [`src/lib/donate.ts`](src/lib/donate.ts)); confirm preset tiers + refund-policy wording
+- [x] Donation impact framing copy — provisional copy in [`src/lib/donate.ts`](src/lib/donate.ts) is **good to go for launch** (Shane 2026-05-29). Revisiting preset tiers + refund-policy wording down the road (post-launch refinement, not a blocker).
 
 ## Donate Launch Checklist (Stripe dashboard — Ben)
 
