@@ -17,7 +17,8 @@ Website redesign for [Confluence Colorado](https://confluenceco.org), a Denver-b
 | Search | Client-side index over projects, program areas, news, and key pages |
 | Translation | Google Website Translator widget (EN/ES) behind a custom control |
 | Hosting | Vercel (auto-deploy from `main`) |
-| Analytics | Plausible (cookieless, privacy-first) |
+| Analytics | Plausible (cookieless, privacy-first) + Vercel Analytics (`@vercel/analytics/react`, mounted at the app root) |
+| SEO / Social | Open Graph + Twitter Card meta in `index.html`; branded share image at `public/og-image.png` |
 | Linting | ESLint (flat config) with `eslint-plugin-jsx-a11y` — accessibility rules over `src` |
 | CI/CD | GitHub Actions — lint + type-check + build on every push/PR |
 | Payments | Stripe Checkout (hosted redirect via Vercel serverless `/api/*`) — donate flow built (Phase 4): one-time + monthly, optional fee-cover, per-project attribution |
@@ -144,7 +145,8 @@ src/
 │   ├── GetInvolved.tsx                        # audience cards → mailto Shane
 │   ├── Donate.tsx / DonateThankYou.tsx        # /donate + /donate/thank-you (Stripe Checkout)
 │   ├── News.tsx
-│   └── NotFound.tsx
+│   ├── Privacy.tsx                            # /privacy (privacy policy — CCPA/CPA)
+│   └── NotFound.tsx                           # friendly 404 — home / search / donate
 ├── lib/donate.ts         # Shared donate constants + fee math (also imported by the serverless API — keep Vite-free)
 ├── routes/redirects.ts   # Legacy /programs/* + /focus-areas/* → /projects /program-areas
 ├── layouts/Layout.tsx    # Nav + Footer wrapper, scroll-to-top on route change
@@ -175,7 +177,7 @@ locally, copy `.env.example` → `.env.local` with Stripe **test** keys and use 
 | 4 — Donate & Get Involved | Get Involved reach-out hub (audience cards → mailto) + Stripe donate flow; Mailchimp pending | Get Involved + Stripe donate flow done; email (Mailchimp) pending |
 | 5 — Impact & News | Impact goals page + News timeline | Complete (awaiting real metrics) |
 | — Site utilities | Search overlay + EN/ES Google Translate in a top utility bar | Complete |
-| 6 — Polish & Launch | A11y audit, SEO, Lighthouse, DNS cutover | In progress — A11y AA pass done; SEO/Lighthouse/DNS pending |
+| 6 — Polish & Launch | A11y audit, SEO, Lighthouse, DNS cutover | In progress — A11y AA pass + privacy policy + social/OG share tags done; Lighthouse/DNS pending |
 | 7 — Post-Launch | Headless CMS, events calendar | Future |
 
 ## Content Pending from Shane Wright
@@ -206,6 +208,36 @@ test mode first, then repeat the per-mode items (receipts) in live mode.
 - [ ] Checkout/receipt branding — logo, brand color `#004667`, support email
 - [ ] Bank account connected + payout schedule set
 - [ ] (Recommended) swap `STRIPE_SECRET_KEY` for a restricted key
+
+## Privacy & Compliance
+
+The site collects personal information in two places — donations (via Stripe)
+and, once wired, email sign-ups (via Mailchimp) — which brings it under
+California's CCPA/CPRA and Colorado's CPA. A privacy policy is published at
+`/privacy` ([`src/pages/Privacy.tsx`](src/pages/Privacy.tsx)) and linked from the
+footer.
+
+- **Coverage** — standard nonprofit boilerplate: what we collect, how it's used,
+  Stripe as processor (we never see or store full card data), "we do not sell
+  your data," CCPA/CPA rights (know / access / correct / delete / opt out of
+  sale), data retention, children's privacy, and contact info. Bump the
+  `LAST_UPDATED` constant in the page whenever the policy changes.
+- **No cookie banner needed** — both analytics tools are privacy-respecting:
+  Plausible is cookieless and Vercel Analytics sets no cross-site tracking
+  cookies. The site sets no advertising/tracking cookies.
+- **Before launch** — the policy is boilerplate; have counsel skim it, and
+  confirm the Stripe receipt carries the tax-deductibility statement (see the
+  Donate checklist above).
+
+## SEO & Social sharing
+
+- **Meta** — title, description, Open Graph, and Twitter Card tags live in
+  [`index.html`](index.html). Because the site is a client-rendered SPA, every
+  route shares the homepage's card; per-page cards would require
+  prerendering/SSR.
+- **Share image** — `public/og-image.png` (1200×630 @2×) is a branded logo +
+  tagline card that unfurls when a link is pasted into Slack, iMessage,
+  Facebook, LinkedIn, X, etc.
 
 ## Accessibility
 
