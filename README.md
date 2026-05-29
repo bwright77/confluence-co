@@ -47,6 +47,28 @@ CI runs on every push and PR (`npm run lint` then `npm run build`):
 - `tsc --noEmit` — type-check
 - `vite build` — production build validation
 
+## DNS Cutover (next — gates public launch)
+
+The site is live on Vercel but `confluenceco.org` DNS still points at the old
+WordPress site. To cut over, set these records at the domain registrar (the
+values Vercel currently recommends after its IP-range expansion):
+
+| Type | Name | Value |
+|---|---|---|
+| `A` | `@` | `216.150.1.1` |
+| `CNAME` | `www` | `71066fdf5b7e439a.vercel-dns-016.com.` |
+
+Notes:
+- These are Vercel's **new recommended** records. The old ones
+  (`76.76.21.21` for the apex, `cname.vercel-dns.com` for `www`) still work,
+  but use the new values.
+- Remove the old WordPress A/CNAME records for `@` and `www` so they don't
+  conflict.
+- `www.confluenceco.org` → apex is handled by the existing redirect config;
+  the CNAME just needs to resolve to Vercel.
+- Allow time for DNS/TLS propagation; Vercel issues the cert automatically once
+  the records resolve. Verify HTTPS + the `www`→apex redirect after cutover.
+
 ## Brand
 
 **Colors** (derived from the official logo):
