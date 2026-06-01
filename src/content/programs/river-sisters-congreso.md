@@ -20,6 +20,8 @@ location:
 
 leadStaff:
   - shane-wright
+
+communityLeaders:
   - vivian-cervantes
 
 partners:

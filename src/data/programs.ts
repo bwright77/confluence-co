@@ -96,6 +96,7 @@ function validateProgram(
     funder: data.funder as Program['funder'],
     location: data.location as Program['location'],
     leadStaff: data.leadStaff as string[] | undefined,
+    communityLeaders: data.communityLeaders as string[] | undefined,
     partners: data.partners as string[] | undefined,
     targets: data.targets as Program['targets'],
     cta: data.cta as Program['cta'],

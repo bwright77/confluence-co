@@ -22,7 +22,7 @@ location:
     - Elyria
   watershed: South Platte
 
-leadStaff:
+communityLeaders:
   - vivian-cervantes
 
 partners:
@@ -72,7 +72,7 @@ Lorraine Granado (April 16, 1948 – December 8, 2019) was an American environme
 
 > In 15 years I want to come back to my neighborhood park and see it being used by children and residents to its full potential.
 >
-> — **Vivian Cervantes**, Program Director
+> — **Vivian Cervantes**, Community Leader
 
 ## Take the survey
 

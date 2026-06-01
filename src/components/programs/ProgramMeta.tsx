@@ -32,6 +32,7 @@ export default function ProgramMeta({ program }: ProgramMetaProps) {
   const hasFunder = !!program.funder
   const hasLocation = !!program.location && (program.location.city || program.location.watershed)
   const hasLeadStaff = !!program.leadStaff && program.leadStaff.length > 0
+  const hasCommunityLeaders = !!program.communityLeaders && program.communityLeaders.length > 0
   const hasPartners = !!program.partners && program.partners.length > 0
   const hasTargets = !!program.targets && program.targets.length > 0
 
@@ -89,6 +90,26 @@ export default function ProgramMeta({ program }: ProgramMetaProps) {
           <MetaItem label="Lead staff">
             <div className="flex flex-wrap gap-1.5">
               {program.leadStaff!.map((slug) => (
+                <span
+                  key={slug}
+                  className="inline-flex items-center rounded-full border border-cc-stone/20 bg-cc-warm px-2.5 py-1 font-body text-xs text-cc-dark"
+                >
+                  {slug
+                    .split('-')
+                    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+                    .join(' ')}
+                </span>
+              ))}
+            </div>
+          </MetaItem>
+        )}
+
+        {hasCommunityLeaders && (
+          <MetaItem
+            label={program.communityLeaders!.length > 1 ? 'Community leaders' : 'Community leader'}
+          >
+            <div className="flex flex-wrap gap-1.5">
+              {program.communityLeaders!.map((slug) => (
                 <span
                   key={slug}
                   className="inline-flex items-center rounded-full border border-cc-stone/20 bg-cc-warm px-2.5 py-1 font-body text-xs text-cc-dark"
