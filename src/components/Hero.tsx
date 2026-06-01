@@ -15,7 +15,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative h-dvh min-h-[600px] overflow-hidden"
+      className="relative h-dvh min-h-[680px] overflow-hidden"
       aria-labelledby="hero-heading"
     >
 
@@ -60,9 +60,11 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* ── TEXT — anchored to bottom of frame ── */}
+      {/* ── TEXT — held low (in the dark gradient) but kept clear of the fixed
+            nav. pt reserves the nav's height so the block can't slide under it
+            on short viewports; justify-end keeps it anchored toward the bottom. ── */}
       <div
-        className="absolute inset-x-0 bottom-0 flex flex-col items-center pb-20 md:pb-28 px-6 z-10"
+        className="absolute inset-0 flex flex-col items-center justify-end pt-28 md:pt-32 pb-10 md:pb-16 px-6 z-10"
       >
         <motion.div
           className="max-w-4xl mx-auto text-center w-full"
@@ -70,26 +72,26 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
         >
-          <p className="font-display font-semibold text-xs md:text-sm uppercase tracking-poster text-cc-sky mb-4 md:mb-5">
+          <p className="font-display font-semibold text-xs md:text-sm uppercase tracking-poster text-cc-sky mb-2 md:mb-4">
             Denver, Colorado &nbsp;·&nbsp; Est. 2022
           </p>
 
           <h1
             id="hero-heading"
-            className="font-display font-bold uppercase text-white leading-none mb-5 md:mb-6"
-            style={{ fontSize: 'clamp(2.6rem, 8vw, 6rem)', letterSpacing: '0.07em' }}
+            className="font-display font-bold uppercase text-white leading-none mb-3 md:mb-5"
+            style={{ fontSize: 'clamp(2.4rem, 6.5vw, 5rem)', letterSpacing: '0.05em' }}
           >
             At the{' '}
             <span style={{ color: '#009dd6' }}>Confluence</span>
             <br />
-            <span style={{ fontSize: '0.66em', letterSpacing: '0.12em' }}>
+            <span style={{ fontSize: '0.62em', letterSpacing: '0.1em' }}>
               of People &amp; Place
             </span>
           </h1>
 
           <p
-            className="font-body text-white/80 max-w-xl mx-auto leading-relaxed mb-9 md:mb-11"
-            style={{ fontSize: 'clamp(0.95rem, 1.8vw, 1.2rem)' }}
+            className="font-body text-white/80 max-w-xl mx-auto leading-relaxed mb-6 md:mb-8"
+            style={{ fontSize: 'clamp(0.9rem, 1.6vw, 1.15rem)' }}
           >
             Connecting Denver's youth to land, water, and community
             through environmental stewardship and outdoor education.

@@ -40,6 +40,44 @@ test.describe('Impact count-up stats', () => {
   })
 })
 
+test.describe('Hero heading clears the fixed nav', () => {
+  // The hero text is anchored low in the frame; on short viewports it must not
+  // slide up under the fixed nav. Spanish makes this worse because the
+  // translated heading wraps to an extra line — so we check both.
+  const SHORT = { width: 1280, height: 700 }
+
+  async function topmostContentTop(page: import('@playwright/test').Page) {
+    return page.evaluate(() => {
+      const nav = document.querySelector('header')!.getBoundingClientRect()
+      // The tagline ("Denver, Colorado · Est. 2022") is the topmost text block.
+      const tagline = document
+        .getElementById('hero-heading')!
+        .previousElementSibling!.getBoundingClientRect()
+      return { navBottom: nav.bottom, contentTop: tagline.top }
+    })
+  }
+
+  test('does not overlap the nav on a short viewport (English)', async ({ page }) => {
+    await page.setViewportSize(SHORT)
+    await page.goto('/')
+    const { navBottom, contentTop } = await topmostContentTop(page)
+    expect(contentTop).toBeGreaterThanOrEqual(navBottom)
+  })
+
+  test('does not overlap the nav with a longer (Spanish) heading', async ({ page }) => {
+    await page.setViewportSize(SHORT)
+    await page.goto('/')
+    // Mimic Google's Spanish output: a heading that wraps to one extra line.
+    await page.evaluate(() => {
+      document.getElementById('hero-heading')!.innerHTML =
+        'En la <span style="color:#009dd6">Confluencia</span><br><span style="font-size:0.62em;letter-spacing:0.1em">de Personas y Lugar</span>'
+    })
+    await page.waitForTimeout(150)
+    const { navBottom, contentTop } = await topmostContentTop(page)
+    expect(contentTop).toBeGreaterThanOrEqual(navBottom)
+  })
+})
+
 test.describe('Google Translate banner suppression', () => {
   test('the injected banner is hidden and the body offset is reset', async ({ page }) => {
     await page.goto('/')
