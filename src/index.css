@@ -69,14 +69,26 @@
   }
 }
 
-/* Google Website Translator — suppress its injected top banner and body offset
-   so our custom translate control is the only visible UI. */
+/* Google Website Translator — suppress its injected top banner and the body
+   offset it forces, so our custom translate control is the only visible UI.
+   Google periodically renames the banner markup, so we hide the whole
+   .skiptranslate banner wrapper (current + legacy class names) rather than a
+   specific child — otherwise the banner reappears and shoves the page down
+   behind the fixed nav. The hidden #google_translate_element combo still
+   drives translation while display:none, so this does not break the feature. */
 .goog-te-banner-frame,
-.skiptranslate iframe {
+.goog-te-banner-frame.skiptranslate,
+.VIpgJd-ZVi9od-l4eHX-hSRGPd,
+body > .skiptranslate {
   display: none !important;
 }
 
-body {
+/* Neutralize the inline `top: 40px` Google sets on <body>, including once it
+   adds the translated-ltr / translated-rtl class to <html> (higher specificity
+   to beat any future variants). */
+body,
+.translated-ltr body,
+.translated-rtl body {
   top: 0 !important;
 }
 
