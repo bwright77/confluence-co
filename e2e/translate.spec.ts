@@ -92,6 +92,27 @@ test.describe('Language toggle / English restore', () => {
   })
 })
 
+test.describe('Nav dropdown labels are translatable', () => {
+  // The submenu items must exist in the DOM on load (not mounted only on open)
+  // so Google Translate translates them on its initial pass — otherwise they
+  // stay in English while the rest of the page is translated.
+  test('About submenu links are in the DOM at load, then revealed on open', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 })
+    await page.goto('/')
+
+    const teamLink = page.locator('header a[href="/about/team"]')
+    // Present in the DOM even while the dropdown is closed (hidden).
+    await expect(teamLink).toHaveCount(1)
+    await expect(teamLink).toBeHidden()
+
+    // Opening the About menu reveals it.
+    await page.getByRole('button', { name: /About/ }).click()
+    await expect(teamLink).toBeVisible()
+  })
+})
+
 test.describe('Hero heading clears the fixed nav', () => {
   // The hero text is anchored low in the frame; on short viewports it must not
   // slide up under the fixed nav. Spanish makes this worse because the

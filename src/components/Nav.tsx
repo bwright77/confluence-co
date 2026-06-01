@@ -145,8 +145,15 @@ export default function Nav() {
                     </svg>
                   </button>
 
-                  {openMenu === link.label && (
-                    <div className="absolute top-full left-0 pt-2 w-56" style={{ marginTop: '-1px' }}>
+                  {/* Always rendered (just hidden when closed) so the Google
+                      Translate widget translates the submenu labels on its
+                      initial pass — conditionally-mounted nodes get missed and
+                      show in English while the rest of the page is translated.
+                      `hidden` (display:none) also drops them from tab order. */}
+                  <div
+                    className={`absolute top-full left-0 pt-2 w-56 ${openMenu === link.label ? '' : 'hidden'}`}
+                    style={{ marginTop: '-1px' }}
+                  >
                     <div className="bg-cc-navy border border-white/10 rounded shadow-2xl overflow-hidden">
                       {link.children.map((child) => (
                         <NavLink
@@ -164,8 +171,7 @@ export default function Nav() {
                         </NavLink>
                       ))}
                     </div>
-                    </div>
-                  )}
+                  </div>
                 </div>
               ) : (
                 <NavLink
