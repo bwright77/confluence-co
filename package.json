@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint . && tsc --noEmit",
-    "lint:a11y": "eslint ."
+    "lint:a11y": "eslint .",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@playwright/test": "^1.60.0",
     "@types/js-yaml": "^4.0.9",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
