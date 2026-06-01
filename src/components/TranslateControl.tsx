@@ -20,10 +20,11 @@ declare global {
   }
 }
 
+// Only languages the Google widget actually supports. Diné Bizaad (nv) is not
+// yet offered by the widget, so it's intentionally omitted.
 const LANGUAGES = [
   { code: 'en', label: 'English', short: 'EN' },
   { code: 'es', label: 'Español', short: 'ES' },
-  { code: 'nv', label: 'Diné Bizaad', short: 'NV' },
 ] as const
 
 type LangCode = (typeof LANGUAGES)[number]['code']
