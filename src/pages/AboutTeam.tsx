@@ -2,11 +2,10 @@ import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
-// TODO: Download photos and move to src/assets/team/
 const SHANE = {
   name: 'Shane Wright',
   title: 'Executive Director',
-  photo: 'https://confluenceco.org/wp-content/uploads/2025/02/shane-216x300.png',
+  photo: '/team/shane-wright.png',
   bio: 'Shane Wright is a husband and father who lives in West Colfax, Denver, Colorado, who came of age guiding rivers and mountains in Colorado and Washington State. With a Masters in Nonprofit Management from Regis University and an undergraduate degree in Sociology from Western State College of Colorado "where champions are made out of thin air", Shane has over 17 years of experience raising money and building programs for youth, nature, and his community. He served on the Denver Parks and Recreation Advisory Board from 2012 to 2019, representing Councilwoman Robin Kneich, where he contributed to the historic designation of Red Rocks Park and Amphitheatre. When he is not working on community-based environmental projects, he loves to spend time with his wife Erin, their three boys, Aidan, Noah, and Griffin, and their dog Ruby.',
 }
 
@@ -19,37 +18,37 @@ interface BoardMember {
 const BOARD: BoardMember[] = [
   {
     name: 'Camiliano Juarez',
-    photo: 'https://confluenceco.org/wp-content/uploads/2025/02/0_26_200_200_cam_juarez-768x822.png',
+    photo: '/team/cam-juarez.png',
     bio: 'As a native of Southern Arizona, Cam grew up where the Colorado River should meet the sea. He is an experienced program coordinator with a passion for people and parks.',
   },
   {
     name: 'Dennis Chestnut',
-    photo: 'https://confluenceco.org/wp-content/uploads/2025/02/35_0_200_200_dennis_chestnut-768x695.png',
+    photo: '/team/dennis-chestnut.png',
     bio: 'Dennis is a river hero. As a retired master carpenter, educator, and executive director his dedication to youth development, community improvement, and civic duty has led to his involvement with many civic and conservation projects.',
   },
   {
     name: 'Beverly Grant',
-    photo: 'https://confluenceco.org/wp-content/uploads/2022/08/8_0_200_200_beverly_grant-768x698.jpg',
+    photo: '/team/beverly-grant.jpg',
     bio: "Founder and Director of Mo' Betta Greens Marketplace, Ms. Beverly Grant is a Denver native and social justice advocate. Beverly has been nourishing, educating, and serving the community since 2010.",
   },
   {
     name: 'Makalah Emanuel',
-    photo: 'https://confluenceco.org/wp-content/uploads/2025/02/makalah.jpeg',
+    photo: '/team/makalah-emanuel.jpeg',
     bio: 'Makalah is an entrepreneur and communications specialist, currently serving as the Media Relations Manager for the Denver Nuggets. As a youth, Makalah participated in community-based environmental work and has developed into a leader for teams serving the community.',
   },
   {
     name: 'Roy Kady',
-    photo: 'https://confluenceco.org/wp-content/uploads/2025/02/197_213_200_199.55752212389_roy-kady-768x1158.webp',
+    photo: '/team/roy-kady.webp',
     bio: 'Roy is an established sheep herder and weaver on the Diné Reservation in Northern Arizona. Roy grew up along the banks of the San Juan River and is an avid environmentalist as the sacred songs of creation depict.',
   },
   {
     name: 'Kirby Wright',
-    photo: 'https://confluenceco.org/wp-content/uploads/2025/02/281_133_200_200_kirby_wright-768x576.jpg',
+    photo: '/team/kirby-wright.jpg',
     bio: 'Kirby is a retired attorney who lives along the banks of the Arkansas River. Previously he served as corporate counsel for a Fortune 500 international environmental engineering construction firm.',
   },
   {
     name: 'David Lopez',
-    photo: 'https://confluenceco.org/wp-content/uploads/2025/03/david_lopez.jpg',
+    photo: '/team/david-lopez.jpg',
     bio: 'David, born in Mexico and brought to Colorado at a young age, is a passionate educator and leader. David works tirelessly to cultivate youth leaders, emphasizing the importance of education and outdoor experiences in shaping their futures.',
   },
 ]
