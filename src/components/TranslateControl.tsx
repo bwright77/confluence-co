@@ -140,6 +140,12 @@ export default function TranslateControl() {
     if (resolved !== 'en') {
       setGoogtransCookie(resolved)
       applyToWidget(resolved)
+    } else {
+      // We intend English. Actively clear any stale googtrans cookie (left by a
+      // prior session, an incomplete restore, or the widget itself) *before*
+      // Google's async script loads and reads it — otherwise it translates the
+      // page to the cookie's language while our control still shows EN.
+      setGoogtransCookie('en')
     }
   }, [])
 
@@ -162,7 +168,17 @@ export default function TranslateControl() {
 
   function choose(lang: LangCode) {
     setOpen(false)
-    if (lang === current) return
+    if (lang === current) {
+      // Already on this language per our state — but if a stale googtrans
+      // cookie is still translating the page (UI out of sync with the actual
+      // DOM), picking English again should force a clean restore rather than
+      // silently no-op, which is what left users stuck in Spanish.
+      if (lang === 'en' && readGoogtransCookie() !== 'en') {
+        setGoogtransCookie('en')
+        window.location.reload()
+      }
+      return
+    }
     saveChoice(lang) // explicit choice persists and wins over auto-detection
     setGoogtransCookie(lang)
     setCurrent(lang)

@@ -40,6 +40,58 @@ test.describe('Impact count-up stats', () => {
   })
 })
 
+test.describe('Language toggle / English restore', () => {
+  const TRANSLATE_TOGGLE = 'button[aria-label="Translate this page"]'
+
+  async function toggleText(page: import('@playwright/test').Page) {
+    return page.locator(`${TRANSLATE_TOGGLE} span`).first().textContent()
+  }
+  async function googtrans(context: import('@playwright/test').BrowserContext) {
+    return (await context.cookies()).find((c) => c.name === 'googtrans')?.value ?? null
+  }
+
+  test('clears a stale googtrans=es cookie on load when English is the saved choice', async ({
+    page,
+    context,
+  }) => {
+    // The reported stuck state: an explicit English preference, but a leftover
+    // Spanish cookie that would otherwise make Google translate the page while
+    // the control still reads EN.
+    await context.addCookies([
+      { name: 'googtrans', value: '/en/es', domain: 'localhost', path: '/' },
+    ])
+    await page.addInitScript(() => localStorage.setItem('cc-lang', 'en'))
+
+    await page.goto('/')
+    await page.waitForTimeout(600)
+
+    expect(await googtrans(context)).toBeNull()
+    expect((await toggleText(page))?.trim()).toBe('EN')
+  })
+
+  test('switching from Spanish back to English clears the cookie and updates the toggle', async ({
+    page,
+    context,
+  }) => {
+    // Drive language purely via the cookie (no init script) so the reload that
+    // the English restore performs is not re-seeded with a Spanish preference.
+    await context.addCookies([
+      { name: 'googtrans', value: '/en/es', domain: 'localhost', path: '/' },
+    ])
+
+    await page.goto('/')
+    await page.waitForTimeout(400)
+    expect((await toggleText(page))?.trim()).toBe('ES')
+
+    await page.locator(TRANSLATE_TOGGLE).click()
+    await page.getByRole('button', { name: /English/ }).click()
+    await page.waitForTimeout(800)
+
+    expect(await googtrans(context)).toBeNull()
+    expect((await toggleText(page))?.trim()).toBe('EN')
+  })
+})
+
 test.describe('Hero heading clears the fixed nav', () => {
   // The hero text is anchored low in the frame; on short viewports it must not
   // slide up under the fixed nav. Spanish makes this worse because the
