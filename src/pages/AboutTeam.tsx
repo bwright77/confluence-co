@@ -43,11 +43,6 @@ const BOARD: BoardMember[] = [
     bio: 'Roy is an established sheep herder and weaver on the Diné Reservation in Northern Arizona. Roy grew up along the banks of the San Juan River and is an avid environmentalist as the sacred songs of creation depict.',
   },
   {
-    name: 'Vivian Cervantes',
-    photo: 'https://confluenceco.org/wp-content/uploads/2025/02/0_169_200_200_vivian_cervantes.png',
-    bio: 'Vivian has cultivated a passion for serving her community through multiple non-profit roles. She works to serve her community using the lens of environment, youth empowerment, and impactful partnership building.',
-  },
-  {
     name: 'Kirby Wright',
     photo: 'https://confluenceco.org/wp-content/uploads/2025/02/281_133_200_200_kirby_wright-768x576.jpg',
     bio: 'Kirby is a retired attorney who lives along the banks of the Arkansas River. Previously he served as corporate counsel for a Fortune 500 international environmental engineering construction firm.',
