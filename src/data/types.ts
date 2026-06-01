@@ -78,6 +78,7 @@ export interface Program {
   funder?: Funder
   location?: Location
   leadStaff?: string[]
+  communityLeaders?: string[]
   partners?: string[]
   targets?: Target[]
   cta?: Cta
