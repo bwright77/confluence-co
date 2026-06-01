@@ -26,7 +26,9 @@ function BigStat({ value, suffix, label, description, trigger, duration }: StatP
         style={{ fontSize: 'clamp(3.5rem, 6vw, 5rem)' }}
         aria-label={`${value}${suffix} ${label}`}
       >
-        {count}<span className="text-cc-orange">{suffix}</span>
+        {/* translate="no": keep Google Translate from wrapping the animated
+            node (which freezes the count at 0); aria-label stays translatable. */}
+        <span translate="no">{count}<span className="text-cc-orange">{suffix}</span></span>
       </div>
       <p className="font-display font-bold uppercase tracking-display text-cc-navy text-sm mb-2">
         {label}

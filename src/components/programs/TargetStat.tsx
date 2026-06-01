@@ -18,7 +18,9 @@ export default function TargetStat({ target, accent = 'text-cc-sky' }: TargetSta
       ref={ref}
       className="rounded-lg border border-cc-stone/15 bg-white p-5 shadow-sm"
     >
-      <div className={`font-display text-4xl md:text-5xl font-bold leading-none ${accent}`}>
+      {/* translate="no": Google Translate wraps dynamic text nodes, detaching
+          the node React animates → the count freezes. Digits need no translation. */}
+      <div className={`font-display text-4xl md:text-5xl font-bold leading-none ${accent}`} translate="no">
         {formatted}
       </div>
       <div className="mt-2 font-display text-xs uppercase tracking-display text-cc-stone">

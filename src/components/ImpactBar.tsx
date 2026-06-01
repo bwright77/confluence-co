@@ -18,8 +18,13 @@ function Stat({ value, suffix, label, trigger, duration }: StatProps) {
         style={{ fontSize: 'clamp(3rem, 6vw, 4.5rem)' }}
         aria-label={`${value}${suffix} ${label}`}
       >
-        {count}
-        <span className="text-cc-orange">{suffix}</span>
+        {/* translate="no": Google Translate wraps dynamic text nodes in <font>
+            tags, detaching the node React animates → the count freezes at 0.
+            Digits need no translation; the aria-label above stays translatable. */}
+        <span translate="no">
+          {count}
+          <span className="text-cc-orange">{suffix}</span>
+        </span>
       </span>
       <span className="font-display font-semibold uppercase tracking-display text-white/80 text-sm md:text-base mt-2">
         {label}
