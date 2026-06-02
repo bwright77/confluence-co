@@ -299,6 +299,40 @@ All components are built to WCAG 2.1 AA targets:
 - **Enforced in CI** — `eslint-plugin-jsx-a11y` runs on every push/PR via
   `npm run lint` (see [Build & Deploy](#build--deploy))
 
+## Translation (EN/ES)
+
+The site offers English/Spanish via the **Google Website Translator** widget,
+driven by a custom control ([`src/components/TranslateControl.tsx`](src/components/TranslateControl.tsx))
+— the real Google widget is rendered hidden and its `<select>` is driven
+programmatically. Google rewrites the live DOM (wraps text in `<font>`, injects
+a banner, sets the `googtrans` cookie), which conflicts with React in a few
+predictable ways. The smoke tests in [`e2e/translate.spec.ts`](e2e/translate.spec.ts)
+guard each one. **When adding or changing UI, keep these rules in mind:**
+
+1. **Conditionally-mounted text isn't translated.** Google translates on its
+   initial pass; nodes mounted only on interaction (`{open && <…>}`) stay in
+   English while the page is Spanish. Always render UI text and hide it with CSS
+   (`hidden`/`display:none`) — don't unmount. (Bit the nav dropdown, search
+   overlay, and projects filter empty-state.) Always-in-DOM-but-CSS-hidden
+   (opacity/visibility, like the mobile menu) is fine.
+2. **Animated/updating text nodes freeze.** When Google wraps a node React is
+   updating, the count stops. Mark the changing element `translate="no"` (digits
+   need no translation); keep labels/`aria-label` outside it. (Count-up stats.)
+3. **The injected banner** is suppressed in [`src/index.css`](src/index.css) by
+   hiding the whole `.skiptranslate` banner wrapper and resetting `body { top }`
+   — hide the wrapper, not a specific child, since Google renames the markup.
+4. **Cookies** are set/cleared across the registrable domain `.confluenceco.org`
+   (the canonical host is `www`; see [Domain & DNS](#domain--dns)) — clearing
+   only the `www` host leaves a stale cookie and the page stays translated.
+5. **Genuinely runtime strings** (e.g. "No results for *query*", a Donate error)
+   can't be pre-rendered and are left to Google's mutation observer.
+6. `translate="no"` is intentional on the brand wordmark, the translate
+   control's own dropdown, and the footer address — leave those untranslated.
+
+> The e2e tests assert DOM contracts (e.g. "this text is in the DOM at load"),
+> not Google's live output. Always verify a translation change by switching to
+> **Español** on `www.confluenceco.org`.
+
 ## Contact
 
 Shane Wright, Executive Director — shane@confluenceco.org — (303) 815-7613
