@@ -42,8 +42,6 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
     }
   }, [open])
 
-  if (!open) return null
-
   function go(href: string) {
     onClose()
     navigate(href)
@@ -51,13 +49,20 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
 
   const trimmed = query.trim()
 
+  // Always rendered (hidden via `hidden`/display:none when closed) instead of
+  // unmounting, so the Google Translate widget translates the static UI text —
+  // input placeholder, the hint, type badges — on its initial page pass.
+  // display:none keeps it out of the tab order / a11y tree while closed, and
+  // the focus-trap, scroll-lock, and query-reset effects above are all gated on
+  // `open`, so staying mounted changes no behavior.
   return (
     <div
       ref={dialogRef}
-      className="fixed inset-0 z-[80] flex items-start justify-center px-4 pt-24 sm:pt-32"
+      className={`fixed inset-0 z-[80] flex items-start justify-center px-4 pt-24 sm:pt-32 ${open ? '' : 'hidden'}`}
       role="dialog"
       aria-modal="true"
       aria-label="Search the site"
+      aria-hidden={open ? undefined : true}
     >
       <div
         className="absolute inset-0 bg-cc-dark/70 backdrop-blur-sm"

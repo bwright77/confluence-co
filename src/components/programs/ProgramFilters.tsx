@@ -149,15 +149,17 @@ export default function ProgramFilters({
           {total === 1 ? 'project' : 'projects'}
         </div>
 
-        {anyActive && (
-          <button
-            type="button"
-            onClick={clearAll}
-            className="font-display text-xs font-semibold uppercase tracking-display text-cc-sky-ink hover:text-cc-navy"
-          >
-            Clear filters
-          </button>
-        )}
+        {/* Always rendered (hidden unless filters are active) so the label is
+            translated on Google's initial pass, not when it first appears. */}
+        <button
+          type="button"
+          onClick={clearAll}
+          className={`font-display text-xs font-semibold uppercase tracking-display text-cc-sky-ink hover:text-cc-navy ${
+            anyActive ? '' : 'hidden'
+          }`}
+        >
+          Clear filters
+        </button>
       </div>
     </div>
   )

@@ -113,6 +113,29 @@ test.describe('Nav dropdown labels are translatable', () => {
   })
 })
 
+test.describe('Search overlay text is translatable', () => {
+  // The search overlay must stay in the DOM (hidden) rather than unmount when
+  // closed, so Google Translate picks up its static UI text on the initial pass.
+  test('search input + hint are in the DOM at load, hidden until opened', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 })
+    await page.goto('/')
+
+    const input = page.locator('input[aria-label="Search query"]')
+    const hint = page.getByText('Type to search projects, news, program areas, and pages.')
+
+    // Present in the DOM even while the overlay is closed (hidden).
+    await expect(input).toHaveCount(1)
+    await expect(input).toBeHidden()
+    await expect(hint).toHaveCount(1)
+
+    // Opening the search reveals it.
+    await page.getByRole('button', { name: /search/i }).first().click()
+    await expect(input).toBeVisible()
+  })
+})
+
 test.describe('Hero heading clears the fixed nav', () => {
   // The hero text is anchored low in the frame; on short viewports it must not
   // slide up under the fixed nav. Spanish makes this worse because the

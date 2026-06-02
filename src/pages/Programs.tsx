@@ -171,20 +171,26 @@ export default function Programs() {
             visible={filtered.length}
           />
 
-          {filtered.length === 0 ? (
-            <div className="mt-12 rounded-lg border border-dashed border-cc-stone/30 bg-cc-warm p-10 text-center">
-              <p className="font-display text-lg font-semibold text-cc-navy">
-                No projects match these filters.
-              </p>
-              <button
-                type="button"
-                onClick={clearAll}
-                className="mt-4 font-display text-sm font-semibold uppercase tracking-display text-cc-sky-ink underline hover:text-cc-navy"
-              >
-                Clear filters
-              </button>
-            </div>
-          ) : (
+          {/* Empty state is always rendered (hidden unless there are no
+              matches) so Google Translate picks up its labels on the initial
+              pass rather than when it appears after filtering. */}
+          <div
+            className={`mt-12 rounded-lg border border-dashed border-cc-stone/30 bg-cc-warm p-10 text-center ${
+              filtered.length === 0 ? '' : 'hidden'
+            }`}
+          >
+            <p className="font-display text-lg font-semibold text-cc-navy">
+              No projects match these filters.
+            </p>
+            <button
+              type="button"
+              onClick={clearAll}
+              className="mt-4 font-display text-sm font-semibold uppercase tracking-display text-cc-sky-ink underline hover:text-cc-navy"
+            >
+              Clear filters
+            </button>
+          </div>
+          {filtered.length > 0 && (
             <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {filtered.map((p) => (
                 <ProgramCard key={p.slug} program={p} />
