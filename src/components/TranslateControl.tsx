@@ -76,17 +76,33 @@ function browserDefault(): LangCode {
   return 'en'
 }
 
-function setGoogtransCookie(lang: LangCode) {
+// Every domain the googtrans cookie might live on: host-only (no domain
+// attribute), then each domain suffix from the full hostname down to the
+// registrable domain (eTLD+1), with and without a leading dot. This matters
+// because Google's widget sets googtrans on the registrable domain
+// (e.g. .confluenceco.org) even when the page is served from a subdomain
+// (www.confluenceco.org) — so to set or fully clear it we must target the
+// parent domain, not just the exact host. Stops at two labels so we never
+// touch a public suffix (.org); for bare hosts / localhost it's host-only.
+function googtransCookieDomains(): (string | null)[] {
   const host = window.location.hostname
-  // English = restore original, so clear the cookie variants.
+  const domains: (string | null)[] = [null] // host-only
+  const parts = host.split('.')
+  for (let i = 0; i + 2 <= parts.length; i++) {
+    const d = parts.slice(i).join('.')
+    domains.push(d, `.${d}`)
+  }
+  return domains
+}
+
+function setGoogtransCookie(lang: LangCode) {
+  // English = restore original, so clear the cookie across every domain.
   const expire = lang === 'en' ? 'expires=Thu, 01 Jan 1970 00:00:00 GMT;' : ''
   const value = lang === 'en' ? '' : `/en/${lang}`
-  const variants = [
-    `googtrans=${value};${expire}path=/;`,
-    `googtrans=${value};${expire}path=/;domain=${host};`,
-    `googtrans=${value};${expire}path=/;domain=.${host};`,
-  ]
-  for (const v of variants) document.cookie = v
+  for (const d of googtransCookieDomains()) {
+    const domainAttr = d ? `domain=${d};` : ''
+    document.cookie = `googtrans=${value};${expire}path=/;${domainAttr}`
+  }
 }
 
 // Drive the hidden Google combo. The widget script loads asynchronously, so on
