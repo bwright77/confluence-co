@@ -20,7 +20,8 @@ Website redesign for [Confluence Colorado](https://confluenceco.org), a Denver-b
 | Analytics | Plausible (cookieless, privacy-first) + Vercel Analytics (`@vercel/analytics/react`, mounted at the app root; enabled in the Vercel dashboard) |
 | SEO / Social | Open Graph + Twitter Card meta in `index.html`; branded share image at `public/og-image.png` |
 | Linting | ESLint (flat config) with `eslint-plugin-jsx-a11y` — accessibility rules over `src` |
-| CI/CD | GitHub Actions — lint + type-check + build on every push/PR |
+| CI/CD | GitHub Actions — lint + type-check + build, and Playwright e2e, on every push/PR |
+| E2E tests | Playwright (`npm run test:e2e`) — smoke tests for the Spanish / Google Translate behaviors (banner suppression, count-up stats, hero/nav layout, language toggle) |
 | Payments | Stripe Checkout (hosted redirect via Vercel serverless `/api/*`) — donate flow built (Phase 4): one-time + monthly, optional fee-cover, per-project attribution |
 | Email | Mailchimp (Phase 4 — not yet integrated) |
 
@@ -42,32 +43,45 @@ npm run preview # preview the production build locally
 
 Vercel deploys automatically on every push to `main`. Pull requests get a preview deploy URL via the Vercel GitHub integration.
 
-CI runs on every push and PR (`npm run lint` then `npm run build`):
+CI runs on every push and PR — a type-check/build job and a Playwright e2e job:
 - `eslint .` — accessibility lint (`eslint-plugin-jsx-a11y`); also `npm run lint:a11y`
 - `tsc --noEmit` — type-check
 - `vite build` — production build validation
+- `npm run test:e2e` — Playwright smoke tests (`e2e/`) against the production
+  build via `vite preview`; guards the Google Translate / Spanish behaviors
+  (banner suppression, count-up stats, hero–nav layout, language toggle).
+  Locally these auto-build and serve; run `npx playwright install chromium` once first.
 
-## DNS Cutover (next — gates public launch)
+## Domain & DNS
 
-The site is live on Vercel but `confluenceco.org` DNS still points at the old
-WordPress site. To cut over, set these records at the domain registrar (the
-values Vercel currently recommends after its IP-range expansion):
+DNS cutover is **complete** — `confluenceco.org` points at Vercel and the site
+is public and live. The old WordPress site is gone.
+
+**The canonical host is `www.confluenceco.org`.** The apex `confluenceco.org`
+**307-redirects to `www`** (apex → www, not the other way around). The
+registrable domain is `.confluenceco.org`.
+
+Why the host direction matters when writing code:
+- **Cookies** must be set/cleared on the registrable domain (`.confluenceco.org`),
+  not just the `www` host — a subdomain can't clear a parent-domain cookie.
+  This bit the Google Translate language toggle (the `googtrans` cookie Google
+  sets on `.confluenceco.org` survived a `www`-only clear); the translate
+  control now writes/clears across host-only + every suffix down to the
+  registrable domain. Keep that in mind for any future cookie use.
+- **Absolute URLs** (e.g. the Stripe `success_url`/`cancel_url`) that target the
+  apex resolve fine but take a 307 hop to `www`; prefer `www.confluenceco.org`
+  to skip it.
+
+Records currently set at the registrar (Vercel's post-IP-expansion
+recommendations):
 
 | Type | Name | Value |
 |---|---|---|
 | `A` | `@` | `216.150.1.1` |
 | `CNAME` | `www` | `71066fdf5b7e439a.vercel-dns-016.com.` |
 
-Notes:
-- These are Vercel's **new recommended** records. The old ones
-  (`76.76.21.21` for the apex, `cname.vercel-dns.com` for `www`) still work,
-  but use the new values.
-- Remove the old WordPress A/CNAME records for `@` and `www` so they don't
-  conflict.
-- `www.confluenceco.org` → apex is handled by the existing redirect config;
-  the CNAME just needs to resolve to Vercel.
-- Allow time for DNS/TLS propagation; Vercel issues the cert automatically once
-  the records resolve. Verify HTTPS + the `www`→apex redirect after cutover.
+(The older `76.76.21.21` apex / `cname.vercel-dns.com` `www` values also work.)
+Vercel issues and renews TLS automatically.
 
 ## Brand
 
@@ -199,7 +213,7 @@ locally, copy `.env.example` → `.env.local` with Stripe **test** keys and use 
 | 4 — Donate & Get Involved | Get Involved reach-out hub (audience cards → mailto) + Stripe donate flow; Mailchimp pending | Get Involved + Stripe donate flow done; email (Mailchimp) pending |
 | 5 — Impact & News | Impact goals page + News timeline | Complete (awaiting real metrics) |
 | — Site utilities | Search overlay + EN/ES Google Translate in a top utility bar | Complete |
-| 6 — Polish & Launch | A11y audit, SEO, Lighthouse, DNS cutover | In progress — A11y AA pass + privacy policy + social/OG share tags done; Lighthouse/DNS pending |
+| 6 — Polish & Launch | A11y audit, SEO, Lighthouse, DNS cutover | DNS cut over — site is **public & live**; A11y AA pass + privacy policy + social/OG share tags done; Lighthouse polish remaining |
 | 7 — Post-Launch | Headless CMS, events calendar | Future |
 
 ## Content Pending from Shane Wright
