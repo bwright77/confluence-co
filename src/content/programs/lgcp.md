@@ -68,6 +68,10 @@ The Steering Committee meets monthly, engaging residents who are eager to see th
 
 Lorraine Granado (April 16, 1948 – December 8, 2019) was an American environmental, peace, and social justice activist whose decades of work in North Denver — particularly in Swansea — left a lasting legacy of community organizing and accountability.
 
+## In the news
+
+- [Swansea park will be renamed for Lorraine Granado, the late Denver activist who forged it from a toxic spill](https://denverite.com/2020/02/04/swansea-park-will-be-renamed-for-lorraine-granado-the-late-denver-activist-who-forged-it-from-a-toxic-spill/) — *Denverite*, February 4, 2020
+
 ## Community voice
 
 > In 15 years I want to come back to my neighborhood park and see it being used by children and residents to its full potential.
