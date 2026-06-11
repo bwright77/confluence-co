@@ -4,6 +4,8 @@
   "framework": "vite",
   "redirects": [
     { "source": "/lgcp", "destination": "/projects/lgcp", "permanent": true },
+    { "source": "/what", "destination": "/projects", "permanent": true },
+    { "source": "/who", "destination": "/about", "permanent": true },
     { "source": "/programs/pathways", "destination": "/program-areas/youth-pathways", "permanent": true },
     { "source": "/programs/watershed", "destination": "/program-areas/watershed-restoration", "permanent": true },
     { "source": "/programs/mo-betta", "destination": "/program-areas/public-health-urban-agriculture", "permanent": true },
