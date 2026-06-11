@@ -2,6 +2,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
+  "trailingSlash": false,
   "redirects": [
     { "source": "/lgcp", "destination": "/projects/lgcp", "permanent": true },
     { "source": "/what", "destination": "/projects", "permanent": true },
