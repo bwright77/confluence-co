@@ -1,3 +1,39 @@
+- id: outerhaven-seeds-of-power-2026
+  date: "2026-06-22"
+  title: Learning at the Seeds of Power Unity Farm
+  body: |
+    Our friend Lacy Macdonald from **Outerhaven** doing what he does best — educating youth at the **Mo' Betta Green Seeds of Power Unity Farm**.
+  link:
+    label: View on Instagram
+    href: https://www.instagram.com/p/DZ5muJLBvUz/
+  tags:
+    - public-health-urban-agriculture
+    - youth-pathways
+
+- id: juneteenth-beverly-grant-2026
+  date: "2026-06-19"
+  title: Happy Juneteenth — honoring Beverly Grant
+  body: |
+    Happy Juneteenth! Confluence Colorado wants to shout out our friend and board member **Ms. Beverly Grant** — a community leader, food- and social-justice hero, and resilience builder. Find the Mo' Betta Green team in Five Points for vendors, fresh produce, and community wellness.
+  link:
+    label: View on Instagram
+    href: https://www.instagram.com/p/DZyNEojOI95/
+  tags:
+    - public-health-urban-agriculture
+    - civic-engagement
+
+- id: public-lands-gunnison-2026
+  date: "2026-06-18"
+  title: Gratitude for our public lands
+  body: |
+    Appreciation for the **Bureau of Land Management** and the beauty of our public lands — from the Canyon of the Ancients to the Johnson Stage Station, where you can camp along the Lake Fork of the Gunnison River. Gratitude to everyone protecting these historical and natural spaces.
+  link:
+    label: View on Instagram
+    href: https://www.instagram.com/p/DZvZV-lAT8j/
+  tags:
+    - outdoor-recreation-stream
+    - natural-resource-conservation
+
 - id: spray-cwcb-exemplar-award-2025
   date: "2025-11-10"
   title: SPRAY Council wins the 2025 CWCB Exemplar Award
