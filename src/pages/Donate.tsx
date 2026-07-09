@@ -17,6 +17,7 @@ import FeeCoverToggle from '../components/donate/FeeCoverToggle'
 import ImpactFraming from '../components/donate/ImpactFraming'
 import ProgramContext from '../components/donate/ProgramContext'
 import MajorGiftNote from '../components/donate/MajorGiftNote'
+import FundLockup from '../components/donate/FundLockup'
 
 function formatUSD(n: number): string {
   return Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`
@@ -148,6 +149,12 @@ export default function Donate({ fund }: Props) {
       {/* Donate form */}
       <section className="section-pad bg-cc-warm">
         <div className="container-site max-w-xl">
+          {fund && (
+            <div className="mb-10">
+              <FundLockup lockup={fund.lockup} />
+            </div>
+          )}
+
           <form
             onSubmit={handleSubmit}
             className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-cc-navy/10 md:p-8"

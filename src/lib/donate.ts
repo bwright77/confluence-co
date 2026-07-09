@@ -40,6 +40,13 @@ export interface Fund {
   heroLede: string
   /** Self-hosted hero background under public/. Never hotlink a partner's site. */
   heroImage: string
+  /** Partner's own logo, shown between the hero and the donate card. */
+  lockup: {
+    /** Mark artwork, in the colourway for a light background. */
+    mark: string
+    wordmark: string
+    subline: string
+  }
   /** Required disclosure, rendered above the standard TAX_STATEMENT. */
   sponsorshipNote: string
   /** Fills the "so 100% of my gift reaches ___" fee-cover sentence. */
@@ -65,6 +72,11 @@ export const FUNDS: Record<string, Fund> = {
       'Your gift supports Diné youth in Teec Nos Pos learning the lifeways of sheep and goats, ' +
       'the land, and the loom.',
     heroImage: '/funds/kady-youth-sheep-camp/hero.jpg',
+    lockup: {
+      mark: '/funds/kady-youth-sheep-camp/ram-night.svg',
+      wordmark: 'Kady Youth Sheep Camp',
+      subline: 'Apprenticeship',
+    },
     sponsorshipNote:
       'Kady Youth Sheep Camp is a fiscally sponsored project of Confluence Colorado. Your gift is ' +
       'made to Confluence Colorado, which retains discretion and control over all funds and grants ' +
