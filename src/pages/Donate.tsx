@@ -116,24 +116,14 @@ export default function Donate({ fund }: Props) {
 
   return (
     <>
-      {/* Page header. A fund supplies a portrait photo, which a short wide band
-          would crop down to an unreadable sliver — give it a taller hero. */}
-      <section
-        className={
-          fund
-            ? 'relative flex min-h-[32rem] items-center overflow-hidden pt-32 pb-16 md:min-h-[38rem] md:pt-40 md:pb-20'
-            : 'relative overflow-hidden pt-32 pb-12 md:pt-40 md:pb-16'
-        }
-      >
+      {/* Page header */}
+      <section className="relative overflow-hidden pt-32 pb-12 md:pt-40 md:pb-16">
         <img
           src={fund?.heroImage ?? '/projects/mo-betta/greens-seeds.jpg'}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{
-            filter: 'saturate(0.9) contrast(1.04)',
-            objectPosition: fund?.heroImagePosition ?? 'center',
-          }}
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          style={{ filter: 'saturate(0.9) contrast(1.04)' }}
         />
         <div className="absolute inset-0" style={{ background: 'rgba(0, 44, 70, 0.58)' }} />
         <div
@@ -143,7 +133,7 @@ export default function Donate({ fund }: Props) {
               'linear-gradient(to bottom, rgba(0,20,35,0.60) 0%, rgba(0,20,35,0.28) 50%, rgba(0,20,35,0.60) 100%)',
           }}
         />
-        <div className="container-site relative z-10 w-full max-w-3xl text-center">
+        <div className="container-site relative z-10 max-w-3xl text-center">
           <p className="mb-3 font-display text-xs font-semibold uppercase tracking-poster text-cc-sky-bright md:text-sm">
             Support the Work
           </p>
