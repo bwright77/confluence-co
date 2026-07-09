@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import Stripe from 'stripe'
-import { chargeCents, isValidAmount, isValidFrequency } from '../src/lib/donate'
+import { FUNDS, chargeCents, isValidAmount, isValidFrequency, isValidFund } from '../src/lib/donate'
 import { rejectIfBlocked } from './_guard'
 
 // Project (a.k.a. "program" in code) slugs → display titles. Hard-coded here
@@ -20,9 +20,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
   apiVersion: '2026-05-27.dahlia',
 })
 
-const SUCCESS_URL =
-  'https://confluenceco.org/donate/thank-you?session_id={CHECKOUT_SESSION_ID}'
-const CANCEL_URL = 'https://confluenceco.org/donate'
+const ORIGIN = 'https://confluenceco.org'
+const SUCCESS_URL = `${ORIGIN}/donate/thank-you?session_id={CHECKOUT_SESSION_ID}`
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -37,9 +36,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     frequency?: unknown
     coverFee?: unknown
     program?: unknown
+    fund?: unknown
   }
 
-  const { amount, frequency, coverFee, program } = body
+  const { amount, frequency, coverFee, program, fund } = body
 
   if (typeof amount !== 'number' || !isValidAmount(amount)) {
     return res.status(400).json({ error: 'Invalid amount' })
@@ -48,20 +48,44 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'Invalid frequency' })
   }
 
+  const hasProgram = typeof program === 'string' && program.length > 0
+  const hasFund = typeof fund === 'string' && fund.length > 0
+  // A gift is designated to one thing. Both set means a caller bug; failing loudly
+  // beats silently dropping one and misattributing the money.
+  if (hasProgram && hasFund) {
+    return res.status(400).json({ error: 'Specify either program or fund, not both' })
+  }
+
   let programSlug = 'general'
-  let programTitle: string | null = null
-  if (typeof program === 'string' && program.length > 0) {
-    if (!PROGRAM_TITLES[program]) {
+  let designationTitle: string | null = null
+  if (hasProgram) {
+    // hasOwnProperty, not a truthiness check on the indexed lookup: PROGRAM_TITLES
+    // is a plain literal, so `PROGRAM_TITLES['constructor']` resolves up the
+    // prototype chain to a truthy native function and would sail through.
+    if (!Object.prototype.hasOwnProperty.call(PROGRAM_TITLES, program)) {
       return res.status(400).json({ error: 'Unknown program' })
     }
     programSlug = program
-    programTitle = PROGRAM_TITLES[program]
+    designationTitle = PROGRAM_TITLES[program]
+  }
+
+  let fundSlug: string | null = null
+  if (hasFund) {
+    if (!isValidFund(fund)) {
+      return res.status(400).json({ error: 'Unknown fund' })
+    }
+    fundSlug = fund
+    designationTitle = FUNDS[fund].title
   }
 
   const cover = coverFee === true
   const cents = chargeCents(amount, cover)
   const monthly = frequency === 'monthly'
   const metadata: Stripe.MetadataParam = { program: programSlug, coverFee: String(cover) }
+  if (fundSlug) metadata.fund = fundSlug
+
+  // A cancelled checkout returns to the page the donor started from.
+  const cancelUrl = fundSlug ? `${ORIGIN}/donate/${fundSlug}` : `${ORIGIN}/donate`
 
   try {
     let session: Stripe.Checkout.Session
@@ -77,8 +101,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               unit_amount: cents,
               recurring: { interval: 'month' },
               product_data: {
-                name: programTitle
-                  ? `Monthly gift — ${programTitle}`
+                name: designationTitle
+                  ? `Monthly gift — ${designationTitle}`
                   : 'Monthly gift to Confluence Colorado',
               },
             },
@@ -88,7 +112,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         subscription_data: { metadata },
         metadata,
         success_url: SUCCESS_URL,
-        cancel_url: CANCEL_URL,
+        cancel_url: cancelUrl,
       })
     } else {
       session = await stripe.checkout.sessions.create({
@@ -101,8 +125,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               currency: 'usd',
               unit_amount: cents,
               product_data: {
-                name: programTitle
-                  ? `Donation — ${programTitle}`
+                name: designationTitle
+                  ? `Donation — ${designationTitle}`
                   : 'Donation to Confluence Colorado',
               },
             },
@@ -112,7 +136,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         payment_intent_data: { metadata },
         metadata,
         success_url: SUCCESS_URL,
-        cancel_url: CANCEL_URL,
+        cancel_url: cancelUrl,
       })
     }
 

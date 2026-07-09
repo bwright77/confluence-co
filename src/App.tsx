@@ -15,6 +15,7 @@ import News from './pages/News'
 import Privacy from './pages/Privacy'
 import NotFound from './pages/NotFound'
 import { programAreaRedirects } from './routes/redirects'
+import { FUNDS } from './lib/donate'
 
 function LegacyAreaRedirect() {
   const { slug } = useParams<{ slug: string }>()
@@ -62,6 +63,16 @@ export default function App() {
           <Route path="/get-involved" element={<GetInvolved />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/donate/thank-you" element={<DonateThankYou />} />
+
+          {/* Designated-fund donate pages, e.g. /donate/kady-youth-sheep-camp.
+              Static paths, so they can't collide with /donate/thank-you. */}
+          {Object.values(FUNDS).map((fund) => (
+            <Route
+              key={fund.slug}
+              path={`/donate/${fund.slug}`}
+              element={<Donate fund={fund} />}
+            />
+          ))}
           <Route path="/news" element={<News />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />

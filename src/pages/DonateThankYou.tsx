@@ -2,18 +2,24 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Heart, FacebookLogo, XLogo, ArrowRight } from '@phosphor-icons/react'
 import { programBySlug } from '../data/programs'
+import { FUNDS } from '../lib/donate'
 
 interface SessionSummary {
   amount_total: number | null
   currency: string | null
   mode: string | null
   program: string | null
+  fund: string | null
 }
 
 const SHARE_URL = 'https://confluenceco.org'
 const SHARE_TEXT = 'I just supported Confluence Colorado — youth restoring rivers, growing food, and caring for parks across Denver.'
 
-function programTitle(slug: string | null): string | null {
+// The gift was designated to at most one of a program or a fund; name whichever.
+function designationTitle(summary: SessionSummary | null): string | null {
+  if (!summary) return null
+  if (summary.fund) return FUNDS[summary.fund]?.title ?? null
+  const slug = summary.program
   if (!slug || slug === 'general') return null
   return programBySlug[slug]?.title ?? null
 }
@@ -44,7 +50,7 @@ export default function DonateThankYou() {
       style: 'currency',
       currency: (summary.currency ?? 'usd').toUpperCase(),
     }) : null
-  const title = programTitle(summary?.program ?? null)
+  const title = designationTitle(summary)
   const monthly = summary?.mode === 'subscription'
 
   let personalized: string | null = null

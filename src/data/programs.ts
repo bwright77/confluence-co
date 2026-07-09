@@ -131,8 +131,10 @@ export const programBySlug: Record<string, Program> = Object.fromEntries(
   programs.map((p) => [p.slug, p])
 )
 
+// hasOwnProperty guards against inherited keys — programBySlug['constructor']
+// would otherwise return Object's constructor instead of undefined.
 export function getProgram(slug: string): Program | undefined {
-  return programBySlug[slug]
+  return Object.prototype.hasOwnProperty.call(programBySlug, slug) ? programBySlug[slug] : undefined
 }
 
 export function programsByArea(areaSlug: string): Program[] {

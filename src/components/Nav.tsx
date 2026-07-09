@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { CCBug } from './Logo'
 import UtilityBar from './UtilityBar'
 import { useFocusTrap } from '../hooks/useFocusTrap'
+import { FUNDS } from '../lib/donate'
 
 interface NavChild {
   label: string
@@ -42,9 +43,9 @@ export default function Nav() {
   // Routes whose top section has its own dark/full-bleed hero — let the nav
   // sit transparently over it until the user scrolls past.
   const DARK_HERO_PREFIXES = ['/about', '/impact', '/projects', '/program-areas', '/news', '/get-involved']
-  // Dark hero on the exact route only (children stay solid-nav): /donate has a
-  // photo hero, but /donate/thank-you is a light page.
-  const DARK_HERO_EXACT = ['/donate']
+  // Dark hero on the exact route only (children stay solid-nav): /donate and the
+  // per-fund donate pages share a photo hero, but /donate/thank-you is a light page.
+  const DARK_HERO_EXACT = ['/donate', ...Object.keys(FUNDS).map((slug) => `/donate/${slug}`)]
   const hasDarkHero =
     location.pathname === '/' ||
     DARK_HERO_EXACT.includes(location.pathname) ||

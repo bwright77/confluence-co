@@ -4,9 +4,16 @@ interface Props {
   checked: boolean
   feeAmount: number | null
   onChange: (checked: boolean) => void
+  /** What the gift reaches once fees are covered. */
+  beneficiary?: string
 }
 
-export default function FeeCoverToggle({ checked, feeAmount, onChange }: Props) {
+export default function FeeCoverToggle({
+  checked,
+  feeAmount,
+  onChange,
+  beneficiary = 'the programs',
+}: Props) {
   const id = useId()
   const display = feeAmount != null ? feeAmount.toFixed(2) : '0.00'
 
@@ -23,7 +30,7 @@ export default function FeeCoverToggle({ checked, feeAmount, onChange }: Props) 
         className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-cc-orange"
       />
       <span className="font-body text-sm leading-relaxed text-cc-navy">
-        Add ${display} so 100% of my gift reaches the programs.
+        Add ${display} so 100% of my gift reaches {beneficiary}.
       </span>
     </label>
   )

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { CircleNotch } from '@phosphor-icons/react'
 import {
@@ -8,31 +8,50 @@ import {
   feeCoverAmount,
   isValidAmount,
   type Frequency,
+  type Fund,
 } from '../lib/donate'
-import { programBySlug } from '../data/programs'
+import { getProgram } from '../data/programs'
 import FrequencyToggle from '../components/donate/FrequencyToggle'
 import AmountSelector from '../components/donate/AmountSelector'
 import FeeCoverToggle from '../components/donate/FeeCoverToggle'
 import ImpactFraming from '../components/donate/ImpactFraming'
 import ProgramContext from '../components/donate/ProgramContext'
+import MajorGiftNote from '../components/donate/MajorGiftNote'
 
 function formatUSD(n: number): string {
   return Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`
 }
 
-export default function Donate() {
-  const [params] = useSearchParams()
-  const programSlug = params.get('program')
-  const program = programSlug ? programBySlug[programSlug] : undefined
+interface Props {
+  /** Set by the route for a designated-fund page (e.g. /donate/kady-youth-sheep-camp). */
+  fund?: Fund
+}
 
-  const [frequency, setFrequency] = useState<Frequency>('one-time')
-  const [amount, setAmount] = useState<number | null>(PRESETS['one-time'][1])
+export default function Donate({ fund }: Props) {
+  const [params] = useSearchParams()
+  // A fund page ignores ?program= — a gift is designated to one thing, and the
+  // API rejects both being set.
+  const programSlug = fund ? null : params.get('program')
+  const program = programSlug ? getProgram(programSlug) : undefined
+
+  useEffect(() => {
+    document.title = fund
+      ? `Donate to ${fund.title} · Confluence Colorado`
+      : 'Donate · Confluence Colorado'
+  }, [fund])
+
+  // A fund can lead with monthly and offer its own (smaller) preset ladder.
+  const presetTable = fund?.presets ?? PRESETS
+  const initialFrequency = fund?.defaultFrequency ?? 'one-time'
+
+  const [frequency, setFrequency] = useState<Frequency>(initialFrequency)
+  const [amount, setAmount] = useState<number | null>(presetTable[initialFrequency][1])
   const [customText, setCustomText] = useState('')
   const [coverFee, setCoverFee] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const presets = PRESETS[frequency]
+  const presets = presetTable[frequency]
   const validAmount = amount != null && isValidAmount(amount)
   const feeAmount = validAmount ? feeCoverAmount(amount) : null
 
@@ -44,7 +63,7 @@ export default function Donate() {
   function handleFrequencyChange(next: Frequency) {
     setFrequency(next)
     setCustomText('')
-    setAmount(PRESETS[next][1] ?? PRESETS[next][0])
+    setAmount(presetTable[next][1] ?? presetTable[next][0])
   }
 
   function handleSelectPreset(value: number) {
@@ -75,6 +94,7 @@ export default function Donate() {
           frequency,
           coverFee,
           program: program?.slug,
+          fund: fund?.slug,
         }),
       })
       if (!res.ok) throw new Error(`Request failed: ${res.status}`)
@@ -119,8 +139,8 @@ export default function Donate() {
           </p>
           <h1 className="heading-display text-4xl text-white md:text-5xl">Donate</h1>
           <p className="mx-auto mt-4 max-w-xl font-body text-lg leading-relaxed text-white/85">
-            Your gift puts youth to work restoring rivers, growing food, and caring for parks
-            across Denver. Every dollar stays close to home.
+            {fund?.heroLede ??
+              'Your gift puts youth to work restoring rivers, growing food, and caring for parks across Denver. Every dollar stays close to home.'}
           </p>
         </div>
       </section>
@@ -133,9 +153,12 @@ export default function Donate() {
             className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-cc-navy/10 md:p-8"
             aria-label="Make a donation"
           >
-            {program && (
+            {(fund || program) && (
               <div className="mb-6">
-                <ProgramContext title={program.title} />
+                <ProgramContext
+                  title={fund?.title ?? program!.title}
+                  note={fund?.sponsorshipNote}
+                />
               </div>
             )}
 
@@ -160,12 +183,27 @@ export default function Donate() {
             </div>
 
             <div className="mb-6 rounded-lg bg-cc-sage/5 px-4 py-3">
-              <ImpactFraming amount={validAmount ? amount : null} frequency={frequency} />
+              <ImpactFraming
+                amount={validAmount ? amount : null}
+                frequency={frequency}
+                fund={fund}
+              />
             </div>
 
             <div className="mb-6">
-              <FeeCoverToggle checked={coverFee} feeAmount={feeAmount} onChange={setCoverFee} />
+              <FeeCoverToggle
+                checked={coverFee}
+                feeAmount={feeAmount}
+                onChange={setCoverFee}
+                beneficiary={fund?.beneficiary}
+              />
             </div>
+
+            {fund && fund.contacts.length > 0 && (
+              <div className="mb-6">
+                <MajorGiftNote contacts={fund.contacts} />
+              </div>
+            )}
 
             {error && (
               <p

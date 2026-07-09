@@ -28,6 +28,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       currency: session.currency,
       mode: session.mode,
       program: session.metadata?.program ?? 'general',
+      fund: session.metadata?.fund ?? null,
     })
   } catch (err) {
     console.error('[checkout-session]', err)
