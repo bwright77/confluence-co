@@ -22,7 +22,17 @@ location:
 leadStaff:
   - shane-wright
 
-partners: []
+partners:
+  - Lincoln Hills Cares
+  - El Laboratorio / Hellmund Associates
+  - Wright Water Engineers
+  - Colorado Parks and Wildlife
+  - Metro Water Recovery
+  - Mile High Flood District
+  - Colorado Stormwater Center (CSU)
+  - Adams County Stormwater Program
+  - Barr Lake State Park
+  - River Watch
 
 targets: []
 
@@ -49,11 +59,26 @@ In **2025**, the SPRAY Council's work — in partnership with Confluence Colorad
 
 The South Platte River Advisory Youth (SPRAY) Council is committed to taking a watershed-wide, ecosystems perspective so the Council can learn about significant problems and create practical solutions for the South Platte River in the Denver area. The Council focuses specifically on coordinating roles for youth and community that can address the broadly distributed sources of river pollution.
 
-In 2022, the SPRAY Council published *Our River, Our Voices, Our Future: A Youth-to-Youth Guide to a Healthier South Platte River* — the Council's plan and an invitation to other youth who want to take action on the river.
+The SPRAY Council published *Our River, Our Voices, Our Future: A Youth-to-Youth Guide to a Healthier South Platte River* — the Council's plan and an invitation to other youth who want to take action on the river. Their vision is a South Platte with healthy, clean water, brimming with life, not pollution.
+
+The plan is grounded in the **One Water** approach, which treats every form of water — stormwater, wastewater, drinking water, and irrigation — as interconnected and valuable. This systems view emphasizes partnerships, watershed-scale solutions, and inclusive community engagement.
+
+## What the Council does
+
+The Council organizes youth-led work into four areas:
+
+- **Experience the River.** Discover local river access points and recreation, and learn to read conditions along the river corridor.
+- **Explore the Watershed.** Connect with related Front Range waterways — Clear Creek, Boulder Creek, and Pueblo's Riverwalk among them.
+- **Add to River Knowledge.** Take part in monitoring: algae-bloom tracking, water-quality testing, stormwater data collection, and biodiversity surveys (BioBlitz).
+- **Jump In to Help.** Hands-on interventions — installing rain gardens, marking storm drains, removing invasive carp, managing trash and dog waste, controlling aquatic nuisance species, and building green infrastructure.
 
 ## What we're doing now
 
 Confluence Colorado is working with the SPRAY Council to update the plan and implement its action priorities.
+
+## Origins
+
+The Council began in **2019**, when fourteen Denver high-school students from Kennedy, Lincoln, and Bruce Randolph schools partnered with Colorado State University's TRIO Upward Bound program to create the founding *Sourcebook*. From 2023 through 2026, Lincoln Hills Cares coordinated Council operations — with Program Coordinator Vivian Cervantes — alongside partners including El Laboratorio and Wright Water Engineers. The Council is now transitioning toward independent implementation through other youth-serving organizations, with Confluence Colorado carrying the plan forward.
 
 ## Why a youth council
 
