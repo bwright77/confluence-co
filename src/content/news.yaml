@@ -1,3 +1,42 @@
+- id: hiring-natural-resource-environmental-associate-2026
+  date: "2026-07-20"
+  title: "We're hiring: Natural Resource & Environmental Associate"
+  body: |
+    We're looking for **paid youth leaders** to join Confluence Colorado's **Youth Pathways Program** as Natural Resource & Environmental Associates — hands-on experience in community-based conservation, watershed restoration, agriculture, parks and recreation, and nonprofit leadership. No experience required; just curiosity, commitment, and a willingness to learn.
+
+    **Pay:** $20.00/hour · **Hours:** up to 80 paid hours · **Employment period:** July 2026 – March 2027. Interested applicants should send a resume and cover letter to shane@confluenceco.org.
+  link:
+    label: Apply — email Shane
+    href: mailto:shane@confluenceco.org
+  tags:
+    - youth-pathways
+    - natural-resource-conservation
+
+- id: conservation-heritage-national-parks-2026
+  date: "2026-07-16"
+  title: A shared heritage of conservation
+  body: |
+    A reflection from the field: there was a time in this country when presidents of both parties established the National Parks and the Environmental Protection Agency — treating the care of the land we inhabit, and leaving it as good or greater for the next generation, as a shared national duty. Conservation belongs to all of us. **People and nature.**
+  link:
+    label: Follow on Facebook
+    href: https://www.facebook.com/profile.php?id=61573593181872
+  tags:
+    - natural-resource-conservation
+    - civic-engagement
+
+- id: south-platte-adams-county-segment-15-2026
+  date: "2026-07-15"
+  title: A swimmable, fishable South Platte in Adams County
+  body: |
+    Segment 15 of the South Platte River in Adams County is beautiful — and it's getting more accessible. Adams County has plans for **swimming and floating** on this stretch, and Confluence Colorado will help as we update the **SPRAY Plan** and connect kids, community, and youth leaders from across the metro area with the river. A fishable, swimmable river, outdoors for all. *We are water.*
+  link:
+    label: SPRAY Council program
+    href: /projects/spray-council
+  tags:
+    - watershed-restoration
+    - outdoor-recreation-stream
+    - civic-engagement
+
 - id: outerhaven-seeds-of-power-2026
   date: "2026-06-22"
   title: Learning at the Seeds of Power Unity Farm
