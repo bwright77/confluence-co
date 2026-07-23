@@ -59,7 +59,7 @@ In **2025**, the SPRAY Council's work — in partnership with Confluence Colorad
 
 The South Platte River Advisory Youth (SPRAY) Council is committed to taking a watershed-wide, ecosystems perspective so the Council can learn about significant problems and create practical solutions for the South Platte River in the Denver area. The Council focuses specifically on coordinating roles for youth and community that can address the broadly distributed sources of river pollution.
 
-The SPRAY Council published *Our River, Our Voices, Our Future: A Youth-to-Youth Guide to a Healthier South Platte River* — the Council's plan and an invitation to other youth who want to take action on the river. Their vision is a South Platte with healthy, clean water, brimming with life, not pollution.
+In 2021, the SPRAY Council published *Our River, Our Voices, Our Future: A Youth-to-Youth Guide to a Healthier South Platte River* — the Council's plan and an invitation to other youth who want to take action on the river. Their vision is a South Platte with healthy, clean water, brimming with life, not pollution.
 
 The plan is grounded in the **One Water** approach, which treats every form of water — stormwater, wastewater, drinking water, and irrigation — as interconnected and valuable. This systems view emphasizes partnerships, watershed-scale solutions, and inclusive community engagement.
 
