@@ -38,8 +38,8 @@ targets: []
 
 cta:
   primary:
-    label: Read the plan
-    href: https://www.magcloud.com/browse/issue/2155064
+    label: Visit the SPRAY Council site
+    href: https://sites.google.com/view/spray-projects/home
   secondary:
     label: Support this program
     href: /donate?program=spray-council
