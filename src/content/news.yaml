@@ -5,6 +5,9 @@
     We're looking for **paid youth leaders** to join Confluence Colorado's **Youth Pathways Program** as Natural Resource & Environmental Associates — hands-on experience in community-based conservation, watershed restoration, agriculture, parks and recreation, and nonprofit leadership. No experience required; just curiosity, commitment, and a willingness to learn.
 
     **Pay:** $20.00/hour · **Hours:** up to 80 paid hours · **Employment period:** July 2026 – March 2027. Interested applicants should send a resume and cover letter to shane@confluenceco.org.
+  image: /news/spray_jobs.jpg
+  imageAlt: Hiring flyer for the Confluence Colorado Natural Resource & Environmental Associate, a paid Youth Pathways Program position
+  imageFit: contain
   link:
     label: Apply — email Shane
     href: mailto:shane@confluenceco.org
@@ -14,9 +17,11 @@
 
 - id: conservation-heritage-national-parks-2026
   date: "2026-07-16"
-  title: A shared heritage of conservation
+  title: Conservation is conservative
   body: |
-    A reflection from the field: there was a time in this country when presidents of both parties established the National Parks and the Environmental Protection Agency — treating the care of the land we inhabit, and leaving it as good or greater for the next generation, as a shared national duty. Conservation belongs to all of us. **People and nature.**
+    There was a time in this country when **Republican Presidents** started the National Parks and the Environmental Protection Agency — when our federal administration held that, just below defending our nation in a Great War, was the duty of leaving this place we inhabit as good if not greater for the next generations. Conservation is conservative. **People and nature.**
+  image: /news/buffalo.jpg
+  imageAlt: Black-and-white photograph of a bison in tallgrass at a wildlife refuge interpretive exhibit
   link:
     label: Follow on Facebook
     href: https://www.facebook.com/profile.php?id=61573593181872
@@ -29,6 +34,8 @@
   title: A swimmable, fishable South Platte in Adams County
   body: |
     Segment 15 of the South Platte River in Adams County is beautiful — and it's getting more accessible. Adams County has plans for **swimming and floating** on this stretch, and Confluence Colorado will help as we update the **SPRAY Plan** and connect kids, community, and youth leaders from across the metro area with the river. A fishable, swimmable river, outdoors for all. *We are water.*
+  image: /news/adams_county.jpg
+  imageAlt: The South Platte River winding through green banks under a pedestrian bridge in Adams County
   link:
     label: SPRAY Council program
     href: /projects/spray-council
