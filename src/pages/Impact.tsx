@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
@@ -86,6 +87,9 @@ const GOALS = [
 ]
 
 export default function Impact() {
+  useEffect(() => {
+    document.title = 'Impact · Confluence Colorado'
+  }, [])
   const [statsRef, statsInView] = useInView<HTMLDivElement>({ threshold: 0.1 })
   const [goalsRef, goalsInView] = useInView<HTMLDivElement>({ threshold: 0.05 })
   const reduced = useReducedMotion()

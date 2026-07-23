@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
@@ -28,6 +29,9 @@ const VALUES = [
 ]
 
 export default function About() {
+  useEffect(() => {
+    document.title = 'About · Confluence Colorado'
+  }, [])
   const [valuesRef, valuesInView] = useInView<HTMLDivElement>({ threshold: 0.05 })
   const [tocRef, tocInView] = useInView<HTMLDivElement>({ threshold: 0.05 })
   const reduced = useReducedMotion()

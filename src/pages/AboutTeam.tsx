@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import { useReducedMotion } from '../hooks/useReducedMotion'
@@ -54,6 +55,9 @@ const BOARD: BoardMember[] = [
 ]
 
 export default function AboutTeam() {
+  useEffect(() => {
+    document.title = 'Our team · Confluence Colorado'
+  }, [])
   const [boardRef, boardInView] = useInView<HTMLDivElement>({ threshold: 0.05 })
   const reduced = useReducedMotion()
 

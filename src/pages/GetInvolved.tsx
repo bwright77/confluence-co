@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Handshake,
@@ -103,6 +104,10 @@ function AudienceCard({ audience }: { audience: Audience }) {
 }
 
 export default function GetInvolved() {
+  useEffect(() => {
+    document.title = 'Get involved · Confluence Colorado'
+  }, [])
+
   return (
     <>
       {/* Page hero */}

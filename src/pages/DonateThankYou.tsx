@@ -30,6 +30,10 @@ export default function DonateThankYou() {
   const [summary, setSummary] = useState<SessionSummary | null>(null)
 
   useEffect(() => {
+    document.title = 'Thank you · Confluence Colorado'
+  }, [])
+
+  useEffect(() => {
     if (!sessionId) return
     let cancelled = false
     fetch(`/api/checkout-session?id=${encodeURIComponent(sessionId)}`)
