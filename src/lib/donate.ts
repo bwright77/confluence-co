@@ -108,6 +108,98 @@ export function isValidFund(value: unknown): value is string {
   return typeof value === 'string' && Object.prototype.hasOwnProperty.call(FUNDS, value)
 }
 
+// Thank-you gifts — fixed support tiers that send the donor a physical item.
+// A fund's own site (e.g. kadysheepcamp.org/support) deep-links here with
+// `?gift=<id>`; this catalog is the authoritative source for the amount and the
+// fair-market value, because Confluence's Stripe account issues the receipt.
+//
+// Because a gift has fair-market value, the IRS "quid pro quo" rule applies: the
+// deductible portion is the amount given MINUS the item's FMV. Low-cost logo
+// items (the sticker) fall under the insubstantial-benefit safe harbor and stay
+// fully deductible — flagged `tokenGift`.
+//
+// FMVs are DRAFT figures from the camp's SUPPORT-MODEL and are pending sign-off
+// by Confluence's accountant; the page marks the deductible line accordingly.
+export const TSHIRT_SIZES = ['S', 'M', 'LG', 'XL', '2XL'] as const
+export type TshirtSize = (typeof TSHIRT_SIZES)[number]
+
+export interface GiftTier {
+  id: string
+  /** The fund this gift is a thank-you for — a `?gift=` only applies on its fund's page. */
+  fund: string
+  label: string
+  amount: number
+  /** Fair market value of the item (DRAFT — pending accountant confirmation). */
+  fmv: number
+  /** Low-cost logo item → 100% deductible under the IRS safe harbor; FMV not subtracted. */
+  tokenGift?: boolean
+  /** Apparel: requires a size and (like all rewards) ships. */
+  apparel?: boolean
+  /** One-line description shown in the reward summary. */
+  blurb: string
+}
+
+export const GIFTS: Record<string, GiftTier> = {
+  sticker: {
+    id: 'sticker',
+    fund: 'kady-youth-sheep-camp',
+    label: 'Apprenticeship Sticker',
+    amount: 15,
+    fmv: 2,
+    tokenGift: true,
+    blurb: 'The camp’s beam-of-light sticker for your bottle, laptop, or truck window.',
+  },
+  poster: {
+    id: 'poster',
+    fund: 'kady-youth-sheep-camp',
+    label: 'Camp Poster',
+    amount: 35,
+    fmv: 10,
+    blurb: 'The camp’s illustration — the flock lifted in a beam of light — printed and ready to frame.',
+  },
+  'ram-beam-tee': {
+    id: 'ram-beam-tee',
+    fund: 'kady-youth-sheep-camp',
+    label: 'Ram Beam Tee',
+    amount: 75,
+    fmv: 25,
+    apparel: true,
+    blurb: 'The “Apprenticeship” design on a soft black tee. Art by Benjamin Mutton.',
+  },
+  'rambo-tee': {
+    id: 'rambo-tee',
+    fund: 'kady-youth-sheep-camp',
+    label: 'Rambo Tee',
+    amount: 75,
+    fmv: 25,
+    apparel: true,
+    blurb: 'Our churro ram as “Rambo” — a bold black tee for the flock’s fiercest fans.',
+  },
+  bundle: {
+    id: 'bundle',
+    fund: 'kady-youth-sheep-camp',
+    label: 'The Full Bundle',
+    amount: 250,
+    fmv: 80,
+    apparel: true,
+    blurb: 'The whole kit — a tote, both tees, the poster, and a sticker.',
+  },
+}
+
+export function isValidGift(value: unknown): value is string {
+  return typeof value === 'string' && Object.prototype.hasOwnProperty.call(GIFTS, value)
+}
+
+export function isValidSize(value: unknown): value is TshirtSize {
+  return typeof value === 'string' && (TSHIRT_SIZES as readonly string[]).includes(value)
+}
+
+// Tax-deductible portion of a gift purchase. Token (low-cost logo) items are
+// fully deductible; otherwise it's the gift minus the item's fair-market value.
+export function deductibleAmount(gift: GiftTier): number {
+  return gift.tokenGift ? gift.amount : Math.max(0, gift.amount - gift.fmv)
+}
+
 // Stripe nonprofit pricing (2.2% + $0.30). If the negotiated rate moves, this is
 // the one place to change it. Amex runs higher (3.5%) but the gross-up can't know
 // the card brand pre-payment, so the 2.2% base is used — never under-recovers for

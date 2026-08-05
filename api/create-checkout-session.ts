@@ -1,6 +1,16 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import Stripe from 'stripe'
-import { FUNDS, chargeCents, isValidAmount, isValidFrequency, isValidFund } from '../src/lib/donate'
+import {
+  FUNDS,
+  GIFTS,
+  chargeCents,
+  deductibleAmount,
+  isValidAmount,
+  isValidFrequency,
+  isValidFund,
+  isValidGift,
+  isValidSize,
+} from '../src/lib/donate'
 import { rejectIfBlocked } from './_guard'
 
 // Project (a.k.a. "program" in code) slugs → display titles. Hard-coded here
@@ -37,9 +47,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     coverFee?: unknown
     program?: unknown
     fund?: unknown
+    gift?: unknown
+    size?: unknown
+    declineReward?: unknown
   }
 
-  const { amount, frequency, coverFee, program, fund } = body
+  const { amount, frequency, coverFee, program, fund, gift, size, declineReward } = body
 
   if (typeof amount !== 'number' || !isValidAmount(amount)) {
     return res.status(400).json({ error: 'Invalid amount' })
@@ -79,10 +92,52 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const cover = coverFee === true
-  const cents = chargeCents(amount, cover)
   const monthly = frequency === 'monthly'
   const metadata: Stripe.MetadataParam = { program: programSlug, coverFee: String(cover) }
   if (fundSlug) metadata.fund = fundSlug
+
+  // Thank-you gift (deep-linked from a fund's own site as ?gift=<id>). The
+  // catalog here is authoritative for the amount and FMV — never trust the
+  // client's number — because Confluence's Stripe issues the receipt. A gift is
+  // a one-time, fund-designated tier; a physical reward collects a shipping
+  // address unless the donor opts out (declineReward → 100% deductible, nothing
+  // to ship).
+  const declined = declineReward === true
+  let giftLabelForName: string | null = null
+  let netAmount = amount
+  let collectShipping = false
+  const hasGift = typeof gift === 'string' && gift.length > 0
+  if (hasGift) {
+    if (!isValidGift(gift)) {
+      return res.status(400).json({ error: 'Unknown gift' })
+    }
+    const giftTier = GIFTS[gift]
+    if (giftTier.fund !== fundSlug) {
+      return res.status(400).json({ error: 'Gift does not match fund' })
+    }
+    if (monthly) {
+      return res.status(400).json({ error: 'A thank-you gift is a one-time gift' })
+    }
+    netAmount = giftTier.amount
+    if (!declined) {
+      collectShipping = true
+      giftLabelForName = giftTier.label
+      metadata.gift = giftTier.id
+      metadata.giftLabel = giftTier.label
+      metadata.fmv = String(giftTier.fmv)
+      metadata.deductible = String(deductibleAmount(giftTier))
+      if (giftTier.apparel) {
+        if (!isValidSize(size)) {
+          return res.status(400).json({ error: 'A t-shirt size is required for this gift' })
+        }
+        metadata.size = size
+      }
+    } else {
+      metadata.gift = `${giftTier.id} (declined)`
+    }
+  }
+
+  const cents = chargeCents(netAmount, cover)
 
   // A cancelled checkout returns to the page the donor started from.
   const cancelUrl = fundSlug ? `${ORIGIN}/donate/${fundSlug}` : `${ORIGIN}/donate`
@@ -119,15 +174,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         mode: 'payment',
         submit_type: 'donate',
         billing_address_collection: 'auto',
+        // A physical thank-you reward needs somewhere to ship.
+        ...(collectShipping
+          ? {
+              shipping_address_collection: {
+                allowed_countries: [
+                  'US',
+                ] as Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[],
+              },
+            }
+          : {}),
         line_items: [
           {
             price_data: {
               currency: 'usd',
               unit_amount: cents,
               product_data: {
-                name: designationTitle
-                  ? `Donation — ${designationTitle}`
-                  : 'Donation to Confluence Colorado',
+                name: giftLabelForName
+                  ? `Donation — ${designationTitle} (${giftLabelForName})`
+                  : designationTitle
+                    ? `Donation — ${designationTitle}`
+                    : 'Donation to Confluence Colorado',
               },
             },
             quantity: 1,

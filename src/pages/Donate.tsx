@@ -3,12 +3,15 @@ import { useSearchParams } from 'react-router-dom'
 import { CircleNotch } from '@phosphor-icons/react'
 import {
   PRESETS,
+  GIFTS,
   EIN,
   TAX_STATEMENT,
   feeCoverAmount,
   isValidAmount,
+  isValidGift,
   type Frequency,
   type Fund,
+  type TshirtSize,
 } from '../lib/donate'
 import { getProgram } from '../data/programs'
 import FrequencyToggle from '../components/donate/FrequencyToggle'
@@ -18,6 +21,7 @@ import ImpactFraming from '../components/donate/ImpactFraming'
 import ProgramContext from '../components/donate/ProgramContext'
 import MajorGiftNote from '../components/donate/MajorGiftNote'
 import FundLockup from '../components/donate/FundLockup'
+import GiftReward from '../components/donate/GiftReward'
 
 function formatUSD(n: number): string {
   return Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`
@@ -35,6 +39,14 @@ export default function Donate({ fund }: Props) {
   const programSlug = fund ? null : params.get('program')
   const program = programSlug ? getProgram(programSlug) : undefined
 
+  // A fund's own site can deep-link a thank-you tier with ?gift=<id>. It only
+  // applies on that fund's page, so guard on both validity and fund match.
+  const giftId = params.get('gift')
+  const gift =
+    fund && giftId && isValidGift(giftId) && GIFTS[giftId].fund === fund.slug
+      ? GIFTS[giftId]
+      : undefined
+
   useEffect(() => {
     document.title = fund
       ? `Donate to ${fund.title} · Confluence Colorado`
@@ -43,12 +55,17 @@ export default function Donate({ fund }: Props) {
 
   // A fund can lead with monthly and offer its own (smaller) preset ladder.
   const presetTable = fund?.presets ?? PRESETS
-  const initialFrequency = fund?.defaultFrequency ?? 'one-time'
+  // A thank-you gift is a fixed, one-time tier; it overrides the fund default.
+  const initialFrequency: Frequency = gift ? 'one-time' : (fund?.defaultFrequency ?? 'one-time')
 
   const [frequency, setFrequency] = useState<Frequency>(initialFrequency)
-  const [amount, setAmount] = useState<number | null>(presetTable[initialFrequency][1])
+  const [amount, setAmount] = useState<number | null>(
+    gift ? gift.amount : presetTable[initialFrequency][1]
+  )
   const [customText, setCustomText] = useState('')
   const [coverFee, setCoverFee] = useState(false)
+  const [size, setSize] = useState<TshirtSize | ''>('')
+  const [declined, setDeclined] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -78,10 +95,16 @@ export default function Donate({ fund }: Props) {
     setAmount(text.trim() !== '' && Number.isFinite(parsed) ? parsed : null)
   }
 
+  const needsSize = gift?.apparel === true && !declined
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (amount == null || !isValidAmount(amount)) {
       setError('Please choose an amount of at least $5.')
+      return
+    }
+    if (needsSize && size === '') {
+      setError('Please choose a t-shirt size.')
       return
     }
     setLoading(true)
@@ -96,6 +119,9 @@ export default function Donate({ fund }: Props) {
           coverFee,
           program: program?.slug,
           fund: fund?.slug,
+          gift: gift?.id,
+          size: needsSize ? size : undefined,
+          declineReward: gift ? declined : undefined,
         }),
       })
       if (!res.ok) throw new Error(`Request failed: ${res.status}`)
@@ -169,25 +195,49 @@ export default function Donate({ fund }: Props) {
               </div>
             )}
 
-            <div className="mb-6">
-              <h2 className="mb-3 font-display text-sm font-bold uppercase tracking-display text-cc-navy">
-                Frequency
-              </h2>
-              <FrequencyToggle value={frequency} onChange={handleFrequencyChange} />
-            </div>
+            {/* Frequency — a thank-you gift is a one-time tier, so hide it. */}
+            {!gift && (
+              <div className="mb-6">
+                <h2 className="mb-3 font-display text-sm font-bold uppercase tracking-display text-cc-navy">
+                  Frequency
+                </h2>
+                <FrequencyToggle value={frequency} onChange={handleFrequencyChange} />
+              </div>
+            )}
 
             <div className="mb-5">
               <h2 className="mb-3 font-display text-sm font-bold uppercase tracking-display text-cc-navy">
                 Amount
               </h2>
-              <AmountSelector
-                presets={presets}
-                amount={amount}
-                customText={customText}
-                onSelectPreset={handleSelectPreset}
-                onCustomChange={handleCustomChange}
-              />
+              {gift ? (
+                <div className="rounded-lg border-2 border-cc-orange bg-cc-orange/5 px-4 py-3">
+                  <span className="font-display text-lg font-bold text-cc-navy">
+                    ${gift.amount}
+                  </span>
+                  <span className="ml-2 font-body text-sm text-cc-stone">· one-time gift</span>
+                </div>
+              ) : (
+                <AmountSelector
+                  presets={presets}
+                  amount={amount}
+                  customText={customText}
+                  onSelectPreset={handleSelectPreset}
+                  onCustomChange={handleCustomChange}
+                />
+              )}
             </div>
+
+            {gift && (
+              <div className="mb-6">
+                <GiftReward
+                  gift={gift}
+                  size={size}
+                  onSizeChange={setSize}
+                  declined={declined}
+                  onDeclineChange={setDeclined}
+                />
+              </div>
+            )}
 
             <div className="mb-6 rounded-lg bg-cc-sage/5 px-4 py-3">
               <ImpactFraming
@@ -238,9 +288,24 @@ export default function Donate({ fund }: Props) {
             </p>
           </form>
 
-          {/* Tax-deductibility statement */}
+          {/* Tax-deductibility statement. With a thank-you gift attached, the
+              generic "no goods provided" line is false — swap in wording that
+              matches the reward: quid-pro-quo for a valued item, safe-harbor for
+              a low-cost token gift. Declined (or no gift) keeps the standard line. */}
           <div className="mx-auto mt-8 max-w-lg text-center">
-            <p className="font-body text-xs leading-relaxed text-cc-stone">{TAX_STATEMENT}</p>
+            <p className="font-body text-xs leading-relaxed text-cc-stone">
+              {gift && !declined
+                ? gift.tokenGift
+                  ? 'Confluence Colorado is a 501(c)(3) tax-exempt organization, EIN 88-1757678. ' +
+                    'Your thank-you is a low-cost item, so your contribution remains fully ' +
+                    'tax-deductible. Kady Youth Sheep Camp is a fiscally sponsored project of ' +
+                    'Confluence Colorado.'
+                  : 'Confluence Colorado is a 501(c)(3) tax-exempt organization, EIN 88-1757678. ' +
+                    'Because you receive a thank-you gift, only the portion of your gift above the ' +
+                    'gift’s fair market value is tax-deductible. Kady Youth Sheep Camp is a fiscally ' +
+                    'sponsored project of Confluence Colorado.'
+                : TAX_STATEMENT}
+            </p>
             <p className="mt-2 font-display text-xs font-semibold uppercase tracking-display text-cc-stone">
               EIN {EIN}
             </p>
