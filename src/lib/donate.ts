@@ -117,9 +117,6 @@ export function isValidFund(value: unknown): value is string {
 // deductible portion is the amount given MINUS the item's FMV. Low-cost logo
 // items (the sticker) fall under the insubstantial-benefit safe harbor and stay
 // fully deductible — flagged `tokenGift`.
-//
-// FMVs are DRAFT figures from the camp's SUPPORT-MODEL and are pending sign-off
-// by Confluence's accountant; the page marks the deductible line accordingly.
 export const TSHIRT_SIZES = ['S', 'M', 'LG', 'XL', '2XL'] as const
 export type TshirtSize = (typeof TSHIRT_SIZES)[number]
 
@@ -129,7 +126,7 @@ export interface GiftTier {
   fund: string
   label: string
   amount: number
-  /** Fair market value of the item (DRAFT — pending accountant confirmation). */
+  /** Fair market value of the item. */
   fmv: number
   /** Low-cost logo item → 100% deductible under the IRS safe harbor; FMV not subtracted. */
   tokenGift?: boolean

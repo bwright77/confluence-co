@@ -10,8 +10,8 @@ interface Props {
   onDeclineChange: (declined: boolean) => void
 }
 
-// The reward attached to a deep-linked gift tier: what you get, the (draft)
-// deductible line, an apparel size when needed, and the opt-out.
+// The reward attached to a deep-linked gift tier: what you get, the deductible
+// line, an apparel size when needed, and the opt-out.
 export default function GiftReward({
   gift,
   size,
@@ -38,7 +38,7 @@ export default function GiftReward({
             <p className="mt-1 font-body text-xs leading-relaxed text-cc-stone">{gift.blurb}</p>
           )}
 
-          {/* Deductible line — DRAFT figures, pending accountant sign-off. */}
+          {/* Deductible line — donation minus the item's fair market value. */}
           <p className="mt-2 font-body text-xs leading-relaxed text-cc-navy">
             {declined || gift.tokenGift ? (
               <>100% tax-deductible.</>
@@ -46,8 +46,7 @@ export default function GiftReward({
               <>
                 ≈ ${deductible} tax-deductible · {gift.label.toLowerCase()} FMV ${gift.fmv}
               </>
-            )}{' '}
-            <span className="text-cc-stone">(draft — pending confirmation)</span>
+            )}
           </p>
         </div>
       </div>
