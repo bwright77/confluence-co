@@ -13,6 +13,134 @@ export interface Profile {
 }
 
 // ---------------------------------------------------------------------------
+// Grants / opportunities (Phase 3). Partnership fields are intentionally omitted
+// — this is the grant-only product — so any leftover partnership field access
+// fails to compile.
+// ---------------------------------------------------------------------------
+export type OpportunityTypeId = 'grant' | 'partnership'
+export type TaskStatus = 'not_started' | 'in_progress' | 'complete' | 'blocked'
+export type GrantType = 'federal' | 'state' | 'foundation' | 'corporate' | 'other'
+export type DocType =
+  | 'proposal' | 'budget' | 'loi' | 'agreement' | 'supporting'
+  | 'award_letter' | 'report' | 'correspondence' | 'other'
+
+export interface PipelineStatus {
+  id: string
+  type_id: OpportunityTypeId
+  label: string
+  sort_order: number
+  is_active: boolean
+}
+
+export interface ScoreDetail {
+  scores: {
+    mission_alignment: number
+    geographic_eligibility: number
+    applicant_eligibility: number
+    award_size_fit: number
+    population_alignment: number
+  }
+  weighted_score: number
+  auto_rejected: boolean
+  auto_reject_reason: string | null
+  rationale: string
+  red_flags: string[]
+  recommended_action: 'apply' | 'investigate' | 'skip'
+}
+
+export interface Opportunity {
+  id: string
+  type_id: OpportunityTypeId
+  name: string
+  description: string | null
+  status: string
+  owner_id: string | null
+  primary_deadline: string | null
+  source_url: string | null
+  tags: string[]
+  // Grant-specific
+  funder: string | null
+  grant_type: GrantType | null
+  amount_max: number | null
+  amount_requested: number | null
+  amount_awarded: number | null
+  loi_deadline: string | null
+  cfda_number: string | null
+  eligibility_notes: string | null
+  // Metadata
+  created_by: string | null
+  created_at: string
+  updated_at: string
+  // Discovery (ADR-002)
+  source: string | null
+  external_id: string | null
+  external_url: string | null
+  ai_match_score: number | null
+  ai_match_rationale: string | null
+  ai_score_detail: ScoreDetail | null
+  auto_discovered: boolean
+  discovered_at: string | null
+  // Joined (optional)
+  owner?: Profile
+}
+
+export interface Task {
+  id: string
+  opportunity_id: string
+  title: string
+  status: TaskStatus
+  assignee_id: string | null
+  due_date: string | null
+  days_offset: number | null
+  sort_order: number
+  created_at: string
+  updated_at: string
+  assignee?: Profile
+  opportunity?: Pick<Opportunity, 'id' | 'name' | 'type_id'>
+}
+
+export interface TaskTemplate {
+  id: string
+  type_id: OpportunityTypeId
+  name: string
+  is_default: boolean
+  created_at: string
+  items?: TaskTemplateItem[]
+}
+
+export interface TaskTemplateItem {
+  id: string
+  template_id: string
+  title: string
+  days_offset: number
+  assignee_role: 'owner' | 'contributor' | 'leadership'
+  sort_order: number
+}
+
+export interface ActivityEntry {
+  id: string
+  opportunity_id: string
+  actor_id: string | null
+  action: string
+  details: Record<string, unknown> | null
+  created_at: string
+  actor?: Profile
+}
+
+export interface Document {
+  id: string
+  opportunity_id: string
+  name: string
+  doc_type: DocType
+  storage_path: string
+  file_size: number | null
+  mime_type: string | null
+  version: number
+  uploaded_by: string | null
+  created_at: string
+}
+
+// ---------------------------------------------------------------------------
 // Board meeting minutes (Phase 2). Transcript → AI extraction → review → approval.
 // ---------------------------------------------------------------------------
 export type BoardMeetingStatus = 'draft' | 'under_review' | 'approved'

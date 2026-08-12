@@ -1,48 +1,272 @@
 import { useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { Link } from 'react-router-dom'
+import { Plus, DollarSign, CheckSquare, Briefcase, Sparkles, ArrowRight } from 'lucide-react'
+import { format, isAfter, addDays } from 'date-fns'
+import { parseLocalDate } from '../../lib/dates'
+import type { LucideIcon } from 'lucide-react'
+import { getSupabase } from '../../lib/supabase'
 import { useAuth } from '../../contexts/AuthContext'
+import type { Opportunity, Task } from '../../lib/adminTypes'
 
-// Phase 1 placeholder. Proves the protected route, the layout, and auth wiring
-// render end-to-end. Real dashboard content (grant pipeline, discovery, board
-// minutes) lands in Phases 2–3.
+const INACTIVE_GRANT_STATUSES = ['grant_archived', 'grant_declined', 'grant_withdrawn']
+
+function MetricCard({ label, value, sub, icon: Icon, accent, to }: {
+  label: string
+  value: number | string
+  sub?: string
+  icon: LucideIcon
+  accent: string
+  to?: string
+}) {
+  const inner = (
+    <>
+      <div className="flex items-start justify-between mb-3">
+        <span className="text-xs font-medium text-gray-400 uppercase tracking-[0.07em]">{label}</span>
+        <div className={`w-8 h-8 rounded-lg ${accent} flex items-center justify-center`}>
+          <Icon size={15} className="text-white" />
+        </div>
+      </div>
+      <p className="text-3xl font-bold text-navy leading-none mb-1">{value}</p>
+      {sub && <p className="text-xs text-gray-400">{sub}</p>}
+    </>
+  )
+  if (to) {
+    return (
+      <Link to={to} className="block bg-white rounded-xl border border-gray-200 p-5 hover:border-river/40 hover:shadow-sm transition-all">
+        {inner}
+      </Link>
+    )
+  }
+  return <div className="bg-white rounded-xl border border-gray-200 p-5">{inner}</div>
+}
+
 export default function Dashboard() {
-  const { user, profile, configured } = useAuth()
+  const { profile } = useAuth()
 
   useEffect(() => {
     document.title = 'Dashboard · Confluence Colorado admin'
   }, [])
 
+  const { data: opportunities = [] } = useQuery<Opportunity[]>({
+    queryKey: ['opportunities'],
+    queryFn: async () => {
+      const supabase = await getSupabase()
+      const { data, error } = await supabase
+        .from('opportunities')
+        .select('*')
+        .order('created_at', { ascending: false })
+      if (error) throw error
+      return data ?? []
+    },
+  })
+
+  const { data: myTasks = [] } = useQuery<Task[]>({
+    queryKey: ['my-tasks', profile?.id],
+    queryFn: async () => {
+      if (!profile?.id) return []
+      const supabase = await getSupabase()
+      const { data, error } = await supabase
+        .from('tasks')
+        .select('*, opportunity:opportunities(id, name, type_id)')
+        .eq('assignee_id', profile.id)
+        .neq('status', 'complete')
+        .order('due_date', { ascending: true, nullsFirst: false })
+      if (error) throw error
+      return data ?? []
+    },
+    enabled: !!profile?.id,
+  })
+
+  const now = new Date()
+  const activeGrants = opportunities.filter(o => o.type_id === 'grant' && !INACTIVE_GRANT_STATUSES.includes(o.status))
+  const overdueTasks = myTasks.filter(t => t.due_date && !isAfter(new Date(t.due_date), now))
+
+  const upcomingDeadlines = opportunities
+    .filter(o =>
+      o.primary_deadline &&
+      isAfter(new Date(o.primary_deadline), now) &&
+      !isAfter(new Date(o.primary_deadline), addDays(now, 30))
+    )
+    .sort((a, b) => new Date(a.primary_deadline!).getTime() - new Date(b.primary_deadline!).getTime())
+    .slice(0, 5)
+
+  const discoveredOpps = opportunities
+    .filter(o => o.auto_discovered && o.status === 'grant_discovered')
+    .sort((a, b) => (b.ai_match_score ?? 0) - (a.ai_match_score ?? 0))
+
+  const firstName = profile?.full_name?.split(' ')[0]
+
   return (
-    <div className="mx-auto max-w-3xl px-6 py-10">
-      <p className="font-display text-xs font-semibold uppercase tracking-display text-cc-clay">
-        Staff workspace
-      </p>
-      <h1 className="mt-2 font-display text-2xl font-bold text-cc-sage-ink">Admin dashboard</h1>
-      <p className="mt-2 font-body text-sm text-cc-stone">
-        The shell is live. Grant seeking, discovery, and board minutes arrive in the next phases.
-      </p>
-
-      <dl className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div className="rounded-lg border border-cc-navy/10 bg-white p-4">
-          <dt className="font-display text-xs uppercase tracking-display text-cc-stone">
-            Signed in as
-          </dt>
-          <dd className="mt-1 font-body text-sm text-cc-dark">
-            {profile?.full_name || user?.email || '—'}
-          </dd>
+    <div className="p-4 sm:p-6 lg:p-8">
+      {/* Header */}
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-8">
+        <div>
+          <h1 className="text-2xl font-bold text-cc-sage-ink">
+            {firstName ? `Welcome, ${firstName}` : 'Dashboard'}
+          </h1>
+          <p className="text-sm text-gray-400 mt-0.5">Opportunity Management Platform</p>
         </div>
-        <div className="rounded-lg border border-cc-navy/10 bg-white p-4">
-          <dt className="font-display text-xs uppercase tracking-display text-cc-stone">Role</dt>
-          <dd className="mt-1 font-body text-sm capitalize text-cc-dark">
-            {profile?.role || '—'}
-          </dd>
-        </div>
-      </dl>
+        <Link
+          to="/admin/opportunities/new"
+          className="flex items-center gap-2 bg-cc-sage-ink hover:bg-cc-sage-ink/90 text-white text-sm font-medium px-4 py-2.5 rounded-lg transition-colors"
+        >
+          <Plus size={16} />
+          New Opportunity
+        </Link>
+      </div>
 
-      {!configured && (
-        <p className="mt-6 rounded-lg bg-cc-orange/10 px-4 py-3 font-body text-sm text-cc-orange">
-          Supabase isn’t configured in this environment yet — set the env vars to enable auth.
-        </p>
+      {/* Discovered opportunities hero */}
+      {discoveredOpps.length > 0 && (
+        <div className="bg-gradient-to-br from-river/10 via-river/5 to-transparent border border-river/20 rounded-xl p-5 mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <Sparkles size={14} className="text-river shrink-0" />
+                <h2 className="text-sm font-semibold text-navy">
+                  {discoveredOpps.length === 1
+                    ? '1 new grant opportunity discovered'
+                    : `${discoveredOpps.length} new grant opportunities discovered`}
+                </h2>
+              </div>
+              <p className="text-xs text-gray-500 mb-4 ml-5">
+                AI-scored from federal and state sources — review and add the best ones to your pipeline.
+              </p>
+              <ul className="space-y-2 ml-5">
+                {discoveredOpps.slice(0, 3).map(o => {
+                  const s = o.ai_match_score
+                  const scoreColor = s === null
+                    ? 'bg-gray-100 text-gray-400'
+                    : s >= 7 ? 'bg-green-100 text-green-700'
+                    : s >= 5 ? 'bg-amber-100 text-amber-700'
+                    : 'bg-red-100 text-red-600'
+                  return (
+                    <li key={o.id} className="flex items-center gap-2.5 min-w-0">
+                      <span className={`shrink-0 text-xs font-bold px-1.5 py-0.5 rounded ${scoreColor}`}>
+                        {s !== null ? s.toFixed(1) : '—'}
+                      </span>
+                      <span className="text-sm text-navy font-medium truncate">{o.name}</span>
+                      {o.funder && (
+                        <span className="text-xs text-gray-400 truncate hidden sm:block">{o.funder}</span>
+                      )}
+                    </li>
+                  )
+                })}
+              </ul>
+              {discoveredOpps.length > 3 && (
+                <p className="text-xs text-gray-400 mt-2 ml-5">
+                  +{discoveredOpps.length - 3} more
+                </p>
+              )}
+            </div>
+            <Link
+              to="/admin/opportunities?tab=discovered"
+              className="shrink-0 self-start flex items-center gap-1.5 bg-cc-sage-ink hover:bg-cc-sage-ink/90 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+            >
+              Review <ArrowRight size={14} />
+            </Link>
+          </div>
+        </div>
       )}
+
+      {/* Metrics */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <MetricCard
+          label="Active Grants"
+          value={activeGrants.length}
+          sub="in pipeline"
+          icon={DollarSign}
+          accent="bg-river"
+          to="/admin/opportunities?tab=grant&status=active"
+        />
+        <MetricCard
+          label="My Tasks"
+          value={myTasks.length}
+          sub={overdueTasks.length > 0 ? `${overdueTasks.length} overdue` : 'all on track'}
+          icon={CheckSquare}
+          accent={overdueTasks.length > 0 ? 'bg-red-500' : 'bg-earth'}
+          to="/admin/opportunities"
+        />
+        <MetricCard
+          label="Total"
+          value={opportunities.length}
+          sub="all opportunities"
+          icon={Briefcase}
+          accent="bg-navy"
+          to="/admin/opportunities"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Upcoming Deadlines */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-[0.08em] mb-4">
+            Upcoming Deadlines
+          </h2>
+          {upcomingDeadlines.length === 0 ? (
+            <div className="py-10 text-center">
+              <p className="text-sm text-gray-400">No deadlines in the next 30 days.</p>
+              <Link to="/admin/opportunities/new" className="mt-2 inline-block text-xs text-river hover:underline">
+                Add your first opportunity →
+              </Link>
+            </div>
+          ) : (
+            <ul className="space-y-3">
+              {upcomingDeadlines.map(o => (
+                <li key={o.id} className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className="w-2 h-2 rounded-full shrink-0 bg-river" />
+                    <Link
+                      to={`/admin/opportunities/${o.id}`}
+                      className="text-sm text-navy font-medium truncate hover:text-river transition-colors"
+                    >
+                      {o.name}
+                    </Link>
+                  </div>
+                  <span className="text-xs text-gray-400 shrink-0">
+                    {format(parseLocalDate(o.primary_deadline!), 'MMM d')}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* My Tasks */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-[0.08em] mb-4">
+            My Tasks
+          </h2>
+          {myTasks.length === 0 ? (
+            <div className="py-10 text-center">
+              <p className="text-sm text-gray-400">No open tasks assigned to you.</p>
+            </div>
+          ) : (
+            <>
+              <ul className="space-y-3">
+                {myTasks.slice(0, 5).map(t => (
+                  <li key={t.id} className="flex items-start gap-3">
+                    <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
+                      t.due_date && !isAfter(new Date(t.due_date), now) ? 'bg-red-500' : 'bg-gray-300'
+                    }`} />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-navy font-medium truncate">{t.title}</p>
+                      {t.due_date && (
+                        <p className="text-xs text-gray-400">{format(new Date(t.due_date), 'MMM d')}</p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              {myTasks.length > 5 && (
+                <Link to="/admin/opportunities" className="mt-4 inline-block text-xs text-river hover:underline">
+                  View all {myTasks.length} tasks →
+                </Link>
+              )}
+            </>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

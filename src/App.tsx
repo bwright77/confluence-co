@@ -27,6 +27,10 @@ const AdminLayout = lazy(() =>
   import('./components/admin/AdminLayout').then((m) => ({ default: m.AdminLayout }))
 )
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
+const Opportunities = lazy(() => import('./pages/admin/Opportunities'))
+const OpportunityDetail = lazy(() => import('./pages/admin/OpportunityDetail'))
+const NewOpportunity = lazy(() => import('./pages/admin/NewOpportunity'))
+const EditOpportunity = lazy(() => import('./pages/admin/EditOpportunity'))
 const BoardMeetings = lazy(() => import('./pages/admin/BoardMeetings'))
 const BoardMeetingNew = lazy(() => import('./pages/admin/BoardMeetingNew'))
 const BoardMeetingDetail = lazy(() => import('./pages/admin/BoardMeetingDetail'))
@@ -78,6 +82,38 @@ export default function App() {
             element={
               <Suspense fallback={<AdminBoot />}>
                 <Dashboard />
+              </Suspense>
+            }
+          />
+          <Route
+            path="opportunities"
+            element={
+              <Suspense fallback={<AdminBoot />}>
+                <Opportunities />
+              </Suspense>
+            }
+          />
+          <Route
+            path="opportunities/new"
+            element={
+              <Suspense fallback={<AdminBoot />}>
+                <NewOpportunity />
+              </Suspense>
+            }
+          />
+          <Route
+            path="opportunities/:id"
+            element={
+              <Suspense fallback={<AdminBoot />}>
+                <OpportunityDetail />
+              </Suspense>
+            }
+          />
+          <Route
+            path="opportunities/:id/edit"
+            element={
+              <Suspense fallback={<AdminBoot />}>
+                <EditOpportunity />
               </Suspense>
             }
           />
