@@ -2,7 +2,31 @@ import { useState } from 'react'
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { LayoutDashboard, LogOut, Menu, X } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
-import { CCHorizontal } from '../Logo'
+import { CCBug } from '../Logo'
+
+// The site's own logo treatment: the oversized bug mark + a bold HTML wordmark
+// (the SVG lockup's text is unreadable at this size). Mirrors Nav.tsx.
+function Wordmark() {
+  return (
+    <div className="flex items-center gap-2.5" translate="no">
+      <CCBug variant="dark" className="h-9 w-9 shrink-0" />
+      <div className="leading-none">
+        <div
+          className="font-display text-base font-bold uppercase text-white"
+          style={{ letterSpacing: '0.06em' }}
+        >
+          Confluence
+        </div>
+        <div
+          className="font-display text-[0.65rem] font-semibold uppercase text-cc-sky"
+          style={{ letterSpacing: '0.2em' }}
+        >
+          Colorado
+        </div>
+      </div>
+    </div>
+  )
+}
 
 // Phase 1 ships the shell with a single Dashboard destination. Opportunities,
 // Tasks, Analytics, Board Minutes, Team, and Settings arrive with their features
@@ -66,7 +90,7 @@ export function AdminLayout() {
         >
           <Menu size={22} />
         </button>
-        <CCHorizontal variant="dark" className="h-7 w-auto" />
+        <Wordmark />
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-cc-clay/50 text-xs font-semibold text-white">
           {initials}
         </div>
@@ -89,7 +113,7 @@ export function AdminLayout() {
         } lg:static lg:w-60 lg:translate-x-0 lg:flex`}
       >
         <div className="flex items-center justify-between border-b border-white/10 px-5 py-5">
-          <CCHorizontal variant="dark" className="h-8 w-auto" />
+          <Wordmark />
           <button
             type="button"
             onClick={() => setSidebarOpen(false)}
