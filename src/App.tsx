@@ -28,6 +28,7 @@ const AdminLayout = lazy(() =>
 )
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
 const Opportunities = lazy(() => import('./pages/admin/Opportunities'))
+const Settings = lazy(() => import('./pages/admin/Settings'))
 const OpportunityDetail = lazy(() => import('./pages/admin/OpportunityDetail'))
 const NewOpportunity = lazy(() => import('./pages/admin/NewOpportunity'))
 const EditOpportunity = lazy(() => import('./pages/admin/EditOpportunity'))
@@ -114,6 +115,14 @@ export default function App() {
             element={
               <Suspense fallback={<AdminBoot />}>
                 <EditOpportunity />
+              </Suspense>
+            }
+          />
+          <Route
+            path="settings"
+            element={
+              <Suspense fallback={<AdminBoot />}>
+                <Settings />
               </Suspense>
             }
           />

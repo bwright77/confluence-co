@@ -141,6 +141,64 @@ export interface Document {
 }
 
 // ---------------------------------------------------------------------------
+// Discovery + notifications (Phase 3).
+// ---------------------------------------------------------------------------
+export interface DiscoveryRun {
+  id: string
+  started_at: string
+  completed_at: string | null
+  triggered_by: 'cron' | 'manual'
+  status: 'running' | 'cancelling' | 'cancelled' | 'completed' | 'failed'
+  source_type: 'federal' | 'state'
+  opportunities_fetched: number
+  opportunities_deduplicated: number
+  opportunities_detail_fetched: number
+  opportunities_auto_rejected: number
+  opportunities_below_threshold: number
+  opportunities_inserted: number
+  tokens_haiku: number | null
+  tokens_sonnet: number | null
+  error_log: Array<{ label: string; error: string; timestamp: string }> | null
+  org_profile_id: string | null
+}
+
+export interface DiscoverySource {
+  id: string
+  label: string
+  source_type: string
+  funder_name: string
+  url: string
+  enabled: boolean
+  check_frequency: string
+  eligibility_notes: string | null
+  relevance_notes: string | null
+  source_proximity_bonus: number
+  last_content_hash: string | null
+  last_fetched_at: string | null
+  last_changed_at: string | null
+  last_error: string | null
+  consecutive_errors: number
+  created_at: string
+  updated_at: string
+}
+
+export type NotificationType =
+  | 'deadline_7d' | 'deadline_3d' | 'deadline_1d'
+  | 'task_assigned'
+  | 'opportunity_discovered'
+
+export interface NotificationPreference {
+  id: string
+  user_id: string
+  deadline_7d: boolean
+  deadline_3d: boolean
+  deadline_1d: boolean
+  task_assigned: boolean
+  opportunity_discovered: boolean
+  updated_at: string
+}
+
+// ---------------------------------------------------------------------------
 // Board meeting minutes (Phase 2). Transcript → AI extraction → review → approval.
 // ---------------------------------------------------------------------------
 export type BoardMeetingStatus = 'draft' | 'under_review' | 'approved'

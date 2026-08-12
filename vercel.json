@@ -26,6 +26,10 @@
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
+  "crons": [
+    { "path": "/api/discovery/sync", "schedule": "0 7 * * *" },
+    { "path": "/api/discovery/state-sync", "schedule": "0 8 * * 1" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

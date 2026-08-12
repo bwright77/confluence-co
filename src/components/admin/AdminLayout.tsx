@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Briefcase, ClipboardList, LogOut, Menu, X } from 'lucide-react'
+import {
+  LayoutDashboard,
+  Briefcase,
+  ClipboardList,
+  Settings as SettingsIcon,
+  LogOut,
+  Menu,
+  X,
+} from 'lucide-react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useAuth } from '../../contexts/AuthContext'
 import { CCBug } from '../Logo'
@@ -39,9 +47,10 @@ function Wordmark() {
 // Tasks, Analytics, Board Minutes, Team, and Settings arrive with their features
 // in later phases — adding nav entries now would just link to 404s.
 const NAV_ITEMS = [
-  { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
-  { to: '/admin/opportunities', label: 'Opportunities', icon: Briefcase, end: false },
-  { to: '/admin/board-meetings', label: 'Board Minutes', icon: ClipboardList, end: false },
+  { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true, adminOnly: false },
+  { to: '/admin/opportunities', label: 'Opportunities', icon: Briefcase, end: false, adminOnly: false },
+  { to: '/admin/board-meetings', label: 'Board Minutes', icon: ClipboardList, end: false, adminOnly: false },
+  { to: '/admin/settings', label: 'Settings', icon: SettingsIcon, end: false, adminOnly: true },
 ]
 
 export function AdminLayout() {
@@ -67,7 +76,7 @@ export function AdminLayout() {
   function NavItems({ onNavigate }: { onNavigate?: () => void }) {
     return (
       <>
-        {NAV_ITEMS.map(({ to, label, icon: Icon, end }) => (
+        {NAV_ITEMS.filter((item) => !item.adminOnly || profile?.role === 'admin').map(({ to, label, icon: Icon, end }) => (
           <NavLink
             key={to}
             to={to}
