@@ -48,6 +48,10 @@ export default {
       backgroundImage: {
         'dawn-sky': 'linear-gradient(to bottom, #0D2137 0%, #1B3A52 30%, #7A5C4A 65%, #C4754A 85%, #E8A870 100%)',
         'dusk-sky': 'linear-gradient(to bottom, #0D2137 0%, #1B2E4A 40%, #4A2E5C 70%, #8A4A3A 90%, #C47050 100%)',
+        // OMP admin dark chrome — pine-green → soil-brown. Grounded in earth/
+        // conservation rather than Wright Adventures' airy blue. Shared by the
+        // login, the admin sidebar, and the auth loaders.
+        'admin-chrome': 'linear-gradient(160deg, #243528 0%, #20281f 50%, #2f2417 100%)',
       },
     },
   },

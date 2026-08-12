@@ -57,7 +57,7 @@ export function AdminLayout() {
   return (
     <div className="flex h-[100dvh] flex-col bg-cc-warm lg:flex-row">
       {/* Mobile top bar */}
-      <header className="flex shrink-0 items-center justify-between bg-cc-navy px-4 py-3 lg:hidden">
+      <header className="flex shrink-0 items-center justify-between bg-admin-chrome px-4 py-3 lg:hidden">
         <button
           type="button"
           onClick={() => setSidebarOpen(true)}
@@ -84,7 +84,7 @@ export function AdminLayout() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-72 shrink-0 transform flex-col bg-cc-navy transition-transform duration-200 ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 shrink-0 transform flex-col bg-admin-chrome transition-transform duration-200 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:static lg:w-60 lg:translate-x-0 lg:flex`}
       >

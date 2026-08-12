@@ -13,8 +13,8 @@ export default function Dashboard() {
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-10">
-      <p className="font-display text-xs font-semibold uppercase tracking-display text-cc-stone">
-        OMP · Phase 1
+      <p className="font-display text-xs font-semibold uppercase tracking-display text-cc-clay">
+        Staff workspace
       </p>
       <h1 className="mt-2 font-display text-2xl font-bold text-cc-navy">Admin dashboard</h1>
       <p className="mt-2 font-body text-sm text-cc-stone">
