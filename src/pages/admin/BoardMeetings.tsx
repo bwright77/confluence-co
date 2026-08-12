@@ -67,14 +67,14 @@ export default function BoardMeetings() {
     <div className="p-4 sm:p-6 lg:p-8">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-navy mb-1">Board Minutes</h1>
+          <h1 className="text-2xl font-bold text-cc-sage-ink mb-1">Board Minutes</h1>
           <p className="text-sm text-gray-400">
             Confluence Colorado — monthly board meeting records
           </p>
         </div>
         <Link
           to="/admin/board-meetings/new"
-          className="flex items-center gap-2 text-sm font-medium text-white bg-navy hover:bg-navy/90 px-4 py-2 rounded-lg transition-colors"
+          className="flex items-center gap-2 text-sm font-medium text-white bg-cc-sage-ink hover:bg-cc-sage-ink/90 px-4 py-2 rounded-lg transition-colors"
         >
           <Plus size={16} />
           New Meeting
@@ -92,7 +92,7 @@ export default function BoardMeetings() {
           </p>
           <Link
             to="/admin/board-meetings/new"
-            className="inline-flex items-center gap-2 text-sm font-medium text-white bg-navy hover:bg-navy/90 px-4 py-2 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-white bg-cc-sage-ink hover:bg-cc-sage-ink/90 px-4 py-2 rounded-lg transition-colors"
           >
             <Plus size={16} />
             Add First Meeting

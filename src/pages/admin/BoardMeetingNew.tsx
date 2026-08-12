@@ -110,7 +110,7 @@ export default function BoardMeetingNew() {
           <ArrowLeft size={18} />
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-navy">New Board Meeting</h1>
+          <h1 className="text-2xl font-bold text-cc-sage-ink">New Board Meeting</h1>
           <p className="text-sm text-gray-400">Upload a transcript to generate minutes</p>
         </div>
       </div>
@@ -199,7 +199,7 @@ export default function BoardMeetingNew() {
                   if (!meeting_date || !location) return
                   setStep(2)
                 }}
-                className="text-sm font-medium text-white bg-navy hover:bg-navy/90 px-5 py-2.5 rounded-lg transition-colors"
+                className="text-sm font-medium text-white bg-cc-sage-ink hover:bg-cc-sage-ink/90 px-5 py-2.5 rounded-lg transition-colors"
               >
                 Next: Add Transcript →
               </button>
@@ -279,7 +279,7 @@ export default function BoardMeetingNew() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex items-center gap-2 text-sm font-medium text-white bg-navy hover:bg-navy/90 disabled:opacity-50 px-5 py-2.5 rounded-lg transition-colors"
+                className="flex items-center gap-2 text-sm font-medium text-white bg-cc-sage-ink hover:bg-cc-sage-ink/90 disabled:opacity-50 px-5 py-2.5 rounded-lg transition-colors"
               >
                 {isSubmitting && <Loader2 size={15} className="animate-spin" />}
                 {isSubmitting ? 'Processing…' : 'Generate Minutes'}

@@ -313,7 +313,7 @@ export default function BoardMeetingDetail() {
           </Link>
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <h1 className="text-xl font-bold text-navy">{meetingDateDisplay}</h1>
+              <h1 className="text-xl font-bold text-cc-sage-ink">{meetingDateDisplay}</h1>
               <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${statusCfg.className}`}>
                 {statusCfg.label}
               </span>
@@ -341,7 +341,7 @@ export default function BoardMeetingDetail() {
               type="button"
               onClick={handleExport}
               disabled={exportLoading}
-              className="flex items-center gap-1.5 text-xs font-medium text-white bg-navy hover:bg-navy/90 disabled:opacity-50 px-3 py-2 rounded-lg transition-colors"
+              className="flex items-center gap-1.5 text-xs font-medium text-white bg-cc-sage-ink hover:bg-cc-sage-ink/90 disabled:opacity-50 px-3 py-2 rounded-lg transition-colors"
             >
               {exportLoading ? <Loader2 size={13} className="animate-spin" /> : <Download size={13} />}
               Export DOCX

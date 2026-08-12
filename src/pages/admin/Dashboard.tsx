@@ -16,7 +16,7 @@ export default function Dashboard() {
       <p className="font-display text-xs font-semibold uppercase tracking-display text-cc-clay">
         Staff workspace
       </p>
-      <h1 className="mt-2 font-display text-2xl font-bold text-cc-navy">Admin dashboard</h1>
+      <h1 className="mt-2 font-display text-2xl font-bold text-cc-sage-ink">Admin dashboard</h1>
       <p className="mt-2 font-body text-sm text-cc-stone">
         The shell is live. Grant seeking, discovery, and board minutes arrive in the next phases.
       </p>
