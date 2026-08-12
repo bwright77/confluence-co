@@ -22,7 +22,10 @@
     { "source": "/focus-areas", "destination": "/program-areas", "permanent": true },
     { "source": "/focus-areas/:slug", "destination": "/program-areas/:slug", "permanent": true }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

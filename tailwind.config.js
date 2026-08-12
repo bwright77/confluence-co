@@ -24,6 +24,17 @@ export default {
         'cc-warm':  '#F8F4F0', // Warm Gray — alternate section backgrounds
         'cc-dark':  '#1A1A2E', // Dark — high-contrast text
         'cc-stone': '#5b626e', // Mid Gray — secondary text, captions (AA on white/warm/sand)
+
+        // OMP admin aliases — Wright Adventures' token names pointed at the
+        // matching Confluence brand values, so admin components ported from WA
+        // render in-brand without edits (ADR-009 §"Brand tokens are nearly free").
+        // The -50 tints are light backgrounds those components assume.
+        'navy':     '#004667', // = cc-navy
+        'river':    '#009dd6', // = cc-sky
+        'river-50': '#e8f6fc', // light river tint (admin panel backgrounds)
+        'earth':    '#b44b00', // = cc-orange
+        'trail':    '#6B8F71', // → cc-sage (WA trail #4A7C59 maps here)
+        'trail-50': '#eef3ef', // light trail tint
       },
       fontFamily: {
         display: ['Jost', 'sans-serif'],

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
 import Layout from './layouts/Layout'
@@ -14,8 +15,26 @@ import DonateThankYou from './pages/DonateThankYou'
 import News from './pages/News'
 import Privacy from './pages/Privacy'
 import NotFound from './pages/NotFound'
+import { ProtectedRoute } from './components/admin/ProtectedRoute'
 import { programAreaRedirects } from './routes/redirects'
 import { FUNDS } from './lib/donate'
+
+// The OMP admin surface is lazy-loaded so its deps (supabase, lucide,
+// react-hook-form, zod) split out of the marketing bundle — they download only
+// when a visitor actually reaches /login or /admin.
+const Login = lazy(() => import('./pages/Login'))
+const AdminLayout = lazy(() =>
+  import('./components/admin/AdminLayout').then((m) => ({ default: m.AdminLayout }))
+)
+const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
+
+function AdminBoot() {
+  return (
+    <div className="flex min-h-[100dvh] items-center justify-center bg-cc-navy">
+      <div className="h-5 w-5 animate-spin rounded-full border-2 border-cc-sage border-t-transparent" />
+    </div>
+  )
+}
 
 function LegacyAreaRedirect() {
   const { slug } = useParams<{ slug: string }>()
@@ -31,6 +50,36 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* OMP admin platform — its own chrome, deliberately outside the
+            marketing Layout (no site nav/footer). Lazy-loaded (see above). */}
+        <Route
+          path="/login"
+          element={
+            <Suspense fallback={<AdminBoot />}>
+              <Login />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<AdminBoot />}>
+                <AdminLayout />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        >
+          <Route
+            index
+            element={
+              <Suspense fallback={<AdminBoot />}>
+                <Dashboard />
+              </Suspense>
+            }
+          />
+        </Route>
+
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

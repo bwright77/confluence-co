@@ -164,8 +164,15 @@ routes.push(
   }
 )
 
-for (const route of routes) {
+// The /admin platform and /login are auth-gated, have no OG identity, and would
+// hit Supabase at runtime — they must never be prerendered. This list is an
+// allowlist so they're already excluded, but guard defensively in case a route
+// is ever added to the enumerator above.
+const isPrivate = (p) => p === '/login' || p === '/admin' || p.startsWith('/admin/')
+const publicRoutes = routes.filter((route) => !isPrivate(route.path))
+
+for (const route of publicRoutes) {
   writeRoute(route.path, render(route))
 }
 
-console.log(`prerender-og: wrote ${routes.length} route HTML files`)
+console.log(`prerender-og: wrote ${publicRoutes.length} route HTML files`)
