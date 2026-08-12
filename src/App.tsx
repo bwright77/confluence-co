@@ -27,6 +27,9 @@ const AdminLayout = lazy(() =>
   import('./components/admin/AdminLayout').then((m) => ({ default: m.AdminLayout }))
 )
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
+const BoardMeetings = lazy(() => import('./pages/admin/BoardMeetings'))
+const BoardMeetingNew = lazy(() => import('./pages/admin/BoardMeetingNew'))
+const BoardMeetingDetail = lazy(() => import('./pages/admin/BoardMeetingDetail'))
 
 function AdminBoot() {
   return (
@@ -75,6 +78,30 @@ export default function App() {
             element={
               <Suspense fallback={<AdminBoot />}>
                 <Dashboard />
+              </Suspense>
+            }
+          />
+          <Route
+            path="board-meetings"
+            element={
+              <Suspense fallback={<AdminBoot />}>
+                <BoardMeetings />
+              </Suspense>
+            }
+          />
+          <Route
+            path="board-meetings/new"
+            element={
+              <Suspense fallback={<AdminBoot />}>
+                <BoardMeetingNew />
+              </Suspense>
+            }
+          />
+          <Route
+            path="board-meetings/:id"
+            element={
+              <Suspense fallback={<AdminBoot />}>
+                <BoardMeetingDetail />
               </Suspense>
             }
           />

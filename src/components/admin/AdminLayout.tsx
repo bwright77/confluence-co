@@ -1,8 +1,15 @@
 import { useState } from 'react'
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, LogOut, Menu, X } from 'lucide-react'
+import { LayoutDashboard, ClipboardList, LogOut, Menu, X } from 'lucide-react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useAuth } from '../../contexts/AuthContext'
 import { CCBug } from '../Logo'
+
+// react-query is scoped to the admin tree (mounted here, not at the app root)
+// so it stays in the admin bundle chunk, off the marketing critical path.
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: 30_000, retry: 1 } },
+})
 
 // The site's own logo treatment: the oversized bug mark + a bold HTML wordmark
 // (the SVG lockup's text is unreadable at this size). Mirrors Nav.tsx.
@@ -31,7 +38,10 @@ function Wordmark() {
 // Phase 1 ships the shell with a single Dashboard destination. Opportunities,
 // Tasks, Analytics, Board Minutes, Team, and Settings arrive with their features
 // in later phases — adding nav entries now would just link to 404s.
-const NAV_ITEMS = [{ to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true }]
+const NAV_ITEMS = [
+  { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
+  { to: '/admin/board-meetings', label: 'Board Minutes', icon: ClipboardList, end: false },
+]
 
 export function AdminLayout() {
   const { user, profile, signOut } = useAuth()
@@ -79,6 +89,7 @@ export function AdminLayout() {
   }
 
   return (
+    <QueryClientProvider client={queryClient}>
     <div className="flex h-[100dvh] flex-col bg-cc-warm lg:flex-row">
       {/* Mobile top bar */}
       <header className="flex shrink-0 items-center justify-between bg-admin-chrome px-4 py-3 lg:hidden">
@@ -158,5 +169,6 @@ export function AdminLayout() {
         </main>
       </div>
     </div>
+    </QueryClientProvider>
   )
 }
