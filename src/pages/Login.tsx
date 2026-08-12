@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Mail, Lock, AlertCircle } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
-import { CCHorizontal } from '../components/Logo'
+import { CCStacked } from '../components/Logo'
 
 const schema = z.object({
   email: z.string().email('Enter a valid email address'),
@@ -51,13 +51,16 @@ export default function Login() {
   }
 
   return (
-    <div className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-cc-navy px-4">
-      <div className="pointer-events-none absolute right-0 top-0 h-1/2 w-1/2 rounded-full bg-cc-sage/[0.09] blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-0 left-0 h-1/3 w-1/3 rounded-full bg-cc-clay/[0.10] blur-[100px]" />
+    <div
+      className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden px-4"
+      style={{ background: 'linear-gradient(160deg, #243528 0%, #20281f 50%, #2f2417 100%)' }}
+    >
+      <div className="pointer-events-none absolute right-0 top-0 h-1/2 w-1/2 rounded-full bg-cc-sage/[0.16] blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-1/2 w-1/2 rounded-full bg-cc-clay/[0.16] blur-[110px]" />
 
       <div className="relative z-10 w-full max-w-sm">
-        <div className="mb-10 flex justify-center">
-          <CCHorizontal variant="dark" className="h-9 w-auto" />
+        <div className="mb-8 flex justify-center">
+          <CCStacked variant="dark" className="h-28 w-auto md:h-32" />
         </div>
 
         <div className="rounded-2xl border border-white/[0.1] bg-white/[0.04] p-8 backdrop-blur-sm">
