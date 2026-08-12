@@ -52,9 +52,6 @@ export default function Login() {
 
   return (
     <div className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-admin-chrome px-4">
-      <div className="pointer-events-none absolute right-0 top-0 h-1/2 w-1/2 rounded-full bg-cc-sage/[0.16] blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-0 left-0 h-1/2 w-1/2 rounded-full bg-cc-clay/[0.16] blur-[110px]" />
-
       <div className="relative z-10 w-full max-w-sm">
         <div className="mb-8 flex justify-center">
           <CCStacked variant="dark" className="h-28 w-auto md:h-32" />
