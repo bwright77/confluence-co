@@ -13,7 +13,9 @@
 --  * type_id + opportunity_types are kept (single value 'grant' for now) per the ADR.
 -- =============================================================================
 
-create extension if not exists "uuid-ossp";
+-- gen_random_uuid() is built into Postgres (no extension needed); Supabase
+-- installs uuid-ossp into the `extensions` schema, so unqualified
+-- uuid_generate_v4() isn't resolvable during migration.
 
 -- ---------------------------------------------------------------------------
 -- Opportunity types + pipeline statuses
@@ -37,7 +39,7 @@ create table pipeline_statuses (
 -- Opportunities (grants only — partnership columns dropped)
 -- ---------------------------------------------------------------------------
 create table opportunities (
-  id                  uuid primary key default uuid_generate_v4(),
+  id                  uuid primary key default gen_random_uuid(),
   type_id             text references opportunity_types(id) not null,
   name                text not null,
   description         text,
@@ -73,7 +75,7 @@ create table opportunity_contributors (
 );
 
 create table tasks (
-  id              uuid primary key default uuid_generate_v4(),
+  id              uuid primary key default gen_random_uuid(),
   opportunity_id  uuid references opportunities(id) on delete cascade not null,
   title           text not null,
   status          text not null default 'not_started'
@@ -87,7 +89,7 @@ create table tasks (
 );
 
 create table task_templates (
-  id          uuid primary key default uuid_generate_v4(),
+  id          uuid primary key default gen_random_uuid(),
   type_id     text references opportunity_types(id) not null,
   name        text not null,
   is_default  boolean default false not null,
@@ -95,7 +97,7 @@ create table task_templates (
 );
 
 create table task_template_items (
-  id            uuid primary key default uuid_generate_v4(),
+  id            uuid primary key default gen_random_uuid(),
   template_id   uuid references task_templates(id) on delete cascade not null,
   title         text not null,
   days_offset   int  not null,
@@ -105,7 +107,7 @@ create table task_template_items (
 );
 
 create table documents (
-  id              uuid primary key default uuid_generate_v4(),
+  id              uuid primary key default gen_random_uuid(),
   opportunity_id  uuid references opportunities(id) on delete cascade not null,
   name            text not null,
   doc_type        text not null
@@ -119,7 +121,7 @@ create table documents (
 );
 
 create table custom_deadlines (
-  id              uuid primary key default uuid_generate_v4(),
+  id              uuid primary key default gen_random_uuid(),
   opportunity_id  uuid references opportunities(id) on delete cascade not null,
   label           text        not null,
   due_date        timestamptz not null,
@@ -127,7 +129,7 @@ create table custom_deadlines (
 );
 
 create table activity_log (
-  id              uuid primary key default uuid_generate_v4(),
+  id              uuid primary key default gen_random_uuid(),
   opportunity_id  uuid references opportunities(id) on delete cascade not null,
   actor_id        uuid references profiles(id) on delete set null,
   action          text    not null,
