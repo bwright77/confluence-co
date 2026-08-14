@@ -279,12 +279,13 @@ function DiscoveryCard() {
   const queryClient  = useQueryClient()
 
   const { data: runs = [], isLoading } = useQuery<DiscoveryRun[]>({
-    queryKey: ['discovery_runs'],
+    queryKey: ['discovery_runs', 'federal'],
     queryFn: async () => {
       const supabase = await getSupabase()
       const { data, error } = await supabase
         .from('discovery_runs')
         .select('*')
+        .eq('source_type', 'federal')
         .order('started_at', { ascending: false })
         .limit(5)
       if (error) throw error
@@ -310,7 +311,7 @@ function DiscoveryCard() {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['discovery_runs'] })
+      queryClient.invalidateQueries({ queryKey: ['discovery_runs', 'federal'] })
     },
   })
 
@@ -326,7 +327,7 @@ function DiscoveryCard() {
       }
       return res.json()
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['discovery_runs'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['discovery_runs', 'federal'] }),
   })
 
   function nextRunTime(): string {
