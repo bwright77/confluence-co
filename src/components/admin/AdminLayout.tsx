@@ -3,6 +3,7 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard,
   Briefcase,
+  CheckSquare,
   ClipboardList,
   Settings as SettingsIcon,
   LogOut,
@@ -49,6 +50,7 @@ function Wordmark() {
 const NAV_ITEMS = [
   { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true, adminOnly: false },
   { to: '/admin/opportunities', label: 'Opportunities', icon: Briefcase, end: false, adminOnly: false },
+  { to: '/admin/tasks', label: 'My Tasks', icon: CheckSquare, end: false, adminOnly: false },
   { to: '/admin/board-meetings', label: 'Board Minutes', icon: ClipboardList, end: false, adminOnly: false },
   { to: '/admin/settings', label: 'Settings', icon: SettingsIcon, end: false, adminOnly: true },
 ]

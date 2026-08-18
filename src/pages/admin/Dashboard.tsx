@@ -185,7 +185,7 @@ export default function Dashboard() {
           sub={overdueTasks.length > 0 ? `${overdueTasks.length} overdue` : 'all on track'}
           icon={CheckSquare}
           accent={overdueTasks.length > 0 ? 'bg-red-500' : 'bg-earth'}
-          to="/admin/opportunities"
+          to="/admin/tasks"
         />
         <MetricCard
           label="Total"
@@ -259,7 +259,7 @@ export default function Dashboard() {
                 ))}
               </ul>
               {myTasks.length > 5 && (
-                <Link to="/admin/opportunities" className="mt-4 inline-block text-xs text-river hover:underline">
+                <Link to="/admin/tasks" className="mt-4 inline-block text-xs text-river hover:underline">
                   View all {myTasks.length} tasks →
                 </Link>
               )}
