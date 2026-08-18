@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, type ComponentType, type LazyExoticComponent } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
 import Layout from './layouts/Layout'
@@ -22,20 +22,43 @@ import { FUNDS } from './lib/donate'
 // The OMP admin surface is lazy-loaded so its deps (supabase, lucide,
 // react-hook-form, zod) split out of the marketing bundle — they download only
 // when a visitor actually reaches /login or /admin.
-const Login = lazy(() => import('./pages/Login'))
-const AdminLayout = lazy(() =>
+//
+// A dynamic import fails ("failed to fetch dynamically imported module", MIME
+// text/html) when a deploy replaces the hashed chunks while a tab is open — the
+// old chunk 404s and Vercel's SPA fallback returns index.html. Reload once to
+// pick up the current asset manifest; only surface the error if it still fails.
+function lazyRetry<T extends ComponentType<object>>(
+  factory: () => Promise<{ default: T }>,
+): LazyExoticComponent<T> {
+  return lazy(() =>
+    factory().then(
+      (mod) => {
+        sessionStorage.removeItem('chunkReloaded')
+        return mod
+      },
+      (err: unknown) => {
+        if (sessionStorage.getItem('chunkReloaded')) throw err
+        sessionStorage.setItem('chunkReloaded', '1')
+        window.location.reload()
+        return new Promise<{ default: T }>(() => {})
+      },
+    ),
+  )
+}
+const Login = lazyRetry(() => import('./pages/Login'))
+const AdminLayout = lazyRetry(() =>
   import('./components/admin/AdminLayout').then((m) => ({ default: m.AdminLayout }))
 )
-const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
-const Opportunities = lazy(() => import('./pages/admin/Opportunities'))
-const Settings = lazy(() => import('./pages/admin/Settings'))
-const Tasks = lazy(() => import('./pages/admin/Tasks'))
-const OpportunityDetail = lazy(() => import('./pages/admin/OpportunityDetail'))
-const NewOpportunity = lazy(() => import('./pages/admin/NewOpportunity'))
-const EditOpportunity = lazy(() => import('./pages/admin/EditOpportunity'))
-const BoardMeetings = lazy(() => import('./pages/admin/BoardMeetings'))
-const BoardMeetingNew = lazy(() => import('./pages/admin/BoardMeetingNew'))
-const BoardMeetingDetail = lazy(() => import('./pages/admin/BoardMeetingDetail'))
+const Dashboard = lazyRetry(() => import('./pages/admin/Dashboard'))
+const Opportunities = lazyRetry(() => import('./pages/admin/Opportunities'))
+const Settings = lazyRetry(() => import('./pages/admin/Settings'))
+const Tasks = lazyRetry(() => import('./pages/admin/Tasks'))
+const OpportunityDetail = lazyRetry(() => import('./pages/admin/OpportunityDetail'))
+const NewOpportunity = lazyRetry(() => import('./pages/admin/NewOpportunity'))
+const EditOpportunity = lazyRetry(() => import('./pages/admin/EditOpportunity'))
+const BoardMeetings = lazyRetry(() => import('./pages/admin/BoardMeetings'))
+const BoardMeetingNew = lazyRetry(() => import('./pages/admin/BoardMeetingNew'))
+const BoardMeetingDetail = lazyRetry(() => import('./pages/admin/BoardMeetingDetail'))
 
 function AdminBoot() {
   return (
