@@ -2,8 +2,8 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  process.env.SUPABASE_URL || 'http://placeholder.invalid',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder',
 )
 
 async function isAdminJwt(jwt: string): Promise<boolean> {
@@ -20,6 +20,9 @@ async function isAdminJwt(jwt: string): Promise<boolean> {
 // POST /api/discovery/cancel
 // Signals the currently running discovery sync to stop after its current iteration.
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return res.status(500).json({ error: 'Server misconfigured: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set' })
+  }
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }

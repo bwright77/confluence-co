@@ -71,8 +71,8 @@ ${transcript}
 
 // ── Supabase (service role — server-side only) ────────────────
 const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  process.env.SUPABASE_URL || 'http://placeholder.invalid',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder',
 )
 
 // ── Anthropic ─────────────────────────────────────────────────
@@ -100,6 +100,9 @@ function parseJson<T>(text: string): T | null {
 // Body: { meetingId: string }
 // Auth: Supabase JWT (admin or manager required)
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return res.status(500).json({ error: 'Server misconfigured: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set' })
+  }
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }

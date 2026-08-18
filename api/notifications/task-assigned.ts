@@ -4,8 +4,8 @@ import { sendEmail } from './_mailer.js'
 
 // Supabase (service role — server-side only)
 const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  process.env.SUPABASE_URL || 'http://placeholder.invalid',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder',
 )
 
 // NOTE: the tasks column is `assignee_id` (the WA source read a non-existent
@@ -33,6 +33,9 @@ interface WebhookPayload {
 //   URL: https://www.confluenceco.org/api/notifications/task-assigned
 //   HTTP header: x-supabase-webhook-secret: <SUPABASE_WEBHOOK_SECRET>
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return res.status(500).json({ error: 'Server misconfigured: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set' })
+  }
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }

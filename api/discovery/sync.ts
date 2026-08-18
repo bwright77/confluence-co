@@ -14,8 +14,8 @@ const MAX_NEW_PER_RUN = 7
 
 // ── Supabase (service role — server-side only) ────────────────
 const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  process.env.SUPABASE_URL || 'http://placeholder.invalid',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder',
 )
 
 // ── Anthropic ─────────────────────────────────────────────────
@@ -224,6 +224,9 @@ async function isAdminJwt(jwt: string): Promise<boolean> {
 //   POST with Authorization: Bearer <user-jwt>     → manual trigger from admin UI
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return res.status(500).json({ error: 'Server misconfigured: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set' })
+  }
   if (req.method !== 'GET' && req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
