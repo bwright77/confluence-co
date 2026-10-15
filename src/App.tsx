@@ -53,6 +53,7 @@ const Dashboard = lazyRetry(() => import('./pages/admin/Dashboard'))
 const Opportunities = lazyRetry(() => import('./pages/admin/Opportunities'))
 const Settings = lazyRetry(() => import('./pages/admin/Settings'))
 const Tasks = lazyRetry(() => import('./pages/admin/Tasks'))
+const SocialNews = lazyRetry(() => import('./pages/admin/SocialNews'))
 const OpportunityDetail = lazyRetry(() => import('./pages/admin/OpportunityDetail'))
 const NewOpportunity = lazyRetry(() => import('./pages/admin/NewOpportunity'))
 const EditOpportunity = lazyRetry(() => import('./pages/admin/EditOpportunity'))
@@ -147,6 +148,14 @@ export default function App() {
             element={
               <Suspense fallback={<AdminBoot />}>
                 <Tasks />
+              </Suspense>
+            }
+          />
+          <Route
+            path="news"
+            element={
+              <Suspense fallback={<AdminBoot />}>
+                <SocialNews />
               </Suspense>
             }
           />

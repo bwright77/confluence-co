@@ -281,6 +281,30 @@ footer.
   tagline card that unfurls when a link is pasted into Slack, iMessage,
   Facebook, LinkedIn, X, etc.
 
+## Facebook → The current
+
+New Facebook Page posts become draft news entries for admins to review at
+`/admin/news`.
+
+- **Sync** — [`api/social/sync.ts`](api/social/sync.ts) runs daily at 15:00 UTC (Vercel
+  Cron), or on demand from the **Check Facebook now** button. It fetches Page posts
+  newer than the latest `news.yaml` date through the Graph API. Each post's images
+  are copied into the `social-post-images` Supabase bucket (Facebook CDN links
+  expire), Claude drafts a title, slug, alt text and tags while keeping the
+  author's own wording, and the post is queued in `social_posts` as `pending`.
+  Text-less posts are skipped. Up to 5 posts are drafted per run.
+- **Publish** — [`api/social/publish.ts`](api/social/publish.ts) makes one commit on
+  `main` through the GitHub API. The commit prepends the entry to
+  `src/content/news.yaml` and adds the image as `public/news/<slug>.<ext>`.
+  Vercel deploys that commit like any other push. Git stays the source of
+  truth for the public feed.
+- **Env (Vercel Production)** — `FB_PAGE_ID`; `FB_PAGE_TOKEN`, a Page token with
+  `pages_read_engagement` (use a Meta *system user* token so it doesn't expire
+  after about 60 days); `GITHUB_TOKEN`, a fine-grained PAT scoped to this repo
+  with Contents read/write; `GITHUB_REPO` (`bwright77/confluence-co`); and the
+  existing `ANTHROPIC_API_KEY`, `CRON_SECRET`, and `SUPABASE_*`. Optional:
+  `FB_GRAPH_VERSION` (default `v23.0`).
+
 ## Accessibility
 
 All components are built to WCAG 2.1 AA targets:

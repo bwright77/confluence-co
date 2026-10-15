@@ -292,3 +292,29 @@ export interface BoardMeeting {
   approver?: Profile
   creator?: Profile
 }
+
+// Facebook → "The current" review queue (see api/social/*).
+export interface SocialPostDraft {
+  slug: string
+  title: string
+  body: string
+  imageAlts: string[]
+  tags: string[]
+}
+
+export interface SocialPost {
+  id: string
+  platform: 'facebook'
+  external_id: string
+  permalink: string | null
+  posted_at: string
+  message: string | null
+  images: { path: string; url: string }[]
+  draft: SocialPostDraft | null
+  draft_error: string | null
+  status: 'pending' | 'published' | 'dismissed'
+  news_id: string | null
+  commit_sha: string | null
+  reviewed_at: string | null
+  created_at: string
+}

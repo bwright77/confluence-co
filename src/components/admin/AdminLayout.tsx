@@ -5,6 +5,7 @@ import {
   Briefcase,
   CheckSquare,
   ClipboardList,
+  Newspaper,
   Settings as SettingsIcon,
   LogOut,
   Menu,
@@ -52,6 +53,7 @@ const NAV_ITEMS = [
   { to: '/admin/opportunities', label: 'Opportunities', icon: Briefcase, end: false, adminOnly: false },
   { to: '/admin/tasks', label: 'My Tasks', icon: CheckSquare, end: false, adminOnly: false },
   { to: '/admin/board-meetings', label: 'Board Minutes', icon: ClipboardList, end: false, adminOnly: false },
+  { to: '/admin/news', label: 'The current', icon: Newspaper, end: false, adminOnly: true },
   { to: '/admin/settings', label: 'Settings', icon: SettingsIcon, end: false, adminOnly: true },
 ]
 
