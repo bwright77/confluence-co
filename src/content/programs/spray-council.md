@@ -53,7 +53,7 @@ seo:
 
 ## Recognition
 
-In **2025**, the SPRAY Council's work — in partnership with Confluence Colorado — received the **Exemplar Award** from the **Colorado Water Conservation Board**, recognizing the Council's youth-led, watershed-wide approach to South Platte River planning and stewardship.
+In **2025**, the SPRAY Council's work — in partnership with Confluence Colorado — was recognized as a **Water Education Exemplar** by the **Colorado Watershed Assembly**, honoring the Council's youth-led, watershed-wide approach to South Platte River planning and stewardship.
 
 ## The plan
 
