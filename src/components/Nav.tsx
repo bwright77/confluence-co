@@ -85,7 +85,7 @@ export default function Nav() {
           aria-label="Main navigation"
         >
           {/* Logo — oversized bug mark + bold wordmark in HTML (readable at all sizes) */}
-          <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Confluence Colorado — home">
+          <Link to="/" className="flex items-center gap-2 shrink-0" aria-label="Confluence Colorado — home">
             <CCBug variant="dark" className="h-12 w-12 md:h-14 md:w-14 shrink-0" />
             <div className="leading-none" translate="no">
               <div className="font-display font-bold uppercase text-white tracking-wide"

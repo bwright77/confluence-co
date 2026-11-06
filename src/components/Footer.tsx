@@ -30,7 +30,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link
               to="/"
-              className="flex items-center gap-3 mb-5"
+              className="flex items-center gap-2 mb-5"
               aria-label="Confluence Colorado — home"
             >
               <CCBug variant="light" className="h-14 w-14 shrink-0" />
